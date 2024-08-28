@@ -1,6 +1,6 @@
 # ChessGG
 
-Minumum requirements:
+Minimum requirements:
 - The game should function and include all rules from regular Chess
 - Two players should be able to join and play a game
 - An interactive website for the game
@@ -8,7 +8,7 @@ Minumum requirements:
 - Player Connect/disconnect handling
 - Chess pieces should have values
 
-Extendsions
+Extensions
 - Game features
   - Hint system
   - Customized pieces (elephants/monkeys/bombs)
