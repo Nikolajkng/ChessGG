@@ -1,18 +1,7 @@
-/* Main layout */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
-  color: #333;
-  font-size: large;
+html{
+  background-color: red;
 }
 
-header {
-  padding: 2rem 2rem 4rem;
-}
-
-
-/*Class styles*/
-
-.paragraph {
-  background-color: blue;
+p{
+  color: red;
 }

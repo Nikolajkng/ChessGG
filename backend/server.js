@@ -1,34 +1,17 @@
-// Load node packages 
-const http = require('node:http');
-const fs = require('node:fs');
+const express = require('express');
+const path = require('path')
+const app = express();
 
-// Local host server
 const hostname = '127.0.0.1';
 const port = 8080;
 
-//Relative path to html file
-const htmlFile = "../website/index.html"  
-
-// Server setup
-const server = http.createServer(function (req, res) {
-    // Load html file from path:
-    fs.readFile(htmlFile, function (err, data) {
-        if (err) {
-            console.log("Failed to load html file...\n")
-        } else {
-            res.writeHead(200, {
-                'Content-Type': 'text/html',
-                'Content-Length': data.length
-            });
-            res.write(data);
-            res.end();
-            console.log("Succesfully loaded html file! \n")
-        }
-    })
+// Links the server to HTML file:
+app.get('/', function(req, res){
+res.sendFile(path.join(__dirname, '../website', 'index.html'))
 });
 
-
-
-server.listen(port, hostname, () => {
+// Server checks:
+app.listen(port, function(){
     console.log(`Server running at http://${hostname}:${port}/`);
+
 });
