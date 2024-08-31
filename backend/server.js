@@ -7,7 +7,7 @@ const hostname = '127.0.0.1';
 const port = 8080;
 
 //Relative path to html file
-const htmlFile = "../website/html/index.html"  
+const htmlFile = "../website/index.html"  
 
 // Server setup
 const server = http.createServer(function (req, res) {
