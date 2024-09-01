@@ -1,7 +1,22 @@
 html{
-  background-color: red;
+  background-color: cornflowerblue;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 
 p{
-  color: red;
+  color: white;
 }
+
+.topbar{
+  background-color: lightskyblue; 
+  font-weight: bold;
+  border-radius: 20px; 
+  width: auto;
+  height: auto; 
+  font-size: 18px; 
+  position:center;
+  text-align: center;
+  color: whitesmoke;
+  padding: 1px;
+}
+
