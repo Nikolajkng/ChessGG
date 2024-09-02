@@ -20,3 +20,10 @@ p{
   padding: 1px;
 }
 
+.boardStyle{
+  display: grid;
+  place-items: center;
+  background-color: lightcoral;
+  height: 300px;
+  width: 1000px;
+}
