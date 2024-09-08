@@ -20,10 +20,19 @@ p{
   padding: 1px;
 }
 
-.boardStyle{
-  display: grid;
-  place-items: center;
+.boardGrid{
+  display:grid;
+  grid-template-rows: repeat(8,1fr);
+  grid-template-columns: repeat(8,1fr);
+  row-gap:0cm;
+  column-gap:0cm;
   background-color: lightcoral;
-  height: 300px;
-  width: 1000px;
+
+}
+
+.boardContainer{
+  margin-top:10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
