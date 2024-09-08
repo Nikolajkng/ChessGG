@@ -5,6 +5,7 @@ html{
 
 p{
   color: white;
+  font-size: 30px;
 }
 
 .topbar{
@@ -26,13 +27,33 @@ p{
   grid-template-columns: repeat(8,1fr);
   row-gap:0cm;
   column-gap:0cm;
-  background-color: lightcoral;
 
 }
 
 .boardContainer{
   margin-top:10px;
+  margin-left:10px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.leftContainer{
+  float:left;
+  background-color: lightcoral;
+  text-align: center;
+  align-content:center;
+  border-radius: 25px;
+  width: 400px;
+  height: 800px;
+}
+
+.rightContainer{
+  float:right;
+  background-color: blue;
+  text-align: center;
+  align-content:center;
+  border-radius: 25px;
+  width: 400px;
+  height:800px;
 }
