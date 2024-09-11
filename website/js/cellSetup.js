@@ -12,6 +12,8 @@ const setCellSize = (newButton) => {
 
 // Set value of cells:
 const setInitialPieceValues = (btn, x, y) => {
+    btn.setAttribute("selected", "no")
+
     // Pawns
     if (x == 7) {
         btn.setAttribute("value", "whiteP");
@@ -59,69 +61,58 @@ const setInitialPieceValues = (btn, x, y) => {
 
 // Place all initial pieces based on their values:
 const setInitialPieces = (btn) => {
-    var piece = document.createTextNode("");
+    var pieceSymbol = document.createTextNode("");
     var value = btn.getAttribute('value');
     switch (value) {
         case value = "whiteP":
-            piece.nodeValue = "♙";
+            pieceSymbol.nodeValue = "♙";
             break;
 
         case value = "whiteK":
-            piece.nodeValue = "♔";
+            pieceSymbol.nodeValue = "♔";
             break;
 
         case value = "whiteQ":
-            piece.nodeValue = "♕";
+            pieceSymbol.nodeValue = "♕";
             break;
 
         case value = "whiteR":
-            piece.nodeValue = "♖";
+            pieceSymbol.nodeValue = "♖";
             break;
 
         case value = "whiteB":
-            piece.nodeValue = "♗";
+            pieceSymbol.nodeValue = "♗";
             break;
 
         case value = "whiteN":
-            piece.nodeValue = "♘";
+            pieceSymbol.nodeValue = "♘";
             break;
         case value = "blackP":
-            piece.nodeValue = "♟";
+            pieceSymbol.nodeValue = "♟";
             break;
 
         case value = "blackK":
-            piece.nodeValue = "♚";
+            pieceSymbol.nodeValue = "♚";
             break;
 
         case value = "blackQ":
-            piece.nodeValue = "♛";
+            pieceSymbol.nodeValue = "♛";
             break;
 
         case value = "blackR":
-            piece.nodeValue = "♜";
+            pieceSymbol.nodeValue = "♜";
             break;
 
         case value = "blackB":
-            piece.nodeValue = "♝";
+            pieceSymbol.nodeValue = "♝";
             break;
 
         case value = "blackN":
-            piece.nodeValue = "♞";
+            pieceSymbol.nodeValue = "♞";
             break;
 
         default:
-            piece.nodeValue = "";
+            pieceSymbol.nodeValue = "";
     }
-    btn.appendChild(piece);
-}
-
-// Onclick function of buttons:
-const onClick = (btn, coord) => {
-    btn.addEventListener('click', () => {
-        console.log('clicked on ' + coord);
-
-        // Changes value of cells after click:
-        btn.setAttribute('value', "selected");
-        console.log(btn.getAttribute("value"));
-    })
+    btn.appendChild(pieceSymbol);
 }
