@@ -2,9 +2,10 @@ let selected = true;
 let selectedPos = "";
 
 const selectedCell = (btn, x, y) => {
-    
-    // Ensures one selection at a time
-    if (selected) {
+    cellType = btn.getAttribute('value');
+
+    // Ensures one selection at a time on cells containing pieces only
+    if (selected && cellType != 'none') {
         selectedPos = x + "" + y;
         btn.setAttribute('selected', 'yes')
         btn.classList.add('highlight');
