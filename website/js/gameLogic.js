@@ -1,22 +1,20 @@
-let firstSelection = "yes";
-let clickCount = 0;
+let selected = true;
 let selectedPos = "";
 
 const selectedCell = (btn, x, y) => {
     
     // Ensures one selection at a time
-    if (firstSelection == "yes") {
-        btn.setAttribute('selected', 'yes')
+    if (selected) {
         selectedPos = x + "" + y;
+        btn.setAttribute('selected', 'yes')
         btn.classList.add('highlight');
-        clickCount++;
-        firstSelection = "no";
+        selected = false;
     } 
-    // Remove selection when clicking on selected cell again
-    else if (clickCount > 0 && selectedPos == (x + "" + y)) {
+    // Remove selection only when clicking on same selected cell
+    else if (!selected && selectedPos == (x + "" + y)) {
         btn.classList.remove('highlight');
-        clickCount = 0;
-        firstSelection = "yes";
+        btn.setAttribute('selected', 'no');
+        selected = true;
 
     }
 
@@ -42,7 +40,6 @@ const onClick = (btn, x, y) => {
         console.log('Coordinates: ' + "("+x+", "+y+")");
         console.log('Value: ' + btn.getAttribute("value"));
         console.log('Selected: ' + btn.getAttribute("selected"));
-        console.log('ClickCount: ' + clickCount);
         console.log("|---------------------|")
     })
 }
