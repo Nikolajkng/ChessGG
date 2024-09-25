@@ -1,21 +1,21 @@
-let selected = true;
+let canSelect = true;
 let selectedPos = "";
 
 const selectedCell = (btn, x, y) => {
     cellType = btn.getAttribute('value');
 
     // Ensures one selection at a time on cells containing pieces only
-    if (selected && cellType != 'none') {
+    if (canSelect && cellType != 'none') {
         selectedPos = x + "" + y;
         btn.setAttribute('selected', 'yes')
         btn.classList.add('highlight');
-        selected = false;
+        canSelect = false;
     } 
     // Remove selection only when clicking on same selected cell
-    else if (!selected && selectedPos == (x + "" + y)) {
+    else if (!canSelect && selectedPos == (x + "" + y)) {
         btn.classList.remove('highlight');
         btn.setAttribute('selected', 'no');
-        selected = true;
+        canSelect = true;
     }
 }
 
