@@ -22,7 +22,7 @@ const selectedCell = (btn, x, y) => {
 
 }
 
-void delete_btn(btn) {
+const delete_btn = (btn) => {
     btn.remove();
 }
 
