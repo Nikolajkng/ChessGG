@@ -16,14 +16,7 @@ const selectedCell = (btn, x, y) => {
         btn.classList.remove('highlight');
         btn.setAttribute('selected', 'no');
         selected = true;
-
     }
-
-
-}
-
-const delete_btn = (btn) => {
-    btn.remove();
 }
 
 // Onclick function of buttons:
