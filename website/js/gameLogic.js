@@ -27,7 +27,7 @@ const onClick = (btn, x, y) => {
         selectedCell(btn, x, y);
 
         // Move piece logic (TODO):
-        delete_btn(btn);
+        
 
         // Remove piece logic (TODO):
 
