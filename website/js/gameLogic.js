@@ -1,9 +1,33 @@
+// Global variables:
 let canSelect = true;
 let selectedPos = "";
 let selectedX = "";
 let selectedY = "";
 let selectedBtn = "";
 let playerTurn = 0;
+
+
+// Functions:
+const swapPieces = (targetBtn, x, y) => {
+    var rmPieceFigure = document.createTextNode("X");
+    var addPieceFigure = document.createTextNode("O");
+
+    // Swap pieces on board
+    selectedBtn.appendChild(rmPieceFigure);
+    targetBtn.appendChild(addPieceFigure);
+
+    // TO DO:
+    // Swap all piece data, look at console 
+
+
+
+    // ONLY for TEST purposes, nothing important:
+    console.log("SELECTED VALUE: "+selectedBtn.getAttribute('value'));
+    console.log("OLD VALUE: "+targetBtn.getAttribute('value'));
+
+
+
+}
 
 const removeHighlight = () => {
     selectedBtn.classList.remove('highlight');
@@ -14,8 +38,8 @@ const removeHighlight = () => {
 const selectedCell = (btn, x, y) => {
     cellType = btn.getAttribute('value');
 
-    // TODO:
-    // for 2 player (Check who is playing, host or client, and correct the "include.white")
+        // TODO:
+        // for 2 player (Check who is playing, host or client, and correct the "include.white")
 
 
     // Ensures one selection at a time on cells containing pieces only
@@ -42,7 +66,7 @@ const onClick = (btn, x, y) => {
         selectedCell(btn, x, y);
 
         // Move piece logic (TODO):
-        movePiece(x, y);
+        movePiece(btn, x, y);
 
         // Remove piece logic (TODO):
 
@@ -57,7 +81,12 @@ const onClick = (btn, x, y) => {
 }
 
 // Move piece
-const movePiece = (x, y) => {
+const movePiece = (btn, x, y) => {
+
+    // TO DO:
+    // Check if move is legal
+
+
     let oldPos = selectedX+""+selectedY;
     let newPos = x+""+y;
     let moveDetected = Math.abs(selectedX - x) != 0 || Math.abs(selectedY - y) != 0 
@@ -68,7 +97,7 @@ const movePiece = (x, y) => {
         removeHighlight();
 
         // Swap piece position and set their coordinates accordingly:
-        
+        swapPieces(btn, x, y);
 
         playerTurn++;
         console.log("|---------------------------------|");
