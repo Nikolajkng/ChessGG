@@ -22,6 +22,9 @@ const selectedCell = (btn, x, y) => {
 
 }
 
+void delete_btn(btn) {
+    btn.remove();
+}
 
 // Onclick function of buttons:
 const onClick = (btn, x, y) => {
@@ -31,7 +34,7 @@ const onClick = (btn, x, y) => {
         selectedCell(btn, x, y);
 
         // Move piece logic (TODO):
-
+        delete_btn(btn);
 
         // Remove piece logic (TODO):
 
