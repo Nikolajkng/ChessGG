@@ -4,7 +4,8 @@ let selectedPos = "";
 let selectedX = -1;
 let selectedY = -1;
 let selectedBtn = null;
-let playerTurn = 0;
+let clickCount = 0;
+let playerTurn = null;
 
 
 // Functions:
@@ -28,7 +29,7 @@ const getPieceSymbol = (value) => {
     }
 }
 
-const swapPieces = (targetBtn, x, y) => {
+const confirmMove = (targetBtn) => {
 
     if(selectedBtn != null){
         // Remove selected piece from board
@@ -46,11 +47,9 @@ const swapPieces = (targetBtn, x, y) => {
         selectedBtn.setAttribute("value", targetBtn.getAttribute("value"));
         targetBtn.setAttribute("value", tempSelect);
 
+        // Move is finished:
+        clickCount++;
 
-
-        // ONLY for TEST purposes, nothing important:
-        console.log("SELECTED VALUE: "+selectedBtn.getAttribute('value'));
-        console.log("OLD VALUE: "+targetBtn.getAttribute('value'));
     } else {
         console.error("illegal cell selection");
     }
@@ -72,23 +71,46 @@ const selectedCell = (btn, x, y) => {
 
     // TODO:
     // for 2 player (Check who is playing, host or client, and correct the "include.white")
-
-
-    // Ensures one selection at a time on cells containing pieces only
-    if (canSelect && cellType != 'none' && (btn.getAttribute('value').includes('white'))) {
-        selectedBtn = btn;
-        selectedX = x;
-        selectedY = y;
-        selectedPos = selectedX + "" + selectedY;
-        btn.setAttribute('selected', 'yes')
-        btn.classList.add('highlight');
-        canSelect = false;
-    } 
-    // Remove selection only when clicking on same selected cell
-    else if (!canSelect && selectedPos == (x + "" + y)) {
-        removeHighlight();
-        selectedBtn = null;
+    if(clickCount % 2 == 0){
+        playerTurn = "White";
+    } else {
+        playerTurn = "Black";
     }
+
+    if(playerTurn == "White"){
+        // Ensures selection is only possible: 1) on cells with pieces 2) WHITE pieces
+        if (canSelect && cellType != 'none' && (btn.getAttribute('value').includes('white'))) {
+            selectedBtn = btn;
+            selectedX = x;
+            selectedY = y;
+            selectedPos = selectedX + "" + selectedY;
+            btn.setAttribute('selected', 'yes')
+            btn.classList.add('highlight');
+            canSelect = false;
+        } 
+        // Remove selection only when clicking on same selected cell
+        else if (!canSelect && selectedPos == (x + "" + y)) {
+            removeHighlight();
+            selectedBtn = null;
+        }
+    } else {
+         // Ensures selection is only possible: 1) on cells with pieces 2) BLACK pieces
+        if (canSelect && cellType != 'none' && (btn.getAttribute('value').includes('black'))) {
+            selectedBtn = btn;
+            selectedX = x;
+            selectedY = y;
+            selectedPos = selectedX + "" + selectedY;
+            btn.setAttribute('selected', 'yes')
+            btn.classList.add('highlight');
+            canSelect = false;
+        } 
+        // Remove selection only when clicking on same selected cell
+        else if (!canSelect && selectedPos == (x + "" + y)) {
+            removeHighlight();
+            selectedBtn = null;
+        }
+    }
+    
 }
 
 // Onclick function of buttons:
@@ -105,7 +127,6 @@ const onClick = (btn, x, y) => {
 
 
         // Info for debug:
-        console.log('Class: ' + btn.className);
         console.log('Coordinates: ' + "("+x+", "+y+")");
         console.log('Value: ' + btn.getAttribute("value"));
         console.log('Selected: ' + btn.getAttribute("selected"));
@@ -119,25 +140,18 @@ const movePiece = (btn, x, y) => {
     // TO DO:
     // Check if move is legal
 
-
-    let oldPos = selectedX+""+selectedY;
-    let newPos = x+""+y;
     let moveDetected = Math.abs(selectedX - x) != 0 || Math.abs(selectedY - y) != 0 
 
     if(moveDetected){
-
         // Remove highlight on movement on oldPos:
         removeHighlight();
 
         // Swap piece position and set their coordinates accordingly:
-        swapPieces(btn, x, y);
+        confirmMove(btn);
 
-        playerTurn++;
-        console.log("new position: " + newPos);
-        console.log("old position: " + oldPos);
-        console.log("movement detected: " + playerTurn);
-    } else {
-        console.log("no movement detected");
-    }
+        
+        console.log("Player turn over for: " + playerTurn);
+        console.log("Total click count: " + clickCount);
+    } 
     
 }

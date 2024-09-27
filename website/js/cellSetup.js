@@ -54,8 +54,6 @@ const setInitialPieceValues = (btn, x, y) => {
     else {
         btn.setAttribute("value", "none")
     }
-
-    console.log("Piece (" + x + "," + y + "): " + btn.getAttribute("value"));
 }
 
 
