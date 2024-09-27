@@ -1,39 +1,66 @@
 // Global variables:
 let canSelect = true;
 let selectedPos = "";
-let selectedX = "";
-let selectedY = "";
-let selectedBtn = "";
+let selectedX = -1;
+let selectedY = -1;
+let selectedBtn = null;
 let playerTurn = 0;
 
 
 // Functions:
+
+// Function to get the correct piece symbol based on the piece value
+const getPieceSymbol = (value) => {
+    switch (value) {
+        case "whiteP": return "♙";
+        case "whiteK": return "♔";
+        case "whiteQ": return "♕";
+        case "whiteR": return "♖";
+        case "whiteB": return "♗";
+        case "whiteN": return "♘";
+        case "blackP": return "♟";
+        case "blackK": return "♚";
+        case "blackQ": return "♛";
+        case "blackR": return "♜";
+        case "blackB": return "♝";
+        case "blackN": return "♞";
+        case "none": return "";
+    }
+}
+
 const swapPieces = (targetBtn, x, y) => {
-    var rmPieceFigure = document.createTextNode("X");
-    var addPieceFigure = document.createTextNode("O");
 
-    // Swap pieces on board
-    selectedBtn.appendChild(rmPieceFigure);
-    targetBtn.appendChild(addPieceFigure);
+    if(selectedBtn != null){
+        // Remove selected piece from board
+        const oldPieceFigure = selectedBtn.querySelector("span");  //selects first element of type "span"
+        selectedBtn.removeChild(oldPieceFigure);
 
-    // TO DO:
-    // Swap all piece data, look at console 
-    var tempSelect = selectedBtn.getAttribute("value");
-    selectedBtn.setAttribute("value", targetBtn.getAttribute("value"));
-    targetBtn.setAttribute("value", tempSelect);
+        // Place selected piece on target: 
+        const newPieceFigure = document.createElement("span");
+        newPieceFigure.textContent = getPieceSymbol(selectedBtn.getAttribute("value"));
+        targetBtn.appendChild(newPieceFigure);
 
 
+        // Update the values on pieces
+        var tempSelect = selectedBtn.getAttribute("value");
+        selectedBtn.setAttribute("value", targetBtn.getAttribute("value"));
+        targetBtn.setAttribute("value", tempSelect);
 
-    // ONLY for TEST purposes, nothing important:
-    console.log("SELECTED VALUE: "+selectedBtn.getAttribute('value'));
-    console.log("OLD VALUE: "+targetBtn.getAttribute('value'));
+
+
+        // ONLY for TEST purposes, nothing important:
+        console.log("SELECTED VALUE: "+selectedBtn.getAttribute('value'));
+        console.log("OLD VALUE: "+targetBtn.getAttribute('value'));
+    } else {
+        console.error("illegal cell selection");
+    }
 
     // Reset selection to none after move is done:
-    selectedBtn = "";
+    selectedBtn = null;
 }
 
 const removeHighlight = () => {
-    if(selectedBtn != ""){
+    if(selectedBtn != null){
     selectedBtn.classList.remove('highlight');
     selectedBtn.setAttribute('selected', 'no');
     canSelect = true;
@@ -43,8 +70,8 @@ const removeHighlight = () => {
 const selectedCell = (btn, x, y) => {
     cellType = btn.getAttribute('value');
 
-        // TODO:
-        // for 2 player (Check who is playing, host or client, and correct the "include.white")
+    // TODO:
+    // for 2 player (Check who is playing, host or client, and correct the "include.white")
 
 
     // Ensures one selection at a time on cells containing pieces only
@@ -60,6 +87,7 @@ const selectedCell = (btn, x, y) => {
     // Remove selection only when clicking on same selected cell
     else if (!canSelect && selectedPos == (x + "" + y)) {
         removeHighlight();
+        selectedBtn = null;
     }
 }
 

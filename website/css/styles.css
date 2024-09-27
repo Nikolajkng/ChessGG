@@ -61,3 +61,7 @@ p{
 .highlight{
   background-color: red;
 }
+
+.illegalSelect{
+  background-color: black;
+}
