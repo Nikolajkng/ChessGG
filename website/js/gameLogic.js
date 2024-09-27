@@ -18,6 +18,9 @@ const swapPieces = (targetBtn, x, y) => {
 
     // TO DO:
     // Swap all piece data, look at console 
+    var tempSelect = selectedBtn.getAttribute("value");
+    selectedBtn.setAttribute("value", targetBtn.getAttribute("value"));
+    targetBtn.setAttribute("value", tempSelect);
 
 
 
@@ -25,14 +28,16 @@ const swapPieces = (targetBtn, x, y) => {
     console.log("SELECTED VALUE: "+selectedBtn.getAttribute('value'));
     console.log("OLD VALUE: "+targetBtn.getAttribute('value'));
 
-
-
+    // Reset selection to none after move is done:
+    selectedBtn = "";
 }
 
 const removeHighlight = () => {
+    if(selectedBtn != ""){
     selectedBtn.classList.remove('highlight');
     selectedBtn.setAttribute('selected', 'no');
     canSelect = true;
+    }
 }
 
 const selectedCell = (btn, x, y) => {
@@ -100,14 +105,11 @@ const movePiece = (btn, x, y) => {
         swapPieces(btn, x, y);
 
         playerTurn++;
-        console.log("|---------------------------------|");
         console.log("new position: " + newPos);
         console.log("old position: " + oldPos);
         console.log("movement detected: " + playerTurn);
-        console.log("|---------------------------------|");
     } else {
         console.log("no movement detected");
-        console.log("|---------------------------------|");
     }
     
 }
