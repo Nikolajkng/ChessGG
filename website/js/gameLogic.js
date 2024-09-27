@@ -29,8 +29,66 @@ const getPieceSymbol = (value) => {
     }
 }
 
+
+const removeHighlight = () => {
+    if(selectedBtn != null){
+    selectedBtn.classList.remove('highlight');
+    selectedBtn.setAttribute('selected', 'no');
+    canSelect = true;
+    }
+}
+
+const selectedCell = (btn, x, y) => {
+    cellType = btn.getAttribute('value');
+
+    // Player turn logic:
+    if(clickCount % 2 == 0){
+        playerTurn = "White";
+    } else {
+        playerTurn = "Black";
+    }
+
+    // WHITE PLAYER TURN //
+    if(playerTurn == "White"){
+        // Ensures selection is only possible: 1) on cells with pieces, 2) only select WHITE pieces
+        if (canSelect && cellType != 'none' && (btn.getAttribute('value').includes('white'))) {
+            selectedBtn = btn;
+            selectedX = x;
+            selectedY = y;
+            selectedPos = selectedX + "" + selectedY;
+            btn.setAttribute('selected', 'yes')
+            btn.classList.add('highlight');
+            canSelect = false;
+        } 
+        // Remove selection only by re-select same cell
+        else if (!canSelect && selectedPos == (x + "" + y)) {
+            removeHighlight();
+            selectedBtn = null;
+        }
+    // BLACK PLAYER TURN //
+    } else {
+         // Ensures selection is only possible: 1) on cells with pieces, 2) only select BLACK pieces
+        if (canSelect && cellType != 'none' && (btn.getAttribute('value').includes('black'))) {
+            selectedBtn = btn;
+            selectedX = x;
+            selectedY = y;
+            selectedPos = selectedX + "" + selectedY;
+            btn.setAttribute('selected', 'yes')
+            btn.classList.add('highlight');
+            canSelect = false;
+        } 
+        // Remove selection only by re-select same cell
+        else if (!canSelect && selectedPos == (x + "" + y)) {
+            removeHighlight();
+            selectedBtn = null;
+        }
+    }   
+}
+
+// Confirm when a player has ended their turn
 const confirmMove = (targetBtn) => {
 
+    // If the selected cell is a legal cell according to playerturn
     if(selectedBtn != null){
         // Remove selected piece from board
         const oldPieceFigure = selectedBtn.querySelector("span");  //selects first element of type "span"
@@ -58,61 +116,6 @@ const confirmMove = (targetBtn) => {
     selectedBtn = null;
 }
 
-const removeHighlight = () => {
-    if(selectedBtn != null){
-    selectedBtn.classList.remove('highlight');
-    selectedBtn.setAttribute('selected', 'no');
-    canSelect = true;
-    }
-}
-
-const selectedCell = (btn, x, y) => {
-    cellType = btn.getAttribute('value');
-
-    // TODO:
-    // for 2 player (Check who is playing, host or client, and correct the "include.white")
-    if(clickCount % 2 == 0){
-        playerTurn = "White";
-    } else {
-        playerTurn = "Black";
-    }
-
-    if(playerTurn == "White"){
-        // Ensures selection is only possible: 1) on cells with pieces 2) WHITE pieces
-        if (canSelect && cellType != 'none' && (btn.getAttribute('value').includes('white'))) {
-            selectedBtn = btn;
-            selectedX = x;
-            selectedY = y;
-            selectedPos = selectedX + "" + selectedY;
-            btn.setAttribute('selected', 'yes')
-            btn.classList.add('highlight');
-            canSelect = false;
-        } 
-        // Remove selection only when clicking on same selected cell
-        else if (!canSelect && selectedPos == (x + "" + y)) {
-            removeHighlight();
-            selectedBtn = null;
-        }
-    } else {
-         // Ensures selection is only possible: 1) on cells with pieces 2) BLACK pieces
-        if (canSelect && cellType != 'none' && (btn.getAttribute('value').includes('black'))) {
-            selectedBtn = btn;
-            selectedX = x;
-            selectedY = y;
-            selectedPos = selectedX + "" + selectedY;
-            btn.setAttribute('selected', 'yes')
-            btn.classList.add('highlight');
-            canSelect = false;
-        } 
-        // Remove selection only when clicking on same selected cell
-        else if (!canSelect && selectedPos == (x + "" + y)) {
-            removeHighlight();
-            selectedBtn = null;
-        }
-    }
-    
-}
-
 // Onclick function of buttons:
 const onClick = (btn, x, y) => {
     btn.addEventListener('click', () => {
@@ -137,12 +140,11 @@ const onClick = (btn, x, y) => {
 // Move piece
 const movePiece = (btn, x, y) => {
 
-    // TO DO:
-    // Check if move is legal
-
+    // TO DO:  Check if move is legal
+    let isLegalMove = legalMove();
     let moveDetected = Math.abs(selectedX - x) != 0 || Math.abs(selectedY - y) != 0 
 
-    if(moveDetected){
+    if(moveDetected && isLegalMove){
         // Remove highlight on movement on oldPos:
         removeHighlight();
 

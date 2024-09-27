@@ -1,0 +1,3 @@
+const legalMove = () => {
+    return true;
+}
