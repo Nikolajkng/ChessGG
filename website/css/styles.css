@@ -31,6 +31,7 @@ p{
 }
 
 .boardContainer{
+  position: relative;
   margin-top:10px;
   margin-left:10px;
   display: flex;
@@ -93,4 +94,20 @@ p{
 
 .illegalSelect{
   background-color: black;
+}
+
+.chatFieldStyles{
+  width: 350px;
+  height: 250px;
+
+  background-color: aliceblue;
+  border-style:double;
+  border-color: black;
+  border-radius: 30px;
+
+  position: absolute;
+
+
+  overflow-y: scroll;
+
 }

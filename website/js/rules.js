@@ -18,6 +18,7 @@ const legalMove = (selectedBtn, targetBtn) => {
 
     return true;
     } else {
+        // TO DO: add chess illegal move sound
         console.error("Error: Selectedbtn === null -> Cause: (1): not your turn, (2): not your pieces");
     }
 
