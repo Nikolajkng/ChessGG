@@ -1,7 +1,6 @@
 const legalMove = (selectedBtn, targetBtn) => {
 
     if (selectedBtn != null) {
-
         const targetValue = targetBtn.getAttribute("value");
         const selectValue = selectedBtn.getAttribute("value");
         console.log("checking legal move for: " + selectValue);
@@ -19,9 +18,11 @@ const legalMove = (selectedBtn, targetBtn) => {
             return kingRules(selectedBtn, targetBtn);
         } else if (selectValue.includes("Q")) {
             return queenRules(selectedBtn, targetBtn);
+        } else {
+            console.error("ERROR in legalMove");
+            return false;
         }
 
-        return false;
     } else {
         // TO DO: add chess illegal move sound
         console.error("Error: Selectedbtn === null -> Cause: (1): not your turn, (2): not your pieces");
