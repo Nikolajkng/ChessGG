@@ -38,17 +38,43 @@ p{
   align-items: center;
 }
 
-.leftContainer{
+.whiteMenuDisable{
   float:left;
-  background-color: lightcoral;
+  background-color: rgb(120, 64, 64);
   text-align: center;
   align-content:center;
   border-radius: 25px;
   width: 400px;
   height: 800px;
+  border-style:double;
+  border-color: black;
+}
+.whiteMenuEnable{
+  float:left;
+  background-color: rgb(240, 128, 128);
+  text-align: center;
+  align-content:center;
+  border-radius: 25px;
+  width: 400px;
+  height: 800px;
+  border-style:double;
+  border-color: black;
 }
 
-.rightContainer{
+.blackMenuDisable{
+  float:right;
+  background-color: rgb(0,0,125);
+  text-align: center;
+  align-content:center;
+  border-radius: 25px;
+  width: 400px;
+  height:800px;
+  border-style:double;
+  border-color: black;
+}
+
+
+.blackMenuEnable{
   float:right;
   background-color: blue;
   text-align: center;
@@ -56,7 +82,10 @@ p{
   border-radius: 25px;
   width: 400px;
   height:800px;
+  border-style:double;
+  border-color: black;
 }
+
 
 .highlight{
   background-color: red;
