@@ -3,8 +3,14 @@
 
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" type="images/x-icon" href="/images/favicon-32x32.png">
+    <link rel="stylesheet" href="css/onBoardStyles.css"/>
     <link rel="stylesheet" href="css/chatboxStyles.css">
-    <link rel="stylesheet" href="css/styles.css"/>
+    <link rel="stylesheet" href="css/sideMenus.css"/>
+    <script src = "/socket.io/socket.io.js"></script>
+    <script>
+       const socket = io();
+    </script>
 </head>
 <!-- Top of website: Header Title -->
 <div class="topbar">
@@ -34,13 +40,15 @@
             <script type="text/javascript" , src="js/ruleChecker.js"></script>
         </div>
     </div>
-    <!------------ Chat field (TO DO) ------------>
+    <!------------ Chat field ------------>
     <div id="chatField" class="chatFieldStyles" type="submit" value="Submit">
         <p class="chatText">Nikolaj: Hej med dig</p>
         <p class="chatText">Martin: Hej </p>
         <div>
-            <input id="chatInput" class="chatInputStyles">
-            <input id="submitBtn" class="submitButton" type="submit" value="Submit">
+        </div>
+        <!------------ chat input field ------------>
+            <input id="chatInput" class="inputfieldStyles">
+            <input id="submit-button" class="submitButton" type="submit" value="Enter">
         </div>
     </div>
 
