@@ -8,6 +8,27 @@ let clickCount = 0;
 let playerTurn = null;
 let isLegalMove = null;
 
+
+
+// Onclick function of buttons:
+const onClick = (btn, x, y) => {
+    btn.addEventListener('click', () => {
+
+        // Selection logic:
+        selectedCell(btn, x, y);
+
+        // Move piece logic (TODO):
+        moveChecker(btn, x, y);
+
+
+        // Info for debug:
+        console.log('Coordinates: ' + "(" + x + ", " + y + ")");
+        console.log('Value: ' + btn.getAttribute("value"));
+        console.log('Selected: ' + btn.getAttribute("selected"));
+        console.log("#################################################")
+    })
+}
+
 // Function to get the correct piece symbol based on the piece value
 const getPieceSymbol = (value) => {
     switch (value) {
@@ -67,6 +88,77 @@ const playerTurnHighlight = () => {
     }
 }
 
+
+const removePieceTrail = (oldPieceBtn) => {
+    while (oldPieceBtn.firstChild) {
+        oldPieceBtn.removeChild(oldPieceBtn.firstChild);
+    }
+}
+
+const placeNewPiece = (targetBtn) =>{
+    const newPieceFigure = document.createElement("span");
+    newPieceFigure.style.cssText = " font-size:"+pieceSize+";"
+    newPieceFigure.textContent = getPieceSymbol(selectedBtn.getAttribute("value"));
+    targetBtn.appendChild(newPieceFigure);
+}
+
+const swapPieceValue = (selectedBtn, targetBtn) =>{
+    var tempSelect = selectedBtn.getAttribute("value");
+    selectedBtn.setAttribute("value", "none");
+    targetBtn.setAttribute("value", tempSelect);
+}
+
+// Confirm when a player has ended their turn
+const confirmMove = (targetBtn) => {
+
+    // If the selected cell is a legal cell according to playerturn
+    if (selectedBtn != null) {
+
+        // Clear selected piece from board
+        removePieceTrail(selectedBtn);
+
+        // Place selected piece on target: 
+        placeNewPiece(targetBtn);
+
+        // Update the values on pieces by swapping
+        swapPieceValue(selectedBtn, targetBtn);
+
+        // Move is finished:
+        clickCount++;
+
+
+    } else {
+        console.error("illegal cell selection");
+    }
+
+    // Reset selection to none after move is done:
+    selectedBtn = null;
+}
+
+
+// Check for game rules:
+const moveChecker = (targetBtn, x, y) => {
+
+    // Check if move is legal
+    isLegalMove = legalMove(selectedBtn, targetBtn);
+    let moveDetected = Math.abs(selectedX - x) != 0 || Math.abs(selectedY - y) != 0
+
+    if (moveDetected && isLegalMove) {
+        // Remove highlight on movement on oldPos:
+        removeHighlight();
+
+        // Swap piece position and set their coordinates accordingly:
+        confirmMove(targetBtn);
+
+        console.log("Player move legal: " + isLegalMove)
+        console.log("Player turn over for: " + playerTurn);
+        console.log("Total click count: " + clickCount);
+    }
+
+}
+
+
+
 const selectedCell = (btn, x, y) => {
     cellType = btn.getAttribute('value');
 
@@ -88,7 +180,7 @@ const selectedCell = (btn, x, y) => {
             selectedX = x;
             selectedY = y;
             selectedPos = selectedX + "" + selectedY;
-            btn.setAttribute('selected', 'yes')
+            btn.setAttribute('selected', 'yes');
             btn.classList.add('highlight');
             canSelect = false;
         }
@@ -110,7 +202,7 @@ const selectedCell = (btn, x, y) => {
             selectedX = x;
             selectedY = y;
             selectedPos = selectedX + "" + selectedY;
-            btn.setAttribute('selected', 'yes')
+            btn.setAttribute('selected', 'yes');
             btn.classList.add('highlight');
             canSelect = false;
         }
@@ -124,83 +216,4 @@ const selectedCell = (btn, x, y) => {
             console.error("Error: Selectedbtn === null -> Cause: (1): not your turn, (2): not your pieces");
         }
     }
-}
-
-// Confirm when a player has ended their turn
-const confirmMove = (targetBtn) => {
-
-    // If the selected cell is a legal cell according to playerturn
-    if (selectedBtn != null) {
-
-        // Clear selected piece from board
-        while (selectedBtn.firstChild) {
-            selectedBtn.removeChild(selectedBtn.firstChild);
-        }
-
-        // Place selected piece on target: 
-        const newPieceFigure = document.createElement("span");
-        newPieceFigure.style.cssText = " font-size:"+pieceSize+";"
-        newPieceFigure.textContent = getPieceSymbol(selectedBtn.getAttribute("value"));
-        targetBtn.appendChild(newPieceFigure);
-
-
-        // Update the values on pieces by swapping
-        var tempSelect = selectedBtn.getAttribute("value");
-        selectedBtn.setAttribute("value", targetBtn.getAttribute("value"));
-        targetBtn.setAttribute("value", tempSelect);
-
-        // Move is finished:
-        clickCount++;
-
-
-    } else {
-        console.error("illegal cell selection");
-    }
-
-    // Reset selection to none after move is done:
-    selectedBtn = null;
-}
-
-
-// Move piece
-const movePiece = (targetBtn, x, y) => {
-
-    // Check if move is legal
-    isLegalMove = legalMove(selectedBtn, targetBtn);
-    let moveDetected = Math.abs(selectedX - x) != 0 || Math.abs(selectedY - y) != 0
-
-    if (moveDetected && isLegalMove) {
-        // Remove highlight on movement on oldPos:
-        removeHighlight();
-
-        // Swap piece position and set their coordinates accordingly:
-        confirmMove(targetBtn);
-
-        console.log("Player move legal: " + isLegalMove)
-        console.log("Player turn over for: " + playerTurn);
-        console.log("Total click count: " + clickCount);
-    }
-
-}
-
-
-// Onclick function of buttons:
-const onClick = (btn, x, y) => {
-    btn.addEventListener('click', () => {
-
-        // Selection logic:
-        selectedCell(btn, x, y);
-
-        // Move piece logic (TODO):
-        movePiece(btn, x, y);
-
-        // Remove piece logic (TODO):
-
-
-        // Info for debug:
-        console.log('Coordinates: ' + "(" + x + ", " + y + ")");
-        console.log('Value: ' + btn.getAttribute("value"));
-        console.log('Selected: ' + btn.getAttribute("selected"));
-        console.log("#################################################")
-    })
 }
