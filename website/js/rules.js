@@ -28,21 +28,8 @@ const legalMove = (selectedBtn, targetBtn) => {
     }
 }
 
-const capturePiece = () => {
-
-}
 
 const pawnRules = (mySelectBtn, targetBtn) => {
-
-    // Rules:
-    const blockedPath = false;
-    const emptyCell = targetBtn.getAttribute("value") === "none"
-    let capturePiece = "";
-    if (playerTurn === "White") {
-        capturePiece = targetBtn.getAttribute("value").includes("black")
-    } else {
-        capturePiece = targetBtn.getAttribute("value").includes("white")
-    }
 
     // Relative Positions and info:
     const selectValue = mySelectBtn.getAttribute("value");
@@ -52,30 +39,51 @@ const pawnRules = (mySelectBtn, targetBtn) => {
     const tX = parseInt(targetBtn.getAttribute("x"));
     const tY = parseInt(targetBtn.getAttribute("y"));
 
-    
+    // Rules:
+    const blockedPath = false;
+    const emptyCell = targetBtn.getAttribute("value") === "none"
+    const verticalMove = Math.abs(tX-x);
+    const horizontalMove = Math.abs(tY-y);
+    const straightLine = horizontalMove === 0;
+    let capturePiece = "";
+    if (playerTurn === "White") {
+        capturePiece = targetBtn.getAttribute("value").includes("black")
+    } else {
+        capturePiece = targetBtn.getAttribute("value").includes("white")
+    }
+
     // Check Rules:
     if (blockedPath) {
-        // If the selected piece-path to target cell is blocked by any pieces: 
         return false;
     } else if (emptyCell) {
-        // If the target cell is an empty cell with no pieces (They have to be opposite apparantly):
-        const diff = Math.abs(x - tX);
-
-        for(let start = 1; start <= boardSize; start++){
+        for (let start = 1; start <= boardSize; start++) {
             // Initially pawns in startposition can move 2 cells
-            if(x == 7 || x == 2){
-                return (diff >= 0 && diff <= 2) 
+            if ((x == 7 || x == 2)) {
+                return (verticalMove >= 0 && verticalMove <= 2) && straightLine;
             } else {
-            // After exiting startposition, pawns can only move by 1 cell
-                return (diff === 1)
+                // After exiting startposition, pawns can only move by 1 cell
+                return (verticalMove === 1 && horizontalMove === 0);
             }
         }
+    } else if (capturePiece && !(emptyCell) && (verticalMove === 1 && horizontalMove === 1)) {
 
-    } else if (capturePiece) {
-        // If the target cell has an enemy piece:
-        targetValue.
+        // Clear selected piece from board
+        removePieceTrail(selectedBtn);
 
-        console.log("COLLIDED WITH ENEMY PIECE");
+        // Remove attacked piece:
+        removePieceTrail(targetBtn);
+
+        // Place selected piece on target: 
+        placeNewPiece(targetBtn);
+
+        // Update the values on pieces by swapping:
+        swapPieceValue(selectedBtn, targetBtn);
+
+        // Clears selection highlight:
+        removeHighlight();
+
+        // Move is finished:
+        clickCount++;
 
     } else {
         // Error handling:

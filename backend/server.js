@@ -18,7 +18,6 @@ app.get('/', function (req, res) {
 app.use(express.static(path.join(__dirname, '../website')));
 
 
-
 // Server checks:
 app.listen(port, function () {
     console.log(`Server running at http://${hostname}:${port}/`);
