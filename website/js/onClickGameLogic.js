@@ -88,7 +88,7 @@ const selectedCell = (btn, x, y) => {
             selectedX = x;
             selectedY = y;
             selectedPos = selectedX + "" + selectedY;
-            btn.setAttribute('selected', 'yes')
+            btn.setAttribute('selected', 'yes');
             btn.classList.add('highlight');
             canSelect = false;
         }
@@ -110,7 +110,7 @@ const selectedCell = (btn, x, y) => {
             selectedX = x;
             selectedY = y;
             selectedPos = selectedX + "" + selectedY;
-            btn.setAttribute('selected', 'yes')
+            btn.setAttribute('selected', 'yes');
             btn.classList.add('highlight');
             canSelect = false;
         }
@@ -126,6 +126,19 @@ const selectedCell = (btn, x, y) => {
     }
 }
 
+const removePieceTrail = (oldPieceBtn) => {
+    while (oldPieceBtn.firstChild) {
+        oldPieceBtn.removeChild(oldPieceBtn.firstChild);
+    }
+}
+
+const placeNewPiece = (targetBtn) =>{
+    const newPieceFigure = document.createElement("span");
+    newPieceFigure.style.cssText = " font-size:"+pieceSize+";"
+    newPieceFigure.textContent = getPieceSymbol(selectedBtn.getAttribute("value"));
+    targetBtn.appendChild(newPieceFigure);
+}
+
 // Confirm when a player has ended their turn
 const confirmMove = (targetBtn) => {
 
@@ -133,15 +146,10 @@ const confirmMove = (targetBtn) => {
     if (selectedBtn != null) {
 
         // Clear selected piece from board
-        while (selectedBtn.firstChild) {
-            selectedBtn.removeChild(selectedBtn.firstChild);
-        }
+        removePieceTrail(selectedBtn);
 
         // Place selected piece on target: 
-        const newPieceFigure = document.createElement("span");
-        newPieceFigure.style.cssText = " font-size:"+pieceSize+";"
-        newPieceFigure.textContent = getPieceSymbol(selectedBtn.getAttribute("value"));
-        targetBtn.appendChild(newPieceFigure);
+        placeNewPiece(targetBtn);
 
 
         // Update the values on pieces by swapping

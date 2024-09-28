@@ -2,10 +2,10 @@
 let board = document.getElementById("board");
 
 // Build the board of 8x8 buttons as cells:
-const size = 8;
+const boardSize = 8;
 var btnNo=0;
-for (let x = 1; x <= size; x++) {
-    for (let y = 1; y <= size; y++) {
+for (let x = 1; x <= boardSize; x++) {
+    for (let y = 1; y <= boardSize; y++) {
         btnNo++;
         let btn = document.createElement('button');
         btn.className += 'button'+btnNo;
