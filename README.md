@@ -9,6 +9,7 @@ Minimum requirements:
 - Two players should be able to join a server-hosted game
 - Victory/defeat mechanics
 - Player Connect/disconnect handling
+- Capture-piece point system
 
 Extensions
 - Game features
