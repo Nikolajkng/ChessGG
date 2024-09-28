@@ -1,5 +1,5 @@
 // Fetch the div where the board is:
-let board = document.getElementById("board");
+let chessBoard = document.getElementById("chessBoard");
 
 // Build the board of 8x8 buttons as cells:
 const boardSize = 8;
@@ -17,7 +17,7 @@ for (let x = 1; x <= boardSize; x++) {
         onClick(btn, x, y);
         
         document.querySelector('body').appendChild(btn);
-        board.appendChild(btn);
+        chessBoard.appendChild(btn);
     }
 }
 

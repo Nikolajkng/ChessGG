@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/chatboxStyles.css">
+    <link rel="stylesheet" href="css/styles.css"/>
 </head>
 <!-- Top of website: Header Title -->
 <div class="topbar">
@@ -14,31 +15,35 @@
 <!-- Main body of website -->
 
 <body>
-    <div>
-        <!-------------- Left menu (TO DO) -------------->
-        <div id="whiteMenu" div class="whiteMenuDisable">
-            <p>White Player</p>
-        </div>
-        <!-------------- right menu (TO DO) -------------->
-        <div id="blackMenu" class="blackMenuDisable" >
-            <p>Black Player</p>
-            </div>
-        <!-------------- Chess Board (in-progress) -------------->
-        <div class="boardContainer">
-            <div class="boardGrid" id="board">
-                <!-- Function that generate board (see createBoard.js file) -->
-                <script type="text/javascript", src="js/createPieces.js"></script>
-                <script type="text/javascript" , src="js/onClickGameLogic.js"></script>
-                <script type="text/javascript" , src="js/createBoard.js"></script>
-                <script type="text/javascript" , src="js/pawnRules.js"></script>
-                <script type="text/javascript" , src="js/ruleChecker.js"></script>
-            </div>
-        </div>
-                <!------------ Chat field (TO DO) ------------>
-                <div id="chatField" class="chatFieldStyles">
-                    <p>Test</p>
-                    </div> 
+    <!-------------- Left menu (TO DO) -------------->
+    <div id="whiteMenu" div class="whiteMenuDisable">
+        <p>White Player</p>
     </div>
+    <!-------------- right menu (TO DO) -------------->
+    <div id="blackMenu" class="blackMenuDisable">
+        <p>Black Player</p>
+    </div>
+    <!-------------- Chess Board (in-progress) -------------->
+    <div id="board" class="boardContainer">
+        <div id="chessBoard" class="boardGrid">
+            <!-- Function that generate board (see createBoard.js file) -->
+            <script type="text/javascript" , src="js/createPieces.js"></script>
+            <script type="text/javascript" , src="js/onClickGameLogic.js"></script>
+            <script type="text/javascript" , src="js/createBoard.js"></script>
+            <script type="text/javascript" , src="js/pawnRules.js"></script>
+            <script type="text/javascript" , src="js/ruleChecker.js"></script>
+        </div>
+    </div>
+    <!------------ Chat field (TO DO) ------------>
+    <div id="chatField" class="chatFieldStyles" type="submit" value="Submit">
+        <p class="chatText">Nikolaj: Hej med dig</p>
+        <p class="chatText">Martin: Hej </p>
+        <div>
+            <input id="chatInput" class="chatInputStyles">
+            <input id="submitBtn" class="submitButton" type="submit" value="Submit">
+        </div>
+    </div>
+
 </body>
 
 </html>
