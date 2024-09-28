@@ -80,9 +80,10 @@ const selectedCell = (btn, x, y) => {
 
 
     // WHITE PLAYER TURN //
-    if (playerTurn == "White") {
+    if (playerTurn === "White") {
+        const hasWhitePiece = cellType.includes("white");
         // Ensures selection is only possible: 1) on cells with pieces, 2) only select WHITE pieces
-        if (canSelect && cellType != 'none' && (playerTurn === "White")) {
+        if (canSelect && cellType != 'none' && hasWhitePiece) {
             selectedBtn = btn;
             selectedX = x;
             selectedY = y;
@@ -95,11 +96,14 @@ const selectedCell = (btn, x, y) => {
         else if (!canSelect && selectedPos == (x + "" + y)) {
             removeHighlight();
             selectedBtn = null;
+        } else {
+            console.error("Error: Selectedbtn === null -> Cause: (1): not your turn, (2): not your pieces");
         }
         // BLACK PLAYER TURN //
-    } else {
+    } else{
+        const hasBlackPiece = cellType.includes("black");
         // Ensures selection is only possible: 1) on cells with pieces, 2) only select BLACK pieces
-        if (canSelect && cellType != 'none' && (playerTurn === "Black")) {
+        if (canSelect && cellType != 'none' && hasBlackPiece) {
             selectedBtn = btn;
             selectedX = x;
             selectedY = y;
@@ -112,6 +116,8 @@ const selectedCell = (btn, x, y) => {
         else if (!canSelect && selectedPos == (x + "" + y)) {
             removeHighlight();
             selectedBtn = null;
+        } else {
+            console.error("Error: Selectedbtn === null -> Cause: (1): not your turn, (2): not your pieces");
         }
     }
 }

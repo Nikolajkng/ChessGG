@@ -1,5 +1,8 @@
 
 const legalMove = (selectedBtn, targetBtn) => {
+
+    if(selectedBtn != null){
+        
     const targetValue = targetBtn.getAttribute("value");
     const selectValue = selectedBtn.getAttribute("value");
 
@@ -14,6 +17,10 @@ const legalMove = (selectedBtn, targetBtn) => {
     console.log("target move is: " + targetValue )
 
     return true;
+    } else {
+        console.error("Error: Selectedbtn === null -> Cause: (1): not your turn, (2): not your pieces");
+    }
+
 }
 
 const pawnRules = () => {
