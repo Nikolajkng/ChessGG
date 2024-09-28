@@ -61,6 +61,8 @@ const setInitialPieceValues = (btn, x, y) => {
 const setInitialPieces = (btn) => {
     var pieceSymbol = document.createElement("span");
     var value = btn.getAttribute('value');
+
+    if (value === "none") {return;}
     switch (value) {
         case "whiteP": pieceSymbol.textContent = "♙"; break;
         case "whiteK": pieceSymbol.textContent = "♔"; break;
@@ -74,7 +76,6 @@ const setInitialPieces = (btn) => {
         case "blackR": pieceSymbol.textContent = "♜"; break;
         case "blackB": pieceSymbol.textContent = "♝"; break;
         case "blackN": pieceSymbol.textContent = "♞"; break;
-        case "none" : pieceSymbol.textContent = "";
     }
     btn.appendChild(pieceSymbol);
 }
