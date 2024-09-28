@@ -1,16 +1,18 @@
 # ChessGG
+Description:
+Just a bunch of CS students having fun trying to build a chess game 
+to learn more about web dev and servers.
 
 Minimum requirements:
+- An interactive website for the game to take place
 - The game should function and include all rules from regular Chess
-- Two players should be able to join and play a game
-- An interactive website for the game
-- Victory/defeat logic
+- Two players should be able to join a server-hosted game
+- Victory/defeat mechanics
 - Player Connect/disconnect handling
-- Chess pieces should have values
 
 Extensions
 - Game features
-  - Hint system
+  - Pieces Hint system
   - Customized pieces (elephants/monkeys/bombs)
   - Visual and sound effects
   - Clock/time
