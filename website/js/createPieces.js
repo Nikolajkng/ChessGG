@@ -1,6 +1,6 @@
 // Local variables:
 let cellSize = 100;
-
+const pieceSize = "70px";
 
 // Style of buttons:
 const setCellSize = (newButton) => {
@@ -61,6 +61,7 @@ const setInitialPieceValues = (btn, x, y) => {
 const setInitialPieces = (btn) => {
     var pieceSymbol = document.createElement("span");
     var value = btn.getAttribute('value');
+    pieceSymbol.style.cssText = " font-size:"+pieceSize+";"
 
     if (value === "none") {return;}
     switch (value) {

@@ -8,9 +8,6 @@ let clickCount = 0;
 let playerTurn = null;
 let isLegalMove = null;
 
-
-// Functions:
-
 // Function to get the correct piece symbol based on the piece value
 const getPieceSymbol = (value) => {
     switch (value) {
@@ -85,7 +82,7 @@ const selectedCell = (btn, x, y) => {
     // WHITE PLAYER TURN //
     if (playerTurn == "White") {
         // Ensures selection is only possible: 1) on cells with pieces, 2) only select WHITE pieces
-        if (canSelect && cellType != 'none' && (btn.getAttribute('value').includes('white'))) {
+        if (canSelect && cellType != 'none' && (playerTurn === "White")) {
             selectedBtn = btn;
             selectedX = x;
             selectedY = y;
@@ -102,7 +99,7 @@ const selectedCell = (btn, x, y) => {
         // BLACK PLAYER TURN //
     } else {
         // Ensures selection is only possible: 1) on cells with pieces, 2) only select BLACK pieces
-        if (canSelect && cellType != 'none' && (btn.getAttribute('value').includes('black'))) {
+        if (canSelect && cellType != 'none' && (playerTurn === "Black")) {
             selectedBtn = btn;
             selectedX = x;
             selectedY = y;
@@ -132,6 +129,7 @@ const confirmMove = (targetBtn) => {
 
         // Place selected piece on target: 
         const newPieceFigure = document.createElement("span");
+        newPieceFigure.style.cssText = " font-size:"+pieceSize+";"
         newPieceFigure.textContent = getPieceSymbol(selectedBtn.getAttribute("value"));
         targetBtn.appendChild(newPieceFigure);
 
@@ -140,9 +138,6 @@ const confirmMove = (targetBtn) => {
         var tempSelect = selectedBtn.getAttribute("value");
         selectedBtn.setAttribute("value", targetBtn.getAttribute("value"));
         targetBtn.setAttribute("value", tempSelect);
-
-        console.log("selected: " + selectedBtn.getAttribute("x") + ", " + selectedBtn.getAttribute("y"));
-        console.log("target: " + targetBtn.getAttribute("x") + ", " + targetBtn.getAttribute("y"));
 
         // Move is finished:
         clickCount++;
@@ -155,6 +150,29 @@ const confirmMove = (targetBtn) => {
     // Reset selection to none after move is done:
     selectedBtn = null;
 }
+
+
+// Move piece
+const movePiece = (targetBtn, x, y) => {
+
+    // Check if move is legal
+    isLegalMove = legalMove(selectedBtn, targetBtn);
+    let moveDetected = Math.abs(selectedX - x) != 0 || Math.abs(selectedY - y) != 0
+
+    if (moveDetected && isLegalMove) {
+        // Remove highlight on movement on oldPos:
+        removeHighlight();
+
+        // Swap piece position and set their coordinates accordingly:
+        confirmMove(targetBtn);
+
+        console.log("Player move legal: " + isLegalMove)
+        console.log("Player turn over for: " + playerTurn);
+        console.log("Total click count: " + clickCount);
+    }
+
+}
+
 
 // Onclick function of buttons:
 const onClick = (btn, x, y) => {
@@ -175,25 +193,4 @@ const onClick = (btn, x, y) => {
         console.log('Selected: ' + btn.getAttribute("selected"));
         console.log("#################################################")
     })
-}
-
-// Move piece
-const movePiece = (btn, x, y) => {
-
-    // TO DO:  Check if move is legal
-    isLegalMove = legalMove();
-    let moveDetected = Math.abs(selectedX - x) != 0 || Math.abs(selectedY - y) != 0
-
-    if (moveDetected && isLegalMove) {
-        // Remove highlight on movement on oldPos:
-        removeHighlight();
-
-        // Swap piece position and set their coordinates accordingly:
-        confirmMove(btn);
-
-        console.log("Player move legal: " + isLegalMove)
-        console.log("Player turn over for: " + playerTurn);
-        console.log("Total click count: " + clickCount);
-    }
-
 }
