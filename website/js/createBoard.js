@@ -9,6 +9,8 @@ for (let x = 1; x <= size; x++) {
         btnNo++;
         let btn = document.createElement('button');
         btn.className += 'button'+btnNo;
+        btn.setAttribute("x",x);
+        btn.setAttribute("y",y);
         setInitialPieceValues(btn, x, y);
         setInitialPieces(btn)
         setCellSize(btn);

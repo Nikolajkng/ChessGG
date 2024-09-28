@@ -54,65 +54,28 @@ const setInitialPieceValues = (btn, x, y) => {
     else {
         btn.setAttribute("value", "none")
     }
-
-    console.log("Piece (" + x + "," + y + "): " + btn.getAttribute("value"));
 }
 
 
 // Place all initial pieces based on their values:
 const setInitialPieces = (btn) => {
-    var pieceSymbol = document.createTextNode("");
+    var pieceSymbol = document.createElement("span");
     var value = btn.getAttribute('value');
+
+    if (value === "none") {return;}
     switch (value) {
-        case value = "whiteP":
-            pieceSymbol.nodeValue = "♙";
-            break;
-
-        case value = "whiteK":
-            pieceSymbol.nodeValue = "♔";
-            break;
-
-        case value = "whiteQ":
-            pieceSymbol.nodeValue = "♕";
-            break;
-
-        case value = "whiteR":
-            pieceSymbol.nodeValue = "♖";
-            break;
-
-        case value = "whiteB":
-            pieceSymbol.nodeValue = "♗";
-            break;
-
-        case value = "whiteN":
-            pieceSymbol.nodeValue = "♘";
-            break;
-        case value = "blackP":
-            pieceSymbol.nodeValue = "♟";
-            break;
-
-        case value = "blackK":
-            pieceSymbol.nodeValue = "♚";
-            break;
-
-        case value = "blackQ":
-            pieceSymbol.nodeValue = "♛";
-            break;
-
-        case value = "blackR":
-            pieceSymbol.nodeValue = "♜";
-            break;
-
-        case value = "blackB":
-            pieceSymbol.nodeValue = "♝";
-            break;
-
-        case value = "blackN":
-            pieceSymbol.nodeValue = "♞";
-            break;
-
-        default:
-            pieceSymbol.nodeValue = "";
+        case "whiteP": pieceSymbol.textContent = "♙"; break;
+        case "whiteK": pieceSymbol.textContent = "♔"; break;
+        case "whiteQ": pieceSymbol.textContent = "♕"; break;
+        case "whiteR": pieceSymbol.textContent = "♖"; break;
+        case "whiteB": pieceSymbol.textContent = "♗"; break;
+        case "whiteN": pieceSymbol.textContent = "♘"; break;
+        case "blackP": pieceSymbol.textContent = "♟"; break;
+        case "blackK": pieceSymbol.textContent = "♚"; break;
+        case "blackQ": pieceSymbol.textContent = "♛"; break;
+        case "blackR": pieceSymbol.textContent = "♜"; break;
+        case "blackB": pieceSymbol.textContent = "♝"; break;
+        case "blackN": pieceSymbol.textContent = "♞"; break;
     }
     btn.appendChild(pieceSymbol);
 }
