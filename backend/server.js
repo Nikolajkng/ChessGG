@@ -31,7 +31,6 @@ io.on('connection', (socket) => {
 
     // Listening for new chat messages...
     socket.on('send-chat-message', message => {
-        console.log(message);
         // Send to all clients
         socket.broadcast.emit('chat-message', {
             message: message,
@@ -43,8 +42,9 @@ io.on('connection', (socket) => {
 
 
     // Disconnection handler
-    socket.on('disconnection', function () {
-        console.log("user disconnected");
+    socket.on('disconnect', () => {
+        socket.broadcast.emit('user-disconnected', players[socket.id]);
+        delete players[socket.id];
     })
 
 })
