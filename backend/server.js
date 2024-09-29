@@ -33,7 +33,12 @@ io.on('connection', (socket) => {
     socket.on('send-chat-message', message => {
         console.log(message);
         // Send to all clients
-        socket.broadcast.emit('chat-message', message);
+        socket.broadcast.emit('chat-message', {
+            message: message,
+            playerName: players[socket.id]
+        });
+
+
     })
 
 
