@@ -15,11 +15,11 @@ const pawnRules = (mySelectBtn, targetBtn) => {
     const verticalMove = Math.abs(tX-x);
     const horizontalMove = Math.abs(tY-y);
     const straightLine = horizontalMove === 0;
-    let capturePiece = "";
+    let canCapture = "";
     if (playerTurn === "White") {
-        capturePiece = targetBtn.getAttribute("value").includes("black")
+        canCapture = targetBtn.getAttribute("value").includes("black")
     } else {
-        capturePiece = targetBtn.getAttribute("value").includes("white")
+        canCapture = targetBtn.getAttribute("value").includes("white")
     }
 
     // Check Rules:
@@ -35,7 +35,7 @@ const pawnRules = (mySelectBtn, targetBtn) => {
                 return (verticalMove === 1 && horizontalMove === 0);
             }
         }
-    } else if (capturePiece && !(emptyCell) && (verticalMove === 1 && horizontalMove === 1)) {
+    } else if (canCapture && !(emptyCell) && (verticalMove === 1 && horizontalMove === 1)) {
 
         // Clear selected piece from board
         removePieceTrail(selectedBtn);

@@ -4,13 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <link rel="icon" type="images/x-icon" href="/images/favicon-32x32.png">
-    <link rel="stylesheet" href="css/onBoardStyles.css"/>
+    <link rel="stylesheet" href="css/onBoardStyles.css" />
     <link rel="stylesheet" href="css/chatboxStyles.css">
-    <link rel="stylesheet" href="css/sideMenus.css"/>
-    <script src = "/socket.io/socket.io.js"></script>
-    <script>
-       const socket = io();
-    </script>
+    <link rel="stylesheet" href="css/sideMenus.css" />
+    <script defer src="http://localhost:6969/socket.io/socket.io.js" , type="text/javascript"></script>
+    <script defer src="js/chatClient.js" type="text/javascript"></script>
+    <script defer type="text/javascript" , src="js/createPieces.js"></script>
+    <script defer type="text/javascript" , src="js/onClickGameLogic.js"></script>
+    <script defer type="text/javascript" , src="js/createBoard.js"></script>
+    <script defer type="text/javascript" , src="js/pawnRules.js"></script>
+    <script defer type="text/javascript" , src="js/ruleChecker.js"></script>
 </head>
 <!-- Top of website: Header Title -->
 <div class="topbar">
@@ -32,24 +35,16 @@
     <!-------------- Chess Board (in-progress) -------------->
     <div id="board" class="boardContainer">
         <div id="chessBoard" class="boardGrid">
-            <!-- Function that generate board (see createBoard.js file) -->
-            <script type="text/javascript" , src="js/createPieces.js"></script>
-            <script type="text/javascript" , src="js/onClickGameLogic.js"></script>
-            <script type="text/javascript" , src="js/createBoard.js"></script>
-            <script type="text/javascript" , src="js/pawnRules.js"></script>
-            <script type="text/javascript" , src="js/ruleChecker.js"></script>
+
+
         </div>
     </div>
     <!------------ Chat field ------------>
-    <div id="chatField" class="chatFieldStyles" type="submit" value="Submit">
-        <p class="chatText">Nikolaj: Hej med dig</p>
-        <p class="chatText">Martin: Hej </p>
-        <div>
-        </div>
-        <!------------ chat input field ------------>
-            <input id="chatInput" class="inputfieldStyles">
+    <div id="message-container" class="chatFieldStyles">
+        <form id="send-container">
+            <input id="message-input" class="inputfieldStyles">
             <input id="submit-button" class="submitButton" type="submit" value="Enter">
-        </div>
+        </form>
     </div>
 
 </body>
