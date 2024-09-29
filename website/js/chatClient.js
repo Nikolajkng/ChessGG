@@ -7,15 +7,19 @@ const messageInput = document.getElementById("message-input");
 
 // Listens for server 'chat-messages' and output msg to client... 
 socket.on('chat-message', data => {
-    console.log(data.playerName+": "+data.message);
-    appendMessage(data.playerName+": "+data.message);
+    appendMessage(data.playerName + ": " + data.message);
 
 })
 
-// Listen for confirmation on user connection:
+// Listen for user connection:
 socket.on('user-connected', playerName => {
     appendMessage(playerName + " has joined!");
-    console.log(playerName + " has joined!");
+})
+
+
+// Listen for user disconnection:
+socket.on('user-disconnected', playerName => {
+    appendMessage(playerName + " has disconnected!");
 })
 
 //////////////////////////////// Functions and channel senders ///////////////////////////////////
@@ -27,22 +31,39 @@ messageForm.addEventListener('submit', e => {
 
     // Sending from client to server on submit
     const msg = messageInput.value;
+    // messageFilter();        TO DO ()
     socket.emit('send-chat-message', msg);
-    appendMessage("You: " + msg);
+    appendMessage("me: " + msg);
 
     // Clear input
     messageInput.value = '';
 })
 
-// Append message to chatbox:
-function appendMessage(msg){
-    const messageElement = document.createElement('div');
-    messageElement.innerText = msg;
-    messageContainer.append(messageElement);
-
-}
-
 // Show player has joined in chat:
 const playerName = prompt('Please enter your name 🖊️');
-appendMessage('You joined');
+appendMessage('you joined!');
 socket.emit('new-player', playerName);
+
+
+// Append message to chatbox:
+function appendMessage(msg) {
+    const messageElement = document.createElement('div');
+    messageElement.innerText = msg;
+    messageStyle(messageElement);
+    messageContainer.append(messageElement);
+}
+
+function messageStyle(messageElement) {
+    if (messageElement.innerText.includes("joined") || messageElement.innerText.includes("disconnect")) {
+        messageElement.style.fontWeight = 'bold'
+    }
+    messageElement.style.backgroundColor = 'lightblue';
+    messageElement.style.fontSize = '17px';
+    messageElement.style.color = 'black';
+
+    messageElement.style.borderRadius = '5px';
+    messageElement.style.textAlign = 'left';
+
+    messageElement.style.margin = '10px';
+    messageElement.style.padding = '10px';
+}
