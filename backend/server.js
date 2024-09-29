@@ -1,7 +1,5 @@
 /////////////////////// imports //////////////////////////
-const hostname = '127.0.0.1';
 const port = 6969;
-
 const path = require('path')
 const express = require('express');
 const app = express();
@@ -21,10 +19,17 @@ app.get('/', function (req, res) {
 app.use(express.static(path.join(__dirname, '../website')));
 
 
-// Trigger an series of actions on connection:
+// Triggers a series of actions and channel-listeners on client connection:
 io.on('connection', (socket) => {
-    console.log('user connected');
-    socket.emit('connection', {message: 'a new client connected'});
+    console.log('user connected!');
+
+
+    // Listening for client...
+    socket.on('send-chat-message', message => {
+        console.log(message);
+        // Sending from server to client...
+        socket.broadcast.emit('chat-message', message);
+    })
 
 
     // Disconnection handler
@@ -37,6 +42,6 @@ io.on('connection', (socket) => {
 
 // Server checks:
 server.listen(port, function () {
-    console.log(`Server running at http://${hostname}:${port}/`);
+    console.log(`Server running at http://localhost:${port}/`);
 
 });
