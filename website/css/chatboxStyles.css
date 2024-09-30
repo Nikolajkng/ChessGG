@@ -8,7 +8,7 @@
     border-radius: 25px;
   
     position: absolute; 
-    bottom: 20px; 
+    bottom: 60px; 
     left: 50%; 
     transform: translateX(-50%); 
     margin-top:10px;
@@ -21,7 +21,6 @@
     width: 410px;
     height: 25px;
 
-    position: absolute;
     bottom: 20px;
     left: 20px;
 
@@ -32,10 +31,17 @@
     width: 100px;
     height: 30px;
 
-    position: absolute;
     right:0;
     bottom: 20px;
     margin-right: 20px;
 
     font-size: 20px;
+  }
+
+  .formStyles{
+    position: absolute; 
+    bottom: 20px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    margin-top:10px;
   }
