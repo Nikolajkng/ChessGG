@@ -34,7 +34,7 @@ io.on('connection', (socket) => {
     socket.on('new-player', playerName => {
         players[socket.id] = playerName;
         socket.broadcast.emit('user-connected', playerName);
-        socket.broadcast.emit("new-user-list", players.values());
+        socket.broadcast.emit("new-user-list", Object.values(players));
     })
 
     // Listening for new chat messages...
