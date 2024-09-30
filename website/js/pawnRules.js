@@ -1,20 +1,19 @@
-
 const pawnRules = (mySelectBtn, targetBtn) => {
 
     // Relative Positions and info:
-    const selectValue = mySelectBtn.getAttribute("value");
-    const targetValue = targetBtn.getAttribute("value");
     const x = parseInt(mySelectBtn.getAttribute("x"));
     const y = parseInt(mySelectBtn.getAttribute("y"));
     const tX = parseInt(targetBtn.getAttribute("x"));
     const tY = parseInt(targetBtn.getAttribute("y"));
 
-    // Rules:
+    // Movement rules:
     const blockedPath = false;
     const emptyCell = targetBtn.getAttribute("value") === "none"
-    const verticalMove = Math.abs(tX-x);
-    const horizontalMove = Math.abs(tY-y);
+    const verticalMove = Math.abs(tX - x);
+    const horizontalMove = Math.abs(tY - y);
     const straightLine = horizontalMove === 0;
+    const backwardsMoveWhite = tX > x;
+    const backwardsMoveBlack = tX < x;
     let canCapture = "";
     if (playerTurn === "White") {
         canCapture = targetBtn.getAttribute("value").includes("black")
@@ -22,41 +21,81 @@ const pawnRules = (mySelectBtn, targetBtn) => {
         canCapture = targetBtn.getAttribute("value").includes("white")
     }
 
+
+    //////////////////////////////////////////////////////////// BLACK PAWN LOGIC //////////////////////////////////////////////////////////// 
+
     // Check Rules:
-    if (blockedPath) {
-        return false;
-    } else if (emptyCell) {
-        for (let start = 1; start <= boardSize; start++) {
-            // Initially pawns in startposition can move 2 cells
-            if ((x == 7 || x == 2)) {
-                return (verticalMove >= 0 && verticalMove <= 2) && straightLine;
-            } else {
-                // After exiting startposition, pawns can only move by 1 cell
-                return (verticalMove === 1 && horizontalMove === 0);
+    if (playerTurn === "White") {
+        // Prevents movement if pawns path are blocked by other pieces:
+        if (blockedPath) {
+            return false;
+            // Ensures straight-only movement when moving to empty cells:
+        } else if (emptyCell) {
+            for (let start = 1; start <= boardSize; start++) {
+                if ((x == 7 || x == 2)) {
+                    return (verticalMove >= 0 && verticalMove <= 2) && straightLine && !backwardsMoveWhite; // Pawns at startposition can move 2
+                } else {
+                    return (verticalMove === 1 && horizontalMove === 0 && !backwardsMoveWhite); // Pawns exited startposition can move 1
+                }
             }
+            // Enable diagonal movement when attacking:
+        } else if (canCapture && !(emptyCell) && (verticalMove === 1 && horizontalMove === 1)) {
+
+            // Remove attacked piece:
+            removePieceTrail(targetBtn);
+
+            // Place selected piece on target: 
+            placeNewPiece(targetBtn);
+
+            // Update the values on pieces by swapping:
+            swapPieceValue(selectedBtn, targetBtn);
+
+            // Clears selection highlight:
+            removeHighlight();
+
+            // Move is finished:
+            clickCount++;
+
+        } else {
+            // Error handling:
+            console.error("Error in pawnRules");
         }
-    } else if (canCapture && !(emptyCell) && (verticalMove === 1 && horizontalMove === 1)) {
+        //////////////////////////////////////////////////////////// BLACK PAWN LOGIC //////////////////////////////////////////////////////////// 
+    } else if (playerTurn === "Black") {
+        // Prevents movement if pawns path are blocked by other pieces:
+        if (blockedPath) {
+            return false;
+            // Ensures straight-only movement when moving to empty cells:
+        } else if (emptyCell) {
+            for (let start = 1; start <= boardSize; start++) {
+                if ((x == 7 || x == 2)) {
+                    return (verticalMove >= 0 && verticalMove <= 2) && straightLine && !backwardsMoveBlack; // Pawns at startposition can move 2
+                } else {
+                    return (verticalMove === 1 && horizontalMove === 0 && !backwardsMoveBlack); // Pawns exited startposition can move 1
+                }
+            }
+            // Enable diagonal movement when attacking:
+        } else if (canCapture && !(emptyCell) && (verticalMove === 1 && horizontalMove === 1)) {
 
-        // Clear selected piece from board
-        removePieceTrail(selectedBtn);
+            // Remove attacked piece:
+            removePieceTrail(targetBtn);
 
-        // Remove attacked piece:
-        removePieceTrail(targetBtn);
+            // Place selected piece on target: 
+            placeNewPiece(targetBtn);
 
-        // Place selected piece on target: 
-        placeNewPiece(targetBtn);
+            // Update the values on pieces by swapping:
+            swapPieceValue(selectedBtn, targetBtn);
 
-        // Update the values on pieces by swapping:
-        swapPieceValue(selectedBtn, targetBtn);
+            // Clears selection highlight:
+            removeHighlight();
 
-        // Clears selection highlight:
-        removeHighlight();
+            // Move is finished:
+            clickCount++;
 
-        // Move is finished:
-        clickCount++;
+        } else {
+            // Error handling:
+            console.error("Error in pawnRules");
+        }
 
-    } else {
-        // Error handling:
-        console.error("Error in pawnRules");
-    };
+    }
 }
