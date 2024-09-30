@@ -52,6 +52,7 @@ function appendMessage(msg) {
     messageStyle(messageElement);
     messageContainer.append(messageElement);
     messageElement.scrollIntoView();
+    console.log("JWEOIEH")
     // messageContainer.scrollTo(messageContainer.getBoundingClientRect().bottom);
 }
 
