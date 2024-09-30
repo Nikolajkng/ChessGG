@@ -148,6 +148,9 @@ const moveChecker = (targetBtn, x, y) => {
         // Swap piece position and set their coordinates accordingly:
         confirmMove(targetBtn);
 
+        console.log("1) Client sending piece-move...");
+        socket.emit('piece-move', {selectedBtn, targetBtn});
+
         console.log("Player move legal: " + isLegalMove)
         console.log("Player turn over for: " + playerTurn);
         console.log("Total click count: " + clickCount);

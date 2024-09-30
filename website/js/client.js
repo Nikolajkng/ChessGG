@@ -3,28 +3,7 @@ const messageContainer = document.getElementById("message-container")
 const messageForm = document.getElementById("send-container");
 const messageInput = document.getElementById("message-input");
 
-//////////////////////////////// Channel listeners for server response/data ///////////////////////////////////
-
-// Listens for server 'chat-messages' and output msg to client... 
-socket.on('chat-message', data => {
-    appendMessage(data.playerName + ": " + data.message);
-
-})
-
-// Listen for user connection:
-socket.on('user-connected', playerName => {
-    appendMessage(playerName + " has joined!");
-})
-
-socket.on("new-user-list", console.log);
-
-
-// Listen for user disconnection:
-socket.on('user-disconnected', playerName => {
-    appendMessage(playerName + " has disconnected!");
-})
-
-//////////////////////////////// Functions and channel senders ///////////////////////////////////
+//////////////////////////////// Socket.emit (SEND TO SERVER) ///////////////////////////////////
 
 // On-press "Enter" event:
 messageForm.addEventListener('submit', e => {
@@ -46,6 +25,35 @@ const playerName = prompt('Please enter your name 🖊️');
 appendMessage('you joined!');
 socket.emit('new-player', playerName);
 
+
+//////////////////////////////// Socket.on (LISTEN FOR SERVER) ///////////////////////////////////
+
+// Listens for server 'chat-messages' and output msg to client... 
+socket.on('chat-message', data => {
+    appendMessage(data.playerName + ": " + data.message);
+
+})
+
+// Listen for user connection:
+socket.on('user-connected', playerName => {
+    appendMessage(playerName + " has joined!");
+})
+
+socket.on("new-user-list", console.log);
+
+
+// Listen for user disconnection:
+socket.on('user-disconnected', playerName => {
+    appendMessage(playerName + " has disconnected!");
+})
+
+
+// Listen for piece movement broadcast:
+socket.on('piece-move-confirmed', () => {
+    console.log("4) Received broadcast from server");
+})
+
+//////////////////////////////// Functions ///////////////////////////////////
 
 // Append message to chatbox:
 function appendMessage(msg) {
