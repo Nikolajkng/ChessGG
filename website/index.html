@@ -18,48 +18,51 @@
 
 
 <body>
-    <!-- Top of website: Header Title -->
+    <!------ CENTER - TOPBAR -------->
     <div class="topbar">
         <h1>
             ChessGG♞
         </h1>
     </div>
-    <!--non TOPBAR-->
+    <!-- CENTER - NON-TOPBAR-->
     <div style="display: flex; justify-content: space-between">
-        <!-------------- Left menu (TO DO) -------------->
+
+        <!----------- LEFT - Menu ----------->
         <div style="display: flex; flex-direction: column">
-            <!--LEFT SIDE-->
             <div id="whiteMenu" div class="whiteMenuDisable">
                 <p>White Player</p>
             </div>
-            <!------------ Chat field ------------>
+
+            <!------------ LEFT - Chat field ------------>
             <div id="message-container" class="chatFieldStyles" style="flex-grow: 1">
                 <div style="display: flex; justify-content: center">
-                    <label id="chatHeader" class="chatHeader">
+                    <label id="chatHeader" class="chatLabel">
                         chat
                     </label>
                 </div>
             </div>
-
-            <form id="send-container" style="display: flex; margin-left: 5px; margin-right: 5px; margin-top: 10px; margin-bottom: 20px">
-                <input id="message-input" style="flex-grow: 1; margin-right: 5px; font-size: large; padding: 5px; border-radius: 5px;" placeholder="say hello!">
-                <input id="submit-button" type="submit" value="Enter" style="background-color:lightblue; border-radius: 5px; border: 0; padding: 5px; font-weight: bold;">
+            <form id="send-container"
+                style="display: flex; margin-left: 5px; margin-right: 5px; margin-top: 10px; margin-bottom: 20px">
+                <input id="message-input"
+                    style="flex-grow: 1; margin-right: 5px; font-size: large; padding: 5px; border-radius: 5px;"
+                    placeholder="say hello!">
+                <input id="submit-button" type="submit" value="Enter"
+                    style="background-color:lightblue; border-radius: 5px; border: 0; padding: 5px; font-weight: bold;">
             </form>
         </div>
 
-        <!-------------- Chess Board (in-progress) -------------->
+        <!-------------- CENTER - Chess Board -------------->
         <div id="board" class="boardContainer">
             <div id="chessBoard" class="boardGrid">
 
-
             </div>
         </div>
-        <!-------------- right menu (TO DO) -------------->
+        <!----------- RIGHT - Menu ----------->
         <div style="display: flex; flex-direction: column">
             <div id="blackMenu" class="blackMenuDisable">
                 <p>Black Player</p>
             </div>
-            <div>
+            <div class="chessHistory">
                 Chess history
             </div>
         </div>

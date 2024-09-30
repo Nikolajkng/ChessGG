@@ -1,22 +1,36 @@
-.chatFieldStyles{
-    width: 400px;
-    height: 200px;
-  
-    background-color: aliceblue;
-    border: 3px solid;
-    border-color: black;
-    border-radius: 25px;
-    margin-top: 10px;
-    
-    overflow-y: scroll;
-    padding: 10px;
-  }
- 
+.chatFieldStyles {
+  height: 200px;
 
-  .formStyles{
-    position: absolute; 
-    bottom: 20px; 
-    left: 50%; 
-    transform: translateX(-50%); 
-    margin-top:10px;
-  }
+  background-color: aliceblue;
+  border: 3px solid;
+  border-color: black;
+  border-radius: 25px;
+  margin-top: 10px;
+
+  overflow-y: scroll;
+  padding: 10px;
+}
+
+
+.formStyles {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 10px;
+}
+
+.chatLabel{
+  background-color: lightblue;
+  border-radius: 5px;
+
+  font-size: x-large;
+  font-weight: bold;
+  color: whitesmoke;
+
+  margin-top: -10px;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  padding-left: 50%;
+  padding-right: 50%;
+}

@@ -24,6 +24,7 @@ p{
     align-content:center;
     border-radius: 25px;
     height: 400px;
+    width: 400px;
     border: 3px solid;
     border-color: black;
   }
@@ -35,6 +36,7 @@ p{
     align-content:center;
     border-radius: 25px;
     height: 400px;
+    width: 400px;
     border: 3px solid;
     border-color: black;
   }
@@ -46,8 +48,8 @@ p{
     text-align: center;
     align-content:center;
     border-radius: 25px;
-    width: 400px;
     height: 400px;
+    width: 400px;
     border: 3px solid;
     border-color: black;
   }
@@ -60,9 +62,20 @@ p{
     text-align: center;
     align-content:center;
     border-radius: 25px;
-    width: 400px;
     height: 400px;
+    width: 400px;
     border: 3px solid;
     border-color: black;
   }
   
+  .chessHistory{
+    margin-top:10px;
+    float:right;
+    background-color: lightskyblue;
+    text-align: center;
+    align-content:center;
+    border-radius: 25px;
+    height: 325px;
+    border: 3px solid;
+    border-color: black;
+  }
