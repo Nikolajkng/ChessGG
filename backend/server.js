@@ -4,14 +4,15 @@ const players = {};
 
 const path = require('path')
 const express = require('express');
+const app = express();
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
+
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
 const {
     exec
 } = require('child_process');
-const bodyParser = require('body-parser');
-const app = express();
-app.use(bodyParser.json());
-const server = require('http').createServer(app);
-const io = require('socket.io')(server);
 
 
 //////////////////////// setup /////////////////////////////////
