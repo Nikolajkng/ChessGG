@@ -51,6 +51,7 @@ function appendMessage(msg) {
     messageElement.innerText = msg;
     messageStyle(messageElement);
     messageContainer.append(messageElement);
+    messageContainer.scrollTo(messageContainer.getBoundingClientRect().bottom);
 }
 
 function messageStyle(messageElement) {
