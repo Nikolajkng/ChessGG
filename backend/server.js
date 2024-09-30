@@ -53,8 +53,10 @@ io.on('connection', (socket) => {
 })
 
 app.post("/super-secret-reload", async (req, res) => {
-    exec("git pull");
+    console.log("RELOADING with body", req.body);
     res.sendStatus(200);
+    exec("git pull");
+
 })
 
 
