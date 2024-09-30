@@ -27,12 +27,14 @@ app.use(express.static(path.join(__dirname, '../website')));
 
 
 // Triggers a series of actions and channel-listeners on client connection:
+
 io.on('connection', (socket) => {
 
     // Listening for new players...
     socket.on('new-player', playerName => {
         players[socket.id] = playerName;
         socket.broadcast.emit('user-connected', playerName);
+        socket.broadcast.emit("new-user-list", players.values());
     })
 
     // Listening for new chat messages...
@@ -48,6 +50,7 @@ io.on('connection', (socket) => {
     // Disconnection handler
     socket.on('disconnect', () => {
         socket.broadcast.emit('user-disconnected', players[socket.id]);
+        socket.broadcast.emit("new-user-list", players.values());
         delete players[socket.id];
     })
 })

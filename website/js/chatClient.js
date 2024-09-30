@@ -16,6 +16,8 @@ socket.on('user-connected', playerName => {
     appendMessage(playerName + " has joined!");
 })
 
+socket.on("new-user-list", console.log);
+
 
 // Listen for user disconnection:
 socket.on('user-disconnected', playerName => {
@@ -52,8 +54,6 @@ function appendMessage(msg) {
     messageStyle(messageElement);
     messageContainer.append(messageElement);
     messageElement.scrollIntoView();
-    console.log("JWEOIEH")
-    // messageContainer.scrollTo(messageContainer.getBoundingClientRect().bottom);
 }
 
 function messageStyle(messageElement) {
