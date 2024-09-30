@@ -41,8 +41,6 @@ io.on('connection', (socket) => {
             message: message,
             playerName: players[socket.id]
         });
-
-
     })
 
 
