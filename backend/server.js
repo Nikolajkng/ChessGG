@@ -65,7 +65,6 @@ io.on('connection', (socket) => {
             sBtn: selectedBtn,
             tBtn: targetBtn
         });
-        console.log(selectedBtn +" : "+targetBtn)
     })
 
 

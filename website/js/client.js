@@ -3,7 +3,7 @@ const messageContainer = document.getElementById("message-container")
 const messageForm = document.getElementById("send-container");
 const messageInput = document.getElementById("message-input");
 
-//////////////////////////////// Socket.emit (SEND TO SERVER) ///////////////////////////////////
+//////////////////////////////// Socket.emit (SEND TO SERVER - for broadcasting ///////////////////////////////////
 
 // On-press "Enter" event:
 messageForm.addEventListener('submit', e => {
@@ -20,7 +20,7 @@ messageForm.addEventListener('submit', e => {
     messageInput.value = '';
 })
 
-// Show player has joined in chat:
+/* PROMPT */
 const playerName = prompt('Please enter your name 🖊️');
 appendMessage('you joined!');
 socket.emit('new-player', playerName);
@@ -28,30 +28,31 @@ socket.emit('new-player', playerName);
 
 //////////////////////////////// Socket.on (LISTEN FOR SERVER) ///////////////////////////////////
 
-// Listens for server 'chat-messages' and output msg to client... 
+
+/* CHAT */
 socket.on('chat-message', data => {
     appendMessage(data.playerName + ": " + data.message);
 
 })
 
-// Listen for user connection:
+socket.on("new-user-list", console.log);
+
+
+/* CONNECTION || DISCONNECTION*/
 socket.on('user-connected', playerName => {
     appendMessage(playerName + " has joined!");
 })
 
-socket.on("new-user-list", console.log);
-
-
-// Listen for user disconnection:
 socket.on('user-disconnected', playerName => {
     appendMessage(playerName + " has disconnected!");
 })
 
-
-// Listen for piece movement broadcast:
-socket.on('piece-move-confirmed', () => {
+/* PIECE MOVEMENT */
+socket.on('piece-move-confirmed', data => {
     console.log("4) Received broadcast from server");
+    console.log("Payload: " + data.sBtn + " : " + data.tBtn);
 })
+
 
 //////////////////////////////// Functions ///////////////////////////////////
 

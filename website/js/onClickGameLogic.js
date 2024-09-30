@@ -149,7 +149,8 @@ const moveChecker = (targetBtn, x, y) => {
         confirmMove(targetBtn);
 
         console.log("1) Client sending piece-move...");
-        socket.emit('piece-move', {selectedBtn, targetBtn});
+        const btnHolder = selectedBtn;
+        socket.emit('piece-move', {btnHolder, targetBtn});
 
         console.log("Player move legal: " + isLegalMove)
         console.log("Player turn over for: " + playerTurn);
