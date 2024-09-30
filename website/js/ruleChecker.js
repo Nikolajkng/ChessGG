@@ -1,4 +1,4 @@
-const legalMove = (selectedBtn, targetBtn) => {
+function legalMove(selectedBtn, targetBtn){
 
     if (selectedBtn != null) {
         const targetValue = targetBtn.getAttribute("value");

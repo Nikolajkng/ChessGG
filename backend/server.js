@@ -15,7 +15,7 @@ const {
 } = require('child_process');
 
 
-//////////////////////// setup /////////////////////////////////
+//////////////////////// EXPRESS setup /////////////////////////////////
 
 // Links the server to HTML file:
 app.get('/', function (req, res) {
@@ -26,7 +26,15 @@ app.get('/', function (req, res) {
 app.use(express.static(path.join(__dirname, '../website')));
 
 
-// Triggers a series of actions and channel-listeners on client connection:
+// Webhook that responds on "git push"
+app.post("/super-secret-reload", async (req, res) => {
+    console.log("RELOADING with body", req.body);
+    res.sendStatus(200);
+    exec("git pull");
+
+})
+
+//////////////////////// Socket.io setup /////////////////////////////////
 
 io.on('connection', (socket) => {
 
@@ -54,14 +62,6 @@ io.on('connection', (socket) => {
         delete players[socket.id];
     })
 })
-
-app.post("/super-secret-reload", async (req, res) => {
-    console.log("RELOADING with body", req.body);
-    res.sendStatus(200);
-    exec("git pull");
-
-})
-
 
 
 // Server checks:

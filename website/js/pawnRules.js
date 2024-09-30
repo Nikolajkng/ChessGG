@@ -1,4 +1,4 @@
-const pawnRules = (mySelectBtn, targetBtn) => {
+function pawnRules(mySelectBtn, targetBtn) {
 
     // Relative Positions and info:
     const x = parseInt(mySelectBtn.getAttribute("x"));
@@ -22,7 +22,7 @@ const pawnRules = (mySelectBtn, targetBtn) => {
     }
 
 
-    //////////////////////////////////////////////////////////// BLACK PAWN LOGIC //////////////////////////////////////////////////////////// 
+    //////////////////////////////////////////////////////////// WHITE PAWN LOGIC //////////////////////////////////////////////////////////// 
 
     // Check Rules:
     if (playerTurn === "White") {
@@ -40,6 +40,10 @@ const pawnRules = (mySelectBtn, targetBtn) => {
             }
             // Enable diagonal movement when attacking:
         } else if (canCapture && !(emptyCell) && (verticalMove === 1 && horizontalMove === 1)) {
+
+
+            // Remove trail piece from old position:
+            removePieceTrail(selectedBtn);
 
             // Remove attacked piece:
             removePieceTrail(targetBtn);
@@ -76,6 +80,9 @@ const pawnRules = (mySelectBtn, targetBtn) => {
             }
             // Enable diagonal movement when attacking:
         } else if (canCapture && !(emptyCell) && (verticalMove === 1 && horizontalMove === 1)) {
+
+            // Remove trail piece from old position:
+            removePieceTrail(selectedBtn);
 
             // Remove attacked piece:
             removePieceTrail(targetBtn);

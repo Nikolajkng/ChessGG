@@ -8,8 +8,6 @@ let clickCount = 0;
 let playerTurn = null;
 let isLegalMove = null;
 
-
-
 // Onclick function of buttons:
 const onClick = (btn, x, y) => {
     btn.addEventListener('click', () => {
