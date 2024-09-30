@@ -50,7 +50,7 @@ io.on('connection', (socket) => {
     // Disconnection handler
     socket.on('disconnect', () => {
         socket.broadcast.emit('user-disconnected', players[socket.id]);
-        socket.broadcast.emit("new-user-list", players.values());
+        socket.broadcast.emit("new-user-list", Object.values(players));
         delete players[socket.id];
     })
 })
