@@ -4,6 +4,9 @@ const players = {};
 
 const path = require('path')
 const express = require('express');
+const {
+    exec
+} = require('child_process');
 const app = express();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
@@ -49,6 +52,9 @@ io.on('connection', (socket) => {
 
 })
 
+app.post("/super-secret-reload", async (req, res) => {
+    exec("git pull");
+})
 
 // Server checks:
 server.listen(port, function () {
