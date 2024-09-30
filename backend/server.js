@@ -49,7 +49,6 @@ io.on('connection', (socket) => {
         socket.broadcast.emit('user-disconnected', players[socket.id]);
         delete players[socket.id];
     })
-
 })
 
 app.post("/super-secret-reload", async (req, res) => {
