@@ -54,7 +54,10 @@ io.on('connection', (socket) => {
 
 app.post("/super-secret-reload", async (req, res) => {
     exec("git pull");
+    res.sendStatus(200);
 })
+
+
 
 // Server checks:
 server.listen(port, function () {
