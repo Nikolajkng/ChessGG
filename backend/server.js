@@ -7,7 +7,9 @@ const express = require('express');
 const {
     exec
 } = require('child_process');
+const bodyParser = require('body-parser');
 const app = express();
+app.user(bodyParser);
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
