@@ -107,7 +107,7 @@ const swapPieceValue = (selectedBtn, targetBtn) =>{
 }
 
 // Confirm when a player has ended their turn
-const confirmMove = (targetBtn) => {
+const confirmMove = (selectedBtn, targetBtn) => {
 
     // If the selected cell is a legal cell according to playerturn
     if (selectedBtn != null) {
@@ -117,6 +117,15 @@ const confirmMove = (targetBtn) => {
 
         // Place selected piece on target: 
         placeNewPiece(targetBtn);
+
+        console.log("1) Client sending piece-move...");
+        const piece = selectedBtn.firstChild;
+        const x = selectedBtn.getAttribute("x");
+        const y = selectedBtn.getAttribute("y");
+        const tX = targetBtn.getAttribute("x");
+        const tY = targetBtn.getAttribute("y");
+        socket.emit('piece-move', {piece, x, y, tX, tY});
+
 
         // Update the values on pieces by swapping
         swapPieceValue(selectedBtn, targetBtn);
@@ -146,11 +155,7 @@ const moveChecker = (targetBtn, x, y) => {
         removeHighlight();
 
         // Swap piece position and set their coordinates accordingly:
-        confirmMove(targetBtn);
-
-        console.log("1) Client sending piece-move...");
-        const btnHolder = selectedBtn;
-        socket.emit('piece-move', {btnHolder, targetBtn});
+        confirmMove(selectedBtn, targetBtn);
 
         console.log("Player move legal: " + isLegalMove)
         console.log("Player turn over for: " + playerTurn);

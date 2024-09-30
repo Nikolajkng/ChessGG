@@ -50,7 +50,7 @@ socket.on('user-disconnected', playerName => {
 /* PIECE MOVEMENT */
 socket.on('piece-move-confirmed', data => {
     console.log("4) Received broadcast from server");
-    console.log("Payload: " + data.sBtn + " : " + data.tBtn);
+    console.log("Payload: Moved " + data.piece +" from (" + data.x + "," + data.y+") to ("+data.tX+","+data.tY+")" );
 })
 
 

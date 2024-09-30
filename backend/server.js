@@ -57,13 +57,14 @@ io.on('connection', (socket) => {
     // Listening for piece moves...
     socket.on('piece-move', data => {
         console.log("2) Received piece-move on server...");
-        const selectedBtn = data.selectedBtn;
-        const targetBtn = data.targetBtn;
 
         console.log("3) Broadcasting piece-move to all clients");
         socket.broadcast.emit('piece-move-confirmed', {
-            sBtn: selectedBtn,
-            tBtn: targetBtn
+            piece: data.piece,
+            x: data.x,
+            y: data.y,
+            tX: data.tX,
+            tY: data.tY
         });
     })
 
