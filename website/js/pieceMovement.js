@@ -162,10 +162,7 @@ const movePiece = (targetBtn, x, y) => {
         console.log("Player turn over for: " + playerTurn);
         console.log("Total click count: " + clickCount);
     }
-
 }
-
-
 
 const selectedCell = (btn, x, y) => {
     cellType = btn.getAttribute('value');
