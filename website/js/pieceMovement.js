@@ -16,7 +16,7 @@ const onClick = (btn, x, y) => {
         selectedCell(btn, x, y);
 
         // Move piece logic (TODO):
-        moveChecker(btn, x, y);
+        movePiece(btn, x, y);
 
 
         // Info for debug:
@@ -100,35 +100,37 @@ const placeNewPiece = (targetBtn) =>{
     targetBtn.appendChild(newPieceFigure);
 }
 
-const swapPieceValue = (selectedBtn, targetBtn) =>{
-    var tempSelect = selectedBtn.getAttribute("value");
-    selectedBtn.setAttribute("value", "none");
+const swapPieceValue = (myBtn, targetBtn) =>{
+    var tempSelect = myBtn.getAttribute("value");
+    myBtn.setAttribute("value", "none");
     targetBtn.setAttribute("value", tempSelect);
 }
 
 // Confirm when a player has ended their turn
-const confirmMove = (selectedBtn, targetBtn) => {
+const confirmMove = (myBtn, targetBtn) => {
 
     // If the selected cell is a legal cell according to playerturn
-    if (selectedBtn != null) {
+    if (myBtn != null) {
 
         // Clear selected piece from board
-        removePieceTrail(selectedBtn);
+        removePieceTrail(myBtn);
 
         // Place selected piece on target: 
         placeNewPiece(targetBtn);
 
+
+        // Sends data on piece movement to server
         console.log("1) Client sending piece-move...");
-        const piece = JSON.stringify(selectedBtn);
-        const x = selectedBtn.getAttribute("x");
-        const y = selectedBtn.getAttribute("y");
+        const piece = JSON.stringify(myBtn);
+        const x = myBtn.getAttribute("x");
+        const y = myBtn.getAttribute("y");
         const tX = targetBtn.getAttribute("x");
         const tY = targetBtn.getAttribute("y");
         socket.emit('piece-move', {piece, x, y, tX, tY});
 
 
         // Update the values on pieces by swapping
-        swapPieceValue(selectedBtn, targetBtn);
+        swapPieceValue(myBtn, targetBtn);
 
         // Move is finished:
         clickCount++;
@@ -144,7 +146,7 @@ const confirmMove = (selectedBtn, targetBtn) => {
 
 
 // Check for game rules:
-const moveChecker = (targetBtn, x, y) => {
+const movePiece = (targetBtn, x, y) => {
 
     // Check if move is legal
     isLegalMove = legalMove(selectedBtn, targetBtn);
