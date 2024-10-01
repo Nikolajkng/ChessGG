@@ -37,9 +37,7 @@ const knightRules = (mySelectBtn, targetBtn) => {
 const bishopRules = (mySelectBtn, targetBtn) => {
     return true;
 }
-const rookRules = (mySelectBtn, targetBtn) => {
-    return true;
-}
+
 const kingRules = (mySelectBtn, targetBtn) => {
     return true;
 }
