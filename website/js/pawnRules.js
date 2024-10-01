@@ -16,9 +16,9 @@ function pawnRules(mySelectBtn, targetBtn) {
     const backwardsMoveBlack = tX < x;
     let canCapture = "";
     if (playerTurn === "White") {
-        canCapture = targetBtn.getAttribute("value").includes("black")
+        canCapture = targetBtn.getAttribute("value").includes("black") && !backwardsMoveWhite
     } else {
-        canCapture = targetBtn.getAttribute("value").includes("white")
+        canCapture = targetBtn.getAttribute("value").includes("white") && !backwardsMoveBlack
     }
 
 
