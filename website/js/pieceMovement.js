@@ -121,12 +121,12 @@ const confirmMove = (myBtn, targetBtn) => {
 
         // Sends data on piece movement to server
         console.log("1) Client sending piece-move...");
-        const piece = JSON.stringify(myBtn);
+        const value = myBtn.getAttribute("value");
         const x = myBtn.getAttribute("x");
         const y = myBtn.getAttribute("y");
         const tX = targetBtn.getAttribute("x");
         const tY = targetBtn.getAttribute("y");
-        socket.emit('piece-move', {piece, x, y, tX, tY});
+        socket.emit('piece-move', {value, x, y, tX, tY});
 
 
         // Update the values on pieces by swapping

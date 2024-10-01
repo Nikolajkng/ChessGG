@@ -60,7 +60,7 @@ io.on('connection', (socket) => {
 
         console.log("3) Broadcasting piece-move to all clients");
         socket.broadcast.emit('piece-move-confirmed', {
-            piece: data.piece,
+            value: data.value,
             x: data.x,
             y: data.y,
             tX: data.tX,
