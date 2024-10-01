@@ -28,16 +28,6 @@ socket.emit('new-player', playerName);
 
 //////////////////////////////// Socket.on (LISTEN FOR SERVER) ///////////////////////////////////
 
-
-/* CHAT */
-socket.on('chat-message', data => {
-    appendMessage(data.playerName + ": " + data.message);
-
-})
-
-socket.on("new-user-list", console.log);
-
-
 /* CONNECTION || DISCONNECTION*/
 socket.on('user-connected', playerName => {
     appendMessage(playerName + " has joined!");
@@ -47,10 +37,20 @@ socket.on('user-disconnected', playerName => {
     appendMessage(playerName + " has disconnected!");
 })
 
+/* CHAT */
+socket.on('chat-message', data => {
+    appendMessage(data.playerName + ": " + data.message);
+})
+
+/* Collect player joined */
+socket.on("new-user-list", console.log);
+
+
+
 /* PIECE MOVEMENT */
 socket.on('piece-move-confirmed', data => {
-    console.log("4) Received broadcast from server");
     console.log("Payload: Moved " + data.piece +" from (" + data.x + "," + data.y+") to ("+data.tX+","+data.tY+")" );
+    syncPieceMovement(data.piece, data.x, data.y, data.tX, data.tY);
 })
 
 

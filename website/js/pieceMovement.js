@@ -119,7 +119,7 @@ const confirmMove = (selectedBtn, targetBtn) => {
         placeNewPiece(targetBtn);
 
         console.log("1) Client sending piece-move...");
-        const piece = selectedBtn.firstChild;
+        const piece = JSON.stringify(selectedBtn);
         const x = selectedBtn.getAttribute("x");
         const y = selectedBtn.getAttribute("y");
         const tX = targetBtn.getAttribute("x");

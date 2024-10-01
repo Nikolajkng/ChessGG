@@ -1,5 +1,13 @@
-// Fetch the div where the board is:
-let chessBoard = document.getElementById("chessBoard");
+// 8x8 data game board that contains each button object
+let chessBoard = [
+    [null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null],
+];
 
 // Build the board of 8x8 buttons as cells:
 const boardSize = 8;
@@ -17,7 +25,7 @@ for (let x = 1; x <= boardSize; x++) {
         onClick(btn, x, y);
         
         document.querySelector('body').appendChild(btn);
-        chessBoard.appendChild(btn);
+        document.getElementById("chessBoard").appendChild(btn);
     }
 }
 
