@@ -7,6 +7,7 @@ let chessBoard = [
     [null, null, null, null, null, null, null, null],
     [null, null, null, null, null, null, null, null],
     [null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null],
 ];
 
 // Build the board of 8x8 buttons as cells:

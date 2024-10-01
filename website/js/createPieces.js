@@ -17,42 +17,57 @@ const setInitialPieceValues = (btn, x, y) => {
     // Pawns
     if (x == 7) {
         btn.setAttribute("value", "whiteP");
+        chessBoard[x-1][y-1] = "whiteP";
     } else if (x == 2) {
         btn.setAttribute("value", "blackP");
+        chessBoard[x-1][y-1] = "blackP";
     }
     // Rooks
     else if ((x == 8 && y == 1) || (x == 8 && y == 8)) {
         btn.setAttribute("value", "whiteR");
+        chessBoard[x-1][y-1] = "whiteR";
     } else if ((x == 1 && y == 1) || (x == 1 && y == 8)) {
         btn.setAttribute("value", "blackR");
+        chessBoard[x-1][y-1] = "blackR";
+
     }
     // Knight
     else if ((x == 8 && y == 2) || (x == 8 && y == 7)) {
         btn.setAttribute("value", "whiteN");
+        chessBoard[x-1][y-1] = "whiteN";
     } else if ((x == 1 && y == 2) || (x == 1 && y == 7)) {
         btn.setAttribute("value", "blackN");
+        chessBoard[x-1][y-1] = "blackN";
     }
     // Bishop
     else if ((x == 8 && y == 3) || (x == 8 && y == 6)) {
         btn.setAttribute("value", "whiteB");
+        chessBoard[x-1][y-1] = "whiteB";
     } else if ((x == 1 && y == 3) || (x == 1 && y == 6)) {
         btn.setAttribute("value", "blackB");
+        chessBoard[x-1][y-1] = "blackB";
     }
     // Queen
     else if ((x == 8 && y == 4)) {
         btn.setAttribute("value", "whiteQ");
+        chessBoard[x-1][y-1] = "whiteQ";
     } else if ((x == 1 && y == 4)) {
         btn.setAttribute("value", "blackQ");
+        chessBoard[x-1][y-1] = "blackQ";
     }
     // King
     else if ((x == 1 && y == 5)) {
         btn.setAttribute("value", "blackK");
+        chessBoard[x-1][y-1] = "blackK";
     } else if ((x == 8 && y == 5)) {
         btn.setAttribute("value", "whiteK");
+        chessBoard[x-1][y-1] = "whiteK";
     }
     // Error handling to console
     else {
         btn.setAttribute("value", "none")
+        chessBoard[x-1][y-1] = "none";
+        console.log(chessBoard)
     }
 }
 
