@@ -120,7 +120,6 @@ const confirmMove = (myBtn, targetBtn) => {
 
 
         // Sends data on piece movement to server
-        console.log("1) Client sending piece-move...");
         const value = myBtn.getAttribute("value");
         const x = myBtn.getAttribute("x");
         const y = myBtn.getAttribute("y");

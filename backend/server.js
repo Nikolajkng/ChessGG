@@ -56,9 +56,6 @@ io.on('connection', (socket) => {
 
     // Listening for piece moves...
     socket.on('piece-move', data => {
-        console.log("2) Received piece-move on server...");
-
-        console.log("3) Broadcasting piece-move to all clients");
         socket.broadcast.emit('piece-move-confirmed', {
             value: data.value,
             x: data.x,

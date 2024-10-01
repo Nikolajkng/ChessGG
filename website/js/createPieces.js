@@ -67,7 +67,6 @@ const setInitialPieceValues = (btn, x, y) => {
     else {
         btn.setAttribute("value", "none")
         chessBoard[x-1][y-1] = "none";
-        console.log(chessBoard)
     }
 }
 

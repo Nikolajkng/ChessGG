@@ -27,6 +27,7 @@ for (let x = 1; x <= boardSize; x++) {
         document.getElementById("chessBoard").appendChild(btn);
     }
 }
+console.log(chessBoard);
 
 
 

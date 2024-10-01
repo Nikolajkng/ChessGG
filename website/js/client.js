@@ -52,10 +52,8 @@ socket.on('piece-move-confirmed', data => {
     console.log("Payload: Moved " + data.value + " from (" + data.x + "," + data.y + ") to (" + data.tX + "," + data.tY + ")");
     const buttonID = "button("+data.tX + "," + data.tY+")";
     const btn = document.getElementById(buttonID);
-    console.log("Payload-2: extracted following from buttonID: " + btn.outerHTML);
     btn.classList.add('highlight');
 
-    //syncPieceMovement(data.piece.getElementById("button(" + data.tX + "," + data.tY + ")"), data.x, data.y, data.tX, data.tY);
 })
 
 
