@@ -50,10 +50,15 @@ socket.on("new-user-list", console.log);
 /* PIECE MOVEMENT */
 socket.on('piece-move-confirmed', data => {
     console.log("Payload: Moved " + data.value + " from (" + data.x + "," + data.y + ") to (" + data.tX + "," + data.tY + ")");
-    const buttonID = "button("+data.tX + "," + data.tY+")";
-    const btn = document.getElementById(buttonID);
-    btn.style.backgroundColor = "red";
-
+    const x = data.x;
+    const y = data.x;
+    const tX = data.x;
+    const tY = data.x;
+    const sButtonID = "button("+data.x + "," + data.y+")";
+    const tButtonID = "button("+data.tX + "," + data.tY+")";
+    const sBtn = document.getElementById(sButtonID);
+    const tBtn = document.getElementById(tButtonID);
+    syncPieceMovement(sBtn, tBtn, sBtn.getAttribute("value"), tBtn.getAttribute("value"));
 })
 
 
