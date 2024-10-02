@@ -12,5 +12,8 @@ const syncPieceMovement = (sBtn, tBtn, sValue, tValue) => {
 
     // Data swap:
     swapPieceValue(sBtn, tBtn)
+
+    // Switch player turn
+    clickCount++;
     
 }

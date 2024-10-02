@@ -78,6 +78,7 @@ const swapPieceValue = (myBtn, targetBtn) => {
     var tempSelect = myBtn.getAttribute("value");
     myBtn.setAttribute("value", "none");
     targetBtn.setAttribute("value", tempSelect);
+    
 }
 
 
@@ -110,6 +111,7 @@ const confirmMove = (myBtn, targetBtn) => {
 
         // Update the values on pieces by swapping
         swapPieceValue(myBtn, targetBtn);
+
 
         // Move is finished:
         clickCount++;
