@@ -96,20 +96,14 @@ const confirmMove = (myBtn, targetBtn) => {
         // Place selected piece on target: 
         placeNewPiece(targetBtn);
 
-        // Sends data on piece movement to server
-        const value = myBtn.getAttribute("value");
-        const x = myBtn.getAttribute("x");
-        const y = myBtn.getAttribute("y");
-        const tX = targetBtn.getAttribute("x");
-        const tY = targetBtn.getAttribute("y");
-        socket.emit('piece-move', {
-            value,
-            x,
-            y,
-            tX,
-            tY
-        });
 
+        // Transmit all piece movements (TEMPORARY, move this inside all the pieceRules):
+        const x = parseInt(myBtn.getAttribute("x"));
+        const y = parseInt(myBtn.getAttribute("y"));
+        const tX = parseInt(targetBtn.getAttribute("x"));
+        const tY = parseInt(targetBtn.getAttribute("y"));    
+        transmitPieceMovement(myBtn.getAttribute("value"), x, y, tX, tY)
+ 
         // Update the values on pieces by swapping
         swapPieceValue(myBtn, targetBtn);
 

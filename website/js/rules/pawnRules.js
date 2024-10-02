@@ -33,8 +33,14 @@ function pawnRules(mySelectBtn, targetBtn) {
         } else if (emptyCell) {
             for (let start = 1; start <= boardSize; start++) {
                 if ((x == 7 || x == 2)) {
+                    // Sends data on piece movement to server
+                    transmitPieceMovement(mySelectBtn.getAttribute("value"), x, y, tX, tY)
+
                     return (verticalMove >= 0 && verticalMove <= 2) && straightLine && !backwardsMoveWhite; // Pawns at startposition can move 2
                 } else {
+                    // Sends data on piece movement to server
+                    transmitPieceMovement(mySelectBtn.getAttribute("value"), x, y, tX, tY)
+
                     return (verticalMove === 1 && horizontalMove === 0 && !backwardsMoveWhite); // Pawns exited startposition can move 1
                 }
             }
@@ -60,7 +66,7 @@ function pawnRules(mySelectBtn, targetBtn) {
             // Move is finished:
             clickCount++;
 
-        } 
+        }
         //////////////////////////////////////////////////////////// BLACK PAWN LOGIC //////////////////////////////////////////////////////////// 
     } else if (playerTurn === "Black") {
         // Prevents movement if pawns path are blocked by other pieces:
@@ -70,8 +76,12 @@ function pawnRules(mySelectBtn, targetBtn) {
         } else if (emptyCell) {
             for (let start = 1; start <= boardSize; start++) {
                 if ((x == 7 || x == 2)) {
+                    // Sends data on piece movement to server
+                    transmitPieceMovement(mySelectBtn.getAttribute("value"), x, y, tX, tY)
                     return (verticalMove >= 0 && verticalMove <= 2) && straightLine && !backwardsMoveBlack; // Pawns at startposition can move 2
                 } else {
+                    // Sends data on piece movement to server
+                    transmitPieceMovement(mySelectBtn.getAttribute("value"), x, y, tX, tY)
                     return (verticalMove === 1 && horizontalMove === 0 && !backwardsMoveBlack); // Pawns exited startposition can move 1
                 }
             }
@@ -102,4 +112,14 @@ function pawnRules(mySelectBtn, targetBtn) {
         }
 
     }
+}
+// Sends data on piece movement to server
+const transmitPieceMovement = (value, x, y, tX, tY) => {
+    socket.emit('piece-move', {
+        value,
+        x,
+        y,
+        tX,
+        tY
+    });
 }
