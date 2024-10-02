@@ -8,27 +8,9 @@ let clickCount = 0;
 let playerTurn = null;
 let isLegalMove = null;
 
-// Onclick function of buttons:
-const onClick = (btn, x, y) => {
-    btn.addEventListener('click', () => {
-
-        // Selection logic:
-        selectedCell(btn, x, y);
-
-        // Move piece logic (TODO):
-        movePiece(btn, x, y);
-
-
-        // Info for debug:
-        console.log('Coordinates: ' + "(" + x + ", " + y + ")");
-        console.log('Value: ' + btn.getAttribute("value"));
-        console.log('Selected: ' + btn.getAttribute("selected"));
-        console.log("#################################################")
-    })
-}
 
 // Function to get the correct piece symbol based on the piece value
-const getPieceSymbol = (value) => {
+function getPieceSymbol(value){
     switch (value) {
         case "whiteP":
             return "♙";
@@ -59,6 +41,24 @@ const getPieceSymbol = (value) => {
     }
 }
 
+// Onclick function of buttons:
+const onClick = (btn, x, y) => {
+    btn.addEventListener('click', () => {
+
+        // Selection logic:
+        selectedCell(btn, x, y);
+
+        // Move piece logic:
+        moveChecker(btn, x, y);
+
+
+        // Info for debug:
+        console.log('Coordinates: ' + "(" + x + ", " + y + ")");
+        console.log('Value: ' + btn.getAttribute("value"));
+        console.log('Selected: ' + btn.getAttribute("selected"));
+        console.log("#################################################")
+    })
+}
 
 const placeNewPiece = (targetBtn) =>{
     const newPieceFigure = document.createElement("span");
@@ -72,6 +72,28 @@ const swapPieceValue = (myBtn, targetBtn) =>{
     myBtn.setAttribute("value", "none");
     targetBtn.setAttribute("value", tempSelect);
 }
+
+
+// Check for game rules:
+const moveChecker = (targetBtn, x, y) => {
+
+    // Check if move is legal
+    isLegalMove = legalMove(selectedBtn, targetBtn);
+    let moveDetected = Math.abs(selectedX - x) != 0 || Math.abs(selectedY - y) != 0
+
+    if (moveDetected && isLegalMove) {
+        // Remove highlight on movement on oldPos:
+        removeHighlight();
+
+        // Swap piece position and set their coordinates accordingly:
+        confirmMove(selectedBtn, targetBtn);
+
+        console.log("Player move legal: " + isLegalMove)
+        console.log("Player turn over for: " + playerTurn);
+        console.log("Total click count: " + clickCount);
+    }
+}
+
 
 // Confirm when a player has ended their turn
 const confirmMove = (myBtn, targetBtn) => {
@@ -108,85 +130,4 @@ const confirmMove = (myBtn, targetBtn) => {
 
     // Reset selection to none after move is done:
     selectedBtn = null;
-}
-
-
-// Check for game rules:
-const movePiece = (targetBtn, x, y) => {
-
-    // Check if move is legal
-    isLegalMove = legalMove(selectedBtn, targetBtn);
-    let moveDetected = Math.abs(selectedX - x) != 0 || Math.abs(selectedY - y) != 0
-
-    if (moveDetected && isLegalMove) {
-        // Remove highlight on movement on oldPos:
-        removeHighlight();
-
-        // Swap piece position and set their coordinates accordingly:
-        confirmMove(selectedBtn, targetBtn);
-
-        console.log("Player move legal: " + isLegalMove)
-        console.log("Player turn over for: " + playerTurn);
-        console.log("Total click count: " + clickCount);
-    }
-}
-
-const selectedCell = (btn, x, y) => {
-    cellType = btn.getAttribute('value');
-
-    // Player turn logic:
-    if (clickCount % 2 === 0) {
-        playerTurn = "White";
-    } else {
-        playerTurn = "Black";
-    }
-    highlightPlayerMenu();
-
-
-    // WHITE PLAYER TURN //
-    if (playerTurn === "White") {
-        const hasWhitePiece = cellType.includes("white");
-        // Ensures selection is only possible: 1) on cells with pieces, 2) only select WHITE pieces
-        if (canSelect && cellType != 'none' && hasWhitePiece) {
-            selectedBtn = btn;
-            selectedX = x;
-            selectedY = y;
-            selectedPos = selectedX + "" + selectedY;
-            btn.setAttribute('selected', 'yes');
-            highlightPiece(btn);
-            canSelect = false;
-        }
-        // Remove selection only by re-select same cell
-        else if (!canSelect && selectedPos == (x + "" + y)) {
-            removeHighlight();
-            selectedBtn = null;
-        } else {
-            // TO DO: add chess illegal move sound
-
-            console.error("Error: Selectedbtn === null -> Cause: (1): not your turn, (2): not your pieces");
-        }
-        // BLACK PLAYER TURN //
-    } else{
-        const hasBlackPiece = cellType.includes("black");
-        // Ensures selection is only possible: 1) on cells with pieces, 2) only select BLACK pieces
-        if (canSelect && cellType != 'none' && hasBlackPiece) {
-            selectedBtn = btn;
-            selectedX = x;
-            selectedY = y;
-            selectedPos = selectedX + "" + selectedY;
-            btn.setAttribute('selected', 'yes');
-            highlightPiece(btn);
-            //btn.classList.add('highlight');
-            canSelect = false;
-        }
-        // Remove selection only by re-select same cell
-        else if (!canSelect && selectedPos == (x + "" + y)) {
-            removeHighlight();
-            selectedBtn = null;
-        } else {
-            // TO DO: add chess illegal move sound
-            
-            console.error("Error: Selectedbtn === null -> Cause: (1): not your turn, (2): not your pieces");
-        }
-    }
 }
