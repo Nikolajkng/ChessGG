@@ -51,7 +51,6 @@ const onClick = (btn, x, y) => {
         // Move piece logic:
         moveChecker(btn, x, y);
 
-
         // Info for debug:
         console.log('Coordinates: ' + "(" + x + ", " + y + ")");
         console.log('Value: ' + btn.getAttribute("value"));

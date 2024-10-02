@@ -60,10 +60,7 @@ function pawnRules(mySelectBtn, targetBtn) {
             // Move is finished:
             clickCount++;
 
-        } else {
-            // Error handling:
-            console.error("Error in pawnRules");
-        }
+        } 
         //////////////////////////////////////////////////////////// BLACK PAWN LOGIC //////////////////////////////////////////////////////////// 
     } else if (playerTurn === "Black") {
         // Prevents movement if pawns path are blocked by other pieces:

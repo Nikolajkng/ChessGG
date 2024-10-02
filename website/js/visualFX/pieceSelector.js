@@ -1,5 +1,10 @@
+let previousCell = null;
+
 const highlightPiece = (btn) => {
-    btn.classList.add('highlight');
+    const x = btn.getAttribute("x");
+    const y = btn.getAttribute("y");
+    previousCell = document.getElementById("button("+x+","+y+")");
+    btn.style.backgroundColor = "red";
 }
 
 const removePieceTrail = (btn) => {
@@ -10,7 +15,11 @@ const removePieceTrail = (btn) => {
 
 const removeHighlight = () => {
     if (selectedBtn != null) {
-        selectedBtn.classList.remove('highlight');
+        if(previousCell.getAttribute("cellColor") === "white-color"){
+            selectedBtn.style.backgroundColor = "white"
+        } else if (previousCell.getAttribute("cellColor") === "lightblue-color"){
+            selectedBtn.style.backgroundColor = "lightblue"
+        }
         selectedBtn.setAttribute('selected', 'no');
         canSelect = true;
     }
@@ -48,7 +57,6 @@ const selectedCell = (btn, x, y) => {
         } else {
             // TO DO: add chess illegal move sound
 
-            console.error("Error: Selectedbtn === null -> Cause: (1): not your turn, (2): not your pieces");
         }
         // BLACK PLAYER TURN //
     } else{

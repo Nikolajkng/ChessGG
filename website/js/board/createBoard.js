@@ -13,15 +13,18 @@ let chessBoard = [
 
 const designPattern = (x, y, btn) => {
     if (y % 2 == 0 && x % 2 == 0) {
+        btn.setAttribute("cellColor", "white-color");
         btn.style.cssText = "" +
             "background-color: white;" +
             "border: 2px;"
     }
     else if (y % 2 != 0 && x % 2 != 0) {
+        btn.setAttribute("cellColor", "white-color");
         btn.style.cssText = "" +
             "background-color: white;" +
             "border: 2px;" 
     } else {
+        btn.setAttribute("cellColor", "lightblue-color");
         btn.style.cssText = "" +
         "background-color: lightblue;" +
         "border: 2px;"
