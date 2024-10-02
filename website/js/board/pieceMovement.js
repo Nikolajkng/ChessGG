@@ -47,8 +47,9 @@ const onClick = (btn, x, y) => {
         // Selection logic:
         selectedCell(btn, x, y);
 
-        // Move piece if follow rule
-        if (legalMove(selectedBtn, btn)) {
+        // Checks that "the move is legal" && "self-select does not count as move"
+        let moveDetected = Math.abs(selectedX - x) != 0 || Math.abs(selectedY - y) != 0  
+        if (legalMove(selectedBtn, btn) && moveDetected) {
             // Remove highlight on movement on oldPos:
             removeHighlight();
 
