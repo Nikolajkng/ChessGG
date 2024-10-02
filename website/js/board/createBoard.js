@@ -10,24 +10,40 @@ let chessBoard = [
     [null, null, null, null, null, null, null, null],
 ];
 
+
+const designPattern = (x, y, btn) => {
+    if (y % 2 == 0 && x % 2 == 0) {
+        btn.style.cssText = "" +
+            "background-color: white;" +
+            "border: 2px;"
+    }
+    else if (y % 2 != 0 && x % 2 != 0) {
+        btn.style.cssText = "" +
+            "background-color: white;" +
+            "border: 2px;" 
+    } else {
+        btn.style.cssText = "" +
+        "background-color: lightblue;" +
+        "border: 2px;"
+    }
+};
+
 // Build the board of 8x8 buttons as cells:
 const boardSize = 8;
 for (let x = 1; x <= boardSize; x++) {
     for (let y = 1; y <= boardSize; y++) {
         let btn = document.createElement('button');
-        btn.setAttribute("id", 'button('+x+","+y+")");   // id = 'button(x,y)'
-        btn.setAttribute("x",x);
-        btn.setAttribute("y",y);
+        btn.setAttribute("id", 'button(' + x + "," + y + ")"); // id = 'button(x,y)'
+        btn.setAttribute("x", x);
+        btn.setAttribute("y", y);
+        designPattern(x, y, btn);
         setInitialPieceValues(btn, x, y);
         setInitialPieces(btn)
         setCellSize(btn);
         onClick(btn, x, y);
-        
+
         document.querySelector('body').appendChild(btn);
         document.getElementById("chessBoard").appendChild(btn);
     }
 }
 console.log(chessBoard);
-
-
-

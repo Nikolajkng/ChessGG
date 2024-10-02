@@ -60,39 +60,6 @@ const getPieceSymbol = (value) => {
 }
 
 
-const removeHighlight = () => {
-    if (selectedBtn != null) {
-        selectedBtn.classList.remove('highlight');
-        selectedBtn.setAttribute('selected', 'no');
-        canSelect = true;
-    }
-}
-
-const playerTurnHighlight = () => {
-
-    let whiteMenu = document.getElementById("whiteMenu");
-    let blackMenu = document.getElementById("blackMenu");
-    if (playerTurn === "White") {
-        whiteMenu.classList.remove("whiteMenuDisable");
-        whiteMenu.classList.add("whiteMenuEnable");
-        blackMenu.classList.remove("blackMenuEnable");
-        blackMenu.classList.add("blackMenuDisable");
-    } else if (playerTurn === "Black") {
-        blackMenu.classList.remove("blackMenuDisable");
-        blackMenu.classList.add("blackMenuEnable");
-        whiteMenu.classList.remove("whiteMenuEnable");
-        whiteMenu.classList.add("whiteMenuDisable");
-
-    }
-}
-
-
-const removePieceTrail = (oldPieceBtn) => {
-    while (oldPieceBtn.firstChild) {
-        oldPieceBtn.removeChild(oldPieceBtn.firstChild);
-    }
-}
-
 const placeNewPiece = (targetBtn) =>{
     const newPieceFigure = document.createElement("span");
     newPieceFigure.style.cssText = " font-size:"+pieceSize+";"
@@ -173,7 +140,7 @@ const selectedCell = (btn, x, y) => {
     } else {
         playerTurn = "Black";
     }
-    playerTurnHighlight();
+    highlightPlayerMenu();
 
 
     // WHITE PLAYER TURN //
@@ -186,7 +153,7 @@ const selectedCell = (btn, x, y) => {
             selectedY = y;
             selectedPos = selectedX + "" + selectedY;
             btn.setAttribute('selected', 'yes');
-            btn.classList.add('highlight');
+            highlightPiece(btn);
             canSelect = false;
         }
         // Remove selection only by re-select same cell
@@ -208,7 +175,8 @@ const selectedCell = (btn, x, y) => {
             selectedY = y;
             selectedPos = selectedX + "" + selectedY;
             btn.setAttribute('selected', 'yes');
-            btn.classList.add('highlight');
+            highlightPiece(btn);
+            //btn.classList.add('highlight');
             canSelect = false;
         }
         // Remove selection only by re-select same cell
