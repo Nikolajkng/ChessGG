@@ -52,7 +52,7 @@ socket.on('piece-move-confirmed', data => {
     console.log("Payload: Moved " + data.value + " from (" + data.x + "," + data.y + ") to (" + data.tX + "," + data.tY + ")");
     const buttonID = "button("+data.tX + "," + data.tY+")";
     const btn = document.getElementById(buttonID);
-    btn.classList.add('highlight');
+    btn.style.backgroundColor = "red";
 
 })
 
