@@ -55,17 +55,18 @@ io.on('connection', (socket) => {
         });
     })
 
-    // Listening for piece moves...
-    socket.on('piece-move', data => {
-        socket.broadcast.emit('piece-move-confirmed', {
-            value: data.value,
+
+    // Listening for piece movements ...
+    socket.on('piece-moved', data => {
+        socket.broadcast.emit('piece-has-moved', {
+            sValue: data.sValue,
+            tValue: data.tValue,
             x: data.x,
             y: data.y,
             tX: data.tX,
             tY: data.tY
         });
     })
-
 
     // Disconnection handler
     socket.on('disconnect', () => {

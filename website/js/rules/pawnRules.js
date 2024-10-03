@@ -34,12 +34,12 @@ function pawnRules(mySelectBtn, targetBtn) {
             for (let start = 1; start <= boardSize; start++) {
                 if ((x == 7 || x == 2)) {
                     // Sends data on piece movement to server
-                    transmitPieceMovement(mySelectBtn.getAttribute("value"), x, y, tX, tY)
+                    transmitPieceMove(selectedBtn.getAttribute("value"), targetBtn.getAttribute("value"), x, y, tX, tY)
 
                     return (verticalMove >= 0 && verticalMove <= 2) && straightLine && !backwardsMoveWhite; // Pawns at startposition can move 2
                 } else {
                     // Sends data on piece movement to server
-                    transmitPieceMovement(mySelectBtn.getAttribute("value"), x, y, tX, tY)
+                    transmitPieceMove(selectedBtn.getAttribute("value"), targetBtn.getAttribute("value"), x, y, tX, tY)
 
                     return (verticalMove === 1 && horizontalMove === 0 && !backwardsMoveWhite); // Pawns exited startposition can move 1
                 }
@@ -47,6 +47,8 @@ function pawnRules(mySelectBtn, targetBtn) {
             // Enable diagonal movement when attacking:
         } else if (canCapture && !(emptyCell) && (verticalMove === 1 && horizontalMove === 1)) {
 
+            console.log("1) target: " + targetBtn.getAttribute("value"));
+            transmitPieceMove(selectedBtn.getAttribute("value"), targetBtn.getAttribute("value"), x, y, tX, tY)
 
             // Remove trail piece from old position:
             removePieceTrail(selectedBtn);
@@ -77,16 +79,20 @@ function pawnRules(mySelectBtn, targetBtn) {
             for (let start = 1; start <= boardSize; start++) {
                 if ((x == 7 || x == 2)) {
                     // Sends data on piece movement to server
-                    transmitPieceMovement(mySelectBtn.getAttribute("value"), x, y, tX, tY)
+                    transmitPieceMove(selectedBtn.getAttribute("value"), targetBtn.getAttribute("value"), x, y, tX, tY)
                     return (verticalMove >= 0 && verticalMove <= 2) && straightLine && !backwardsMoveBlack; // Pawns at startposition can move 2
                 } else {
                     // Sends data on piece movement to server
-                    transmitPieceMovement(mySelectBtn.getAttribute("value"), x, y, tX, tY)
+                    transmitPieceMove(selectedBtn.getAttribute("value"), targetBtn.getAttribute("value"), x, y, tX, tY)
                     return (verticalMove === 1 && horizontalMove === 0 && !backwardsMoveBlack); // Pawns exited startposition can move 1
                 }
             }
             // Enable diagonal movement when attacking:
         } else if (canCapture && !(emptyCell) && (verticalMove === 1 && horizontalMove === 1)) {
+            
+            
+            transmitPieceMove(x, y, tX, tY)
+
 
             // Remove trail piece from old position:
             removePieceTrail(selectedBtn);
@@ -106,17 +112,15 @@ function pawnRules(mySelectBtn, targetBtn) {
             // Move is finished:
             clickCount++;
 
-        } else {
-            // Error handling:
-            console.error("Error in pawnRules");
-        }
-
+        } 
     }
 }
+
 // Sends data on piece movement to server
-const transmitPieceMovement = (value, x, y, tX, tY) => {
-    socket.emit('piece-move', {
-        value,
+const transmitPieceMove = (sValue, tValue, x, y, tX, tY) => {
+    socket.emit('piece-moved', {
+        sValue,
+        tValue,
         x,
         y,
         tX,

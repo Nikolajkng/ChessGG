@@ -43,7 +43,7 @@ const onClick = (btn, x, y) => {
         selectedCell(btn, x, y);
 
         // Checks that "the move is legal" && "self-select does not count as move"
-        let moveDetected = Math.abs(selectedX - x) != 0 || Math.abs(selectedY - y) != 0  
+        let moveDetected = Math.abs(selectedX - x) != 0 || Math.abs(selectedY - y) != 0
         if (legalMove(selectedBtn, btn) && moveDetected) {
             // Remove highlight on movement on oldPos:
             removeHighlight();
@@ -58,7 +58,6 @@ const onClick = (btn, x, y) => {
         // Info for debug:
         console.log('Coordinates: ' + "(" + x + ", " + y + ")");
         console.log('Value: ' + btn.getAttribute("value"));
-        console.log('Selected: ' + btn.getAttribute("selected"));
         console.log("#################################################")
     })
 }
@@ -67,21 +66,21 @@ const placeNewPiece = (targetBtn) => {
     const newPieceFigure = document.createElement("span");
     newPieceFigure.style.cssText = " font-size:" + pieceSize + ";"
     newPieceFigure.textContent = getPieceSymbol(selectedBtn.getAttribute("value"));
+    targetBtn.innerHTML = ''; // Clear previous piece
     targetBtn.appendChild(newPieceFigure);
 }
 
 const swapPieceValue = (myBtn, targetBtn) => {
-    var tempSelect = myBtn.getAttribute("value");
+    const myBtnValue = myBtn.getAttribute("value");
     myBtn.setAttribute("value", "none");
-    targetBtn.setAttribute("value", tempSelect);
-    
+    targetBtn.setAttribute("value", myBtnValue);
+
 }
 
 
 
 // Confirm when a player has ended their turn
 const confirmMove = (myBtn, targetBtn) => {
-    console.log("Legal is true!")
     // If the selected cell is a legal cell according to playerturn
     if (myBtn != null) {
 
@@ -96,9 +95,9 @@ const confirmMove = (myBtn, targetBtn) => {
         const x = parseInt(myBtn.getAttribute("x"));
         const y = parseInt(myBtn.getAttribute("y"));
         const tX = parseInt(targetBtn.getAttribute("x"));
-        const tY = parseInt(targetBtn.getAttribute("y"));    
-        transmitPieceMovement(myBtn.getAttribute("value"), x, y, tX, tY)
- 
+        const tY = parseInt(targetBtn.getAttribute("y"));
+        transmitPieceMove(selectedBtn.getAttribute("value"), targetBtn.getAttribute("value"), x, y, tX, tY)
+
         // Update the values on pieces by swapping
         swapPieceValue(myBtn, targetBtn);
 

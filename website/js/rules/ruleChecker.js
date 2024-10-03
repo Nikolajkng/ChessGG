@@ -3,8 +3,6 @@ function legalMove(selectedBtn, targetBtn){
     if (selectedBtn != null) {
         const targetValue = targetBtn.getAttribute("value");
         const selectValue = selectedBtn.getAttribute("value");
-        console.log("target move is: " + targetValue)
-
         if (selectValue.includes("P")) {
             return pawnRules(selectedBtn, targetBtn);
         } else if (selectValue.includes("N")) {
