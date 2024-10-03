@@ -1,5 +1,5 @@
 {
-  "name": "node.js",
+  "name": "node",
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "author": "Nikolaj",
   "license": "ISC",
-  "description": "",
+  "description": "Description: Just a bunch of CS students having fun trying to build a chess game  to learn more about web dev and servers.",
   "dependencies": {
     "body-parser": "^1.20.3",
     "express": "^4.19.2",
