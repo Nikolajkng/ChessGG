@@ -3,9 +3,10 @@ const port = 6969;
 const players = {};
 
 const path = require('path')
+const http = require('http')
 const express = require('express');
 const app = express();
-const server = require('http').createServer(app);
+const server = http.createServer(app);
 const io = require('socket.io')(server);
 
 const bodyParser = require('body-parser');

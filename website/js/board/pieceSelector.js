@@ -1,4 +1,9 @@
 let previousCell = null;
+let selectedX = -1;
+let selectedY = -1;
+let selectedBtn = null;
+let canSelect = true;
+let selectedPos = "";
 
 const highlightPiece = (btn) => {
     const x = btn.getAttribute("x");

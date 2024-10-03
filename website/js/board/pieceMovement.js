@@ -1,9 +1,4 @@
 // Global variables:
-let canSelect = true;
-let selectedPos = "";
-let selectedX = -1;
-let selectedY = -1;
-let selectedBtn = null;
 let clickCount = 0;
 let playerTurn = null;
 
