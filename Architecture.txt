@@ -1,0 +1,19 @@
+All game logic and rules will be moved into backend for the server to handle.
+
+The NEW Architecture will be based on Server-source-of-truth.
+Example of the game flow:
+
+0) Player attemps to move a piece from (x, y) to (xT, yT)
+1) The web (client) sends 'move-attempt' along with data to Server (and only this, no movement yet)
+    - The web has a listener for the server response to confirm move is valid.
+2) The server receives 'move-attempt' and data, and forwards data to game rule checker.
+    ok) Valid -> send back to ALL clients (io.emit) 'move-accepted'
+    nope) Invalid -> send back to ALL clients (io.emit) 'move-rejected'
+
+ok) If move is accepted, the web (client) will update:
+- GUI: Pieces on board (placement and removal)
+- DOM: All attributes on DOMs such as button-value
+
+nope) If move is rejected, the web (client) will respond with rejection-feedback:
+- GUI: no updates -> invalid move feedback (red color) + soundfx?
+- DOM: no updates
