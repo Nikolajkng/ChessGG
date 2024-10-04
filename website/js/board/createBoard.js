@@ -1,16 +1,4 @@
-// 8x8 data game board that contains each button object
-let chessBoard = [
-    [null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null],
-];
-
-
+// The board style design:
 const designPattern = (x, y, btn) => {
     if (y % 2 == 0 && x % 2 == 0) {
         btn.setAttribute("cellColor", "white-color");
@@ -44,9 +32,7 @@ for (let x = 1; x <= boardSize; x++) {
         setInitialPieces(btn)
         setCellSize(btn);
         onClick(btn, x, y);
-
         document.querySelector('body').appendChild(btn);
         document.getElementById("chessBoard").appendChild(btn);
     }
 }
-console.log(chessBoard);

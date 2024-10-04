@@ -1,5 +1,7 @@
-// Fetch the "server" object from server.js
+// Export the whole socket to server.js
 module.exports = (server) => {
+    // Import the legalMove() from ruleChecker.js
+    const {legalMove} = require('./game-rules/ruleChecker.js');
 
     //////////////////////// Socket.io setup /////////////////////////////////
     const io = require('socket.io')(server);
@@ -23,18 +25,24 @@ module.exports = (server) => {
             });
         });
 
+        // Listening for move-attempt:
+        socket.on('move-attempt', data => {
+            if (legalMove(data.sX, data.sY, data.x, data.y, data.sValue)) {
+                io.emit('legal-move', {
+                    sValue: data.sValue,
+                    sX: data.sX,
+                    sY: data.sY,
+                    tX: data.x,
+                    tY: data.y
+                })
+            } else {
+                io.emit('illegal-move', {
+                    // Update nothing
+                });
+            }
 
-        // Listening for piece movements ...
-        socket.on('piece-moved', data => {
-            socket.broadcast.emit('piece-has-moved', {
-                sValue: data.sValue,
-                tValue: data.tValue,
-                x: data.x,
-                y: data.y,
-                tX: data.tX,
-                tY: data.tY
-            });
         });
+
 
         // Disconnection handler
         socket.on('disconnect', () => {
