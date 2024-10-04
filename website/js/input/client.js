@@ -35,6 +35,7 @@ socket.on('user-connected', playerName => {
 
 socket.on('user-disconnected', playerName => {
     appendMessage(playerName + " has disconnected!");
+    //alert(playerName + "has rage quit")
 })
 
 /* CHAT */
