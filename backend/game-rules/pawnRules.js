@@ -29,14 +29,11 @@ function pawnRules(x, y, tX, tY, chessBoard, turn, sValue, tValue) {
         // Specific rules for white
         let whiteFreePath = chessBoard[x - 1][y] === "none" || chessBoard[x - 2][y] === "none";
         let whiteGoBackwards = tX > x;
-
-
         return (whiteFreePath && straightMove && maxStep && !whiteGoBackwards)
     } else if (turn === "Black") {
         // Specific rules for black
         let blackFreePath = chessBoard[x + 1][parseInt(y)] === "none" || chessBoard[x + 2][y] === "none";
         let blackGoBackwards = tX < x;
-
         return (blackFreePath && straightMove && maxStep && !blackGoBackwards);
     }
 }
