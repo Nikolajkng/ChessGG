@@ -2,8 +2,7 @@ module.exports = {
     pawnRules
 }
 
-function pawnRules(x, y, tX, tY, chessBoard, playerTurn) {
-
+function pawnRules(x, y, tX, tY, chessBoard, turn, sValue, tValue) {
     /* OLD 
     // Movement rules:
     const blockedPath = false;
@@ -20,13 +19,23 @@ function pawnRules(x, y, tX, tY, chessBoard, playerTurn) {
         canCapture = targetBtn.getAttribute("value").includes("white") && !backwardsMoveBlack
     }
 */
+    let freePath = false; // Temp. value -> easier to debug as 'false'
+    if (chessBoard[x - 1][y] === "none" || chessBoard[x - 2][y] === "none") {
+        freePath = true;
+    }
 
     //////////////////////////////////////////////////////////// WHITE PAWN LOGIC //////////////////////////////////////////////////////////// 
-    if (playerTurn === "White") {
-        return true;
+    if (turn === "White") {
+        if (freePath) {
+            return true;
+        } else {
+            console.log("path is blocked")
+            return false;
+        }
 
 
         //////////////////////////////////////////////////////////// BLACK PAWN LOGIC //////////////////////////////////////////////////////////// 
-    } else if (playerTurn === "Black") {
+    } else if (turn === "Black") {
+        return false;
     }
 }

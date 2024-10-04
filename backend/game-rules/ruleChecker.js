@@ -19,13 +19,13 @@ let chessBoard = [
 
 
 // The function
-const legalMove = (sX, sY, tX, tY, sValue, turn) => {
+const legalMove = (sX, sY, tX, tY, sValue, tValue, turn) => {
     //const targetValue = sBtn.getAttribute("value");
     const selectValue = sValue;
 
     // Filter which piece has been selected -> applies correct rule for specific piece-type: 
     if (selectValue.includes("P")) {
-        return pawnRules(sX, sY, tX, tY, chessBoard, turn);
+        return pawnRules(sX, sY, tX, tY, chessBoard, turn, sValue, tValue);
         } else if (selectValue.includes("N")) {
             return knightRules(sX, sY, tX, tY, chessBoard, turn);
         } else if (selectValue.includes("B")) {
