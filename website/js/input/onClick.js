@@ -48,7 +48,8 @@ function movePiece(sX, sY, tX, tY, turn) {
     let tBtn = document.getElementById("button\(" + tX + "," + tY + "\)")
     console.log("Moving " + sBtn.getAttribute("value") + " to " + tBtn.getAttribute("value"))
 
-    // Updates pieces on board 
+    // Updates pieces on board for everyone: 
+    removeOldPiece(sBtn);
     placeNewPiece(sBtn, tBtn);
     swapPieceValue(sBtn, tBtn);
 
@@ -56,12 +57,11 @@ function movePiece(sX, sY, tX, tY, turn) {
     clickCount++;
     selectedBtn = null;
     switchPlayerTurn();
-
 }
 
 
 
-function placeNewPiece(sBtn, tBtn){
+function placeNewPiece(sBtn, tBtn) {
     const newPieceFigure = document.createElement("span");
     newPieceFigure.style.cssText = " font-size:" + pieceSize + ";"
     newPieceFigure.textContent = getPieceSymbol(sBtn.getAttribute("value"));
@@ -70,13 +70,16 @@ function placeNewPiece(sBtn, tBtn){
 }
 
 
-function swapPieceValue(myBtn, targetBtn){
+function swapPieceValue(myBtn, targetBtn) {
     const myBtnValue = myBtn.getAttribute("value");
     myBtn.setAttribute("value", "none");
     targetBtn.setAttribute("value", myBtnValue);
 
 }
 
+function removeOldPiece(sBtn) {
+    sBtn.innerHTML ="";
+}
 
 // Function to get the correct piece symbol based on the piece value
 function getPieceSymbol(value) {

@@ -36,6 +36,6 @@ function pawnRules(x, y, tX, tY, chessBoard, turn, sValue, tValue) {
 
         //////////////////////////////////////////////////////////// BLACK PAWN LOGIC //////////////////////////////////////////////////////////// 
     } else if (turn === "Black") {
-        return false;
+        return true;
     }
 }

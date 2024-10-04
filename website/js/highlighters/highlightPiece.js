@@ -59,11 +59,6 @@ function highlightSelection(btn) {
     btn.style.backgroundColor = "red";
 }
 
-const removePieceTrail = (btn) => {
-    while (btn.firstChild) {
-        btn.removeChild(btn.firstChild);
-    }
-}
 
 function removeHighlight() {
     if (selectedBtn != null) {
