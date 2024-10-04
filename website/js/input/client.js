@@ -47,10 +47,11 @@ socket.on("new-user-list", console.log);
 
 
 
-// Await move-attempt response from server:
+// Await move-attempt response from servers Rule-checker:
 socket.on('legal-move', data => {
     console.log("attempt-move: Accepted!")
-    movePiece(data.sX, data.sY, data.tX, data.tY, data.turn);
+
+    updateBoard(data.sX, data.sY, data.tX, data.tY, data.turn);
     console.log("updated clickcount: " + clickCount);
     console.log("next turn is: " + playerTurn)
     console.log("########################")
@@ -58,7 +59,7 @@ socket.on('legal-move', data => {
 
 socket.on('illegal-move', () => {
     console.log("attempt-move: REJECTED!")
-    console.log("Rejection Cause: not your turn || selected an invalid cell")
+    console.log("Rejection cause possibles: not your turn || selected an invalid cell || illegal move")
     console.log("########################")
 });
 

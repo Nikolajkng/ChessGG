@@ -2,40 +2,41 @@ module.exports = {
     pawnRules
 }
 
-function pawnRules(x, y, tX, tY, chessBoard, turn, sValue, tValue) {
-    /* OLD 
-    // Movement rules:
-    const blockedPath = false;
-    const emptyCell = targetBtn.getAttribute("value") === "none"
-    const verticalMove = Math.abs(tX - x);
-    const horizontalMove = Math.abs(tY - y);
-    const straightLine = horizontalMove === 0;
-    const backwardsMoveWhite = tX > x;
-    const backwardsMoveBlack = tX < x;
-    let canCapture = "";
+/*
     if (playerTurn === "White") {
         canCapture = targetBtn.getAttribute("value").includes("black") && !backwardsMoveWhite
     } else {
         canCapture = targetBtn.getAttribute("value").includes("white") && !backwardsMoveBlack
     }
 */
-    let freePath = false; // Temp. value -> easier to debug as 'false'
-    if (chessBoard[x - 1][y] === "none" || chessBoard[x - 2][y] === "none") {
-        freePath = true;
+
+function pawnRules(x, y, tX, tY, chessBoard, turn, sValue, tValue) {
+
+    // Shared rules
+    let straightMove = Math.abs(y - tY) === 0;
+    let maxStep = ""
+
+    // Initial position allow pawns to move 2 steps
+    if (x == 7 || x == 2) {
+        maxStep = Math.abs(x - tX) <= 2;
+    } else {
+        // Exit of intial restricts move to 1 step
+        maxStep = Math.abs(x - tX) === 1;
     }
 
-    //////////////////////////////////////////////////////////// WHITE PAWN LOGIC //////////////////////////////////////////////////////////// 
+
     if (turn === "White") {
-        if (freePath) {
-            return true;
-        } else {
-            console.log("path is blocked")
-            return false;
-        }
+        // Specific rules for white
+        let whiteFreePath = chessBoard[x - 1][y] === "none" || chessBoard[x - 2][y] === "none";
+        let whiteGoBackwards = tX > x;
 
 
-        //////////////////////////////////////////////////////////// BLACK PAWN LOGIC //////////////////////////////////////////////////////////// 
+        return (whiteFreePath && straightMove && maxStep && !whiteGoBackwards)
     } else if (turn === "Black") {
-        return true;
+        // Specific rules for black
+        let blackFreePath = chessBoard[x + 1][parseInt(y)] === "none" || chessBoard[x + 2][y] === "none";
+        let blackGoBackwards = tX < x;
+
+        return (blackFreePath && straightMove && maxStep && !blackGoBackwards);
     }
 }
