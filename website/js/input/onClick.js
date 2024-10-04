@@ -1,24 +1,29 @@
 // Global variables:
 let clickCount = 0;
-let playerTurn = null;
+let playerTurn = "White"; //always starts
 
+const switchPlayerTurn = () =>{
+    playerTurn = (clickCount % 2 === 0) ? "White" : "Black"
+}
 
 // Onclick function of buttons:
 const onClick = (btn, x, y) => {
-    btn.addEventListener('click', () => {
-
-        setPlayerTurn();
+    btn.addEventListener('click', () => {        
+        highlightPlayerMenu();
 
         // Selection logic:
         selectedCell(btn, x, y);
         let sX = selectedX;
         let sY = selectedY;
 
+        // (1) Send move-attempt to server / rulechecker:
         const sValue = selectedValue;
-        // Send move-attempt to server / rulechecker:
+        const turn = playerTurn;
+
         let moveDetected = Math.abs(sX - x) != 0 || Math.abs(sY - y) != 0
         if (moveDetected) {
             socket.emit('move-attempt', {
+                turn,
                 sValue,
                 sX,
                 sY,
@@ -28,13 +33,10 @@ const onClick = (btn, x, y) => {
             console.log("move-attempt sent to server...")
         }
 
-
-        // Await move-attempt response from server:
-
-        // Listening for piece movements ...
+        // (2) Await move-attempt response from server:
         socket.on('legal-move', data => {
             console.log("attempt-move: Accepted!")
-            movePiece(data.sX, data.sY, data.tX, data.tY);
+            movePiece(data.sX, data.sY, data.tX, data.tY, data.turn);
 
         });
 
@@ -50,21 +52,19 @@ const onClick = (btn, x, y) => {
 }
 
 // Move piece
-function movePiece(sX, sY, tX, tY) {
+function movePiece(sX, sY, tX, tY, turn) {
     let sBtn = document.getElementById("button\(" + sX + "," + sY + "\)")
     let tBtn = document.getElementById("button\(" + tX + "," + tY + "\)")
     console.log("Moving " + sBtn.getAttribute("value") + " to " + tBtn.getAttribute("value"))
+    
+    // Confirms move and switch turn:
+    clickCount++;
+    selectedBtn = null;
+    console.log("updated clickcount: "+ clickCount);
+    switchPlayerTurn();
+    console.log("next turn is: " + playerTurn)
 }
 
-// Based on global vars
-function setPlayerTurn() {
-    if (clickCount % 2 === 0) {
-        playerTurn = "White";
-    } else {
-        playerTurn = "Black";
-    }
-    highlightPlayerMenu();
-}
 
 
 const placeNewPiece = (targetBtn) => {

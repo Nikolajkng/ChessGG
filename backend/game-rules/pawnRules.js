@@ -2,7 +2,9 @@ module.exports = {
     pawnRules
 }
 
-function pawnRules(x, y, tX, tY, chessBoard) {
+function pawnRules(x, y, tX, tY, chessBoard, playerTurn) {
+
+    /* OLD 
     // Movement rules:
     const blockedPath = false;
     const emptyCell = targetBtn.getAttribute("value") === "none"
@@ -17,15 +19,14 @@ function pawnRules(x, y, tX, tY, chessBoard) {
     } else {
         canCapture = targetBtn.getAttribute("value").includes("white") && !backwardsMoveBlack
     }
-
+*/
 
     //////////////////////////////////////////////////////////// WHITE PAWN LOGIC //////////////////////////////////////////////////////////// 
     if (playerTurn === "White") {
+        return true;
 
 
         //////////////////////////////////////////////////////////// BLACK PAWN LOGIC //////////////////////////////////////////////////////////// 
     } else if (playerTurn === "Black") {
-        
-        
     }
 }

@@ -27,8 +27,9 @@ module.exports = (server) => {
 
         // Listening for move-attempt:
         socket.on('move-attempt', data => {
-            if (legalMove(data.sX, data.sY, data.x, data.y, data.sValue)) {
+            if (legalMove(data.sX, data.sY, data.x, data.y, data.sValue, data.turn)) {
                 io.emit('legal-move', {
+                    turn: data.turn,
                     sValue: data.sValue,
                     sX: data.sX,
                     sY: data.sY,
