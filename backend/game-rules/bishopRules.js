@@ -3,6 +3,6 @@ module.exports = {
 }
 
 
-const bishopRules = (sX, sY, tX, tY, chessBoard) => {
+function bishopRules(sX, sY, tX, tY, chessBoard){
     return true;
 }

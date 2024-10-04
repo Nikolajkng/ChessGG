@@ -3,6 +3,6 @@ module.exports = {
 }
 
 
-const queenRules = (sX, sY, tX, tY, chessBoard) => {
+function queenRules(sX, sY, tX, tY, chessBoard){
     return true;
 }

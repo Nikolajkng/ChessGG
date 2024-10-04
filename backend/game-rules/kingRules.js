@@ -3,6 +3,6 @@ module.exports = {
 }
 
 
-const kingRules = (sX, sY, tX, tY, chessBoard) => {
+function kingRules(sX, sY, tX, tY, chessBoard){
     return true;
 }
