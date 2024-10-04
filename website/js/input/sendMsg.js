@@ -46,47 +46,6 @@ socket.on('chat-message', data => {
 socket.on("new-user-list", console.log);
 
 
-
-/* PIECE MOVEMENT */
-socket.on('piece-has-moved', data => {
-    const sValue = data.sValue
-    const tValue = data.tValue
-    const x = data.x;
-    const y = data.y;
-    const tX = data.tX;
-    const tY = data.tY;
-    const sButtonID = "button(" + x + "," + y + ")";
-    const tButtonID = "button(" + tX + "," + tY + ")";
-    const sBtn = document.getElementById(sButtonID);
-    const tBtn = document.getElementById(tButtonID);
-    console.log("Payload from (piece-has-moved) => " + data.sValue + " at (" + x + "," + y + ") move on " + data.tValue + " at (" + tX + "," + tY + ")");
-
-    // Remove trail piece from old position:
-    removePieceTrail(sBtn);
-
-    // Remove attacked piece:
-    removePieceTrail(tBtn);
-
-    // Place selected piece on target using `data.sValue` instead of `selectedBtn`:
-    const newPieceFigure = document.createElement("span");
-    newPieceFigure.style.cssText = "font-size:" + pieceSize + ";";
-    newPieceFigure.textContent = getPieceSymbol(sValue); // Use the server value
-    tBtn.innerHTML = ''; // Clear previous piece
-    tBtn.appendChild(newPieceFigure);
-
-    // Update the values on pieces by swapping:
-    sBtn.setAttribute('value', 'none'); // Old position should now be "none"
-    tBtn.setAttribute('value', data.sValue); // New position takes the selected piece's value
-
-
-    // Clears selection highlight:
-    removeHighlight();
-
-    // Switch player turn
-    clickCount++;
-})
-
-
 //////////////////////////////// Functions ///////////////////////////////////
 
 // Append message to chatbox:

@@ -13,6 +13,5 @@ const highlightPlayerMenu = () => {
         blackMenu.classList.add("blackMenuEnable");
         whiteMenu.classList.remove("whiteMenuEnable");
         whiteMenu.classList.add("whiteMenuDisable");
-
     }
 }
