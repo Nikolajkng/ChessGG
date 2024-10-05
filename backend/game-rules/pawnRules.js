@@ -18,7 +18,7 @@ function pawnRules(x, y, tX, tY, chessBoard, turn, sValue, tValue) {
     let firstMove = false;
 
     // Initial position allow pawns to move 2 steps
-    if (x == 7 || x == 2) {
+    if (x === 7 || x === 2) {
         maxStep = Math.abs(x - tX) <= 2;
         firstMove = true;
     } else {
@@ -39,7 +39,6 @@ function pawnRules(x, y, tX, tY, chessBoard, turn, sValue, tValue) {
 
         let whiteGoBackwards = tX > x;
         let satisfyAllRulesWhite = (whiteFreePath && straightMove && maxStep && !whiteGoBackwards);
-
         if (satisfyAllRulesWhite) {
             swapValueArray(chessBoard, x, y, tX, tY)
         }
@@ -51,7 +50,7 @@ function pawnRules(x, y, tX, tY, chessBoard, turn, sValue, tValue) {
             blackFreePath = chessBoard[x + 1][y] && chessBoard[x + 2][y] === "none";
             firstMove = false;
         } else {
-            chessBoard[x - 1][y] === "none"
+            chessBoard[x + 1][y] === "none"
         }
         let blackGoBackwards = tX < x;
         let satisfyAllRulesBlack = (blackFreePath && straightMove && maxStep && !blackGoBackwards);
@@ -63,20 +62,24 @@ function pawnRules(x, y, tX, tY, chessBoard, turn, sValue, tValue) {
     }
 }
 
-function swapValueArray(chessBoard, x, y, tX, tY) {
-    const temp = chessBoard[x-1][y-1];
-    chessBoard[x-1][y-1] = chessBoard[tY-1][tX-1]
-    chessBoard[tX-1][tY-1] = temp;
+function swapValueArray(chessBoard, X, Y, TX , TY) {
+    const temp = chessBoard[X - 1][Y - 1];
+    chessBoard[X - 1][Y - 1] = chessBoard[TX- 1][TY - 1]
+    chessBoard[TX - 1][TY - 1] = temp;
 
     // Check array
     printBoard(chessBoard)
 };
 
-function printBoard(chessBoard){
+function printBoard(chessBoard) {
     console.log("\n")
     console.log("---------------------------------------------------------------------")
     chessBoard.forEach(row => {
-        console.log(row.join(" | "))
+        if (row.includes("none")) {
+            console.log(row.join("  |  "))
+        } else {
+            console.log(row.join(" | "))
+        }
     });
     console.log("---------------------------------------------------------------------")
     console.log("\n")
