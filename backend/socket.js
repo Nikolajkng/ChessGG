@@ -1,7 +1,10 @@
 // Export the whole socket to server.js
 module.exports = (server) => {
+    
     // Import the legalMove() from ruleChecker.js
     const {legalMove} = require('./game-rules/ruleChecker.js');
+    const {resetGameArray} = require('./game-rules/ruleChecker.js');
+
 
     //////////////////////// Socket.io setup /////////////////////////////////
     const io = require('socket.io')(server);
@@ -53,6 +56,9 @@ module.exports = (server) => {
             socket.broadcast.emit('user-disconnected', players[socket.id]);
             socket.broadcast.emit("new-user-list", Object.values(players));
             delete players[socket.id];
+
+            //Reset gameboard:
+            resetGameArray();
         });
     });
 

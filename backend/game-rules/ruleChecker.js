@@ -45,9 +45,22 @@ const legalMove = (sX, sY, tX, tY, sValue, tValue, turn) => {
     }
 }
 
+function resetGameArray(){
+    console.log("Player disconnected: Resetting board array...")
+    chessBoard = [
+        ["blackR", "blackN", "blackB", "blackQ", "blackK", "blackB", "blackN", "blackR"],
+        ["blackP", "blackP", "blackP", "blackP", "blackP", "blackP", "blackP", "blackP"],
+        ["none", "none", "none", "none", "none", "none", "none", "none"],
+        ["none", "none", "none", "none", "none", "none", "none", "none"],
+        ["none", "none", "none", "none", "none", "none", "none", "none"],
+        ["none", "none", "none", "none", "none", "none", "none", "none"],
+        ["whiteP", "whiteP", "whiteP", "whiteP", "whiteP", "whiteP", "whiteP", "whiteP"],
+        ["whiteR", "whiteN", "whiteB", "whiteQ", "whiteK", "whiteB", "whiteN", "whiteR"]
+    ];
+}
+
 // Export the function
 module.exports = {
-    legalMove
+    legalMove,
+    resetGameArray
 };
-
-
