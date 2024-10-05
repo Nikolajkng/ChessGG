@@ -37,7 +37,7 @@ function pawnRules(x, y, tX, tY, chessBoard, turn, sValue, tValue) {
             console.log(x +","+ y)
             firstMove = false;
         } else {
-            chessBoard[x - 1][y] === "none"
+            whiteFreePath = chessBoard[x - 1][y] === "none"
         }
 
         let whiteGoBackwards = tX > x;
@@ -53,7 +53,7 @@ function pawnRules(x, y, tX, tY, chessBoard, turn, sValue, tValue) {
             blackFreePath = chessBoard[x + 1][y] && chessBoard[x + 2][y] === "none";
             firstMove = false;
         } else {
-            chessBoard[x + 1][y] === "none"
+            blackFreePath = chessBoard[x + 1][y] === "none"
         }
         let blackGoBackwards = tX < x;
         let satisfyAllRulesBlack = (blackFreePath && straightMove && maxStep && !blackGoBackwards);
