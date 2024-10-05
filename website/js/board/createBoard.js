@@ -21,8 +21,8 @@ const designPattern = (x, y, btn) => {
 
 // Build the board of 8x8 buttons as cells:
 const boardSize = 8;
-for (let x = 1; x <= boardSize; x++) {
-    for (let y = 1; y <= boardSize; y++) {
+for (let x = 0; x < boardSize; x++) {
+    for (let y = 0; y < boardSize; y++) {
         let btn = document.createElement('button');
         btn.setAttribute("id", 'button(' + x + "," + y + ")"); // id = 'button(x,y)'
         btn.setAttribute("x", x);

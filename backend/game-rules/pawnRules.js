@@ -18,12 +18,12 @@ function pawnRules(x, y, tX, tY, chessBoard, turn, sValue, tValue) {
     let firstMove = false;
 
     // Initial position allow pawns to move 2 steps
-    if (x === 7 || x === 2) {
+    if (x === 6 || x === 1) {
         maxStep = Math.abs(x - tX) <= 2;
         firstMove = true;
     } else {
         // Exit of intial restricts move to 1 step
-        maxStep = Math.abs(x - tX) === 1;
+        maxStep = Math.abs(x - tX) == 1;
     }
 
 
@@ -32,6 +32,9 @@ function pawnRules(x, y, tX, tY, chessBoard, turn, sValue, tValue) {
         let whiteFreePath = ""
         if (firstMove) {
             whiteFreePath = chessBoard[x - 1][y] && chessBoard[x - 2][y] === "none";
+            console.log("Inside freepath")
+            console.log(whiteFreePath)
+            console.log(x +","+ y)
             firstMove = false;
         } else {
             chessBoard[x - 1][y] === "none"
@@ -63,9 +66,9 @@ function pawnRules(x, y, tX, tY, chessBoard, turn, sValue, tValue) {
 }
 
 function swapValueArray(chessBoard, X, Y, TX , TY) {
-    const temp = chessBoard[X - 1][Y - 1];
-    chessBoard[X - 1][Y - 1] = chessBoard[TX- 1][TY - 1]
-    chessBoard[TX - 1][TY - 1] = temp;
+    const temp = chessBoard[X][Y];
+    chessBoard[X][Y] = chessBoard[TX][TY]
+    chessBoard[TX][TY] = temp;
 
     // Check array
     printBoard(chessBoard)
