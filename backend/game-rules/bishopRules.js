@@ -54,17 +54,11 @@ function checkBishopPath(dirVectorBR, dirVectorTL, dirVectorBL, dirVectorTR, X, 
             }
         }
 
-    } else if (dirVectorBL) {
-        console.log("moving towards BOT-LEFT")
-
-    } else if (dirVectorTR) {
-        console.log("moving towards TOP-RIGHT")
-
     } else if (dirVectorTL) {
         console.log("Moving towards TOP-LEFT")
         const xyDiff = Math.abs(X - Y);
-        for (let n = X-1; n > TX; n--) {
-            for (let m = Y-1; m > TY; m--) {
+        for (let n = X - 1; n > TX; n--) {
+            for (let m = Y - 1; m > TY; m--) {
                 if (n - m === xyDiff) {
                     // Create list of all values in bishop path
                     pathResult.push(chessBoard[n][m]);
@@ -72,6 +66,32 @@ function checkBishopPath(dirVectorBR, dirVectorTL, dirVectorBL, dirVectorTR, X, 
                 }
             }
         }
+
+    } else if (dirVectorTR) {
+        console.log("moving towards TOP-RIGHT")
+        while (chessBoard[X][Y] !== chessBoard[TX][TY]) {
+            // Move one row up
+            X--;
+            // Move one col right
+            Y++;
+            pathResult.push(chessBoard[X][Y]);
+            console.log(X + "," + Y);
+        }
+        // Removes target piece-value, only want in-between for path
+        pathResult.pop(pathResult.length - 1)
+
+    } else if (dirVectorBL) {
+        console.log("moving towards BOT-LEFT")
+        while (chessBoard[X][Y] !== chessBoard[TX][TY]) {
+            // Move one row down
+            X++;
+            // Move one col left
+            Y--;
+            pathResult.push(chessBoard[X][Y]);
+            console.log(X + "," + Y);
+        }
+         // Removes target piece-value, only want in-between for path
+         pathResult.pop(pathResult.length-1)
 
     }
 
