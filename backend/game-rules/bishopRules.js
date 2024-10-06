@@ -41,14 +41,14 @@ function checkBishopPath(dirVectorBR, dirVectorTL, dirVectorBL, dirVectorTR, X, 
 
     // Diagonal traversal in 2D array algorithm:
     const XYDiff = Math.abs(X - Y);
-    let valueArr = [];
+    let pathResult = [];
     if (dirVectorBR) {
         console.log("moving towards BOT-RIGHT")
-        for (let n = X + 1; n < boardSize; n++) {
+        for (let n = X + 1; n < TX; n++) {
             for (let m = Y + 1; m < TY; m++) {
                 if (m - n === XYDiff) {
                     // Create list of all values in bishop path
-                    valueArr.push(chessBoard[n][m]);
+                    pathResult.push(chessBoard[n][m]);
                     console.log(m + ", " + n)
                 }
             }
@@ -62,13 +62,23 @@ function checkBishopPath(dirVectorBR, dirVectorTL, dirVectorBL, dirVectorTR, X, 
 
     } else if (dirVectorTL) {
         console.log("Moving towards TOP-LEFT")
+        const xyDiff = Math.abs(X - Y);
+        for (let n = X-1; n > TX; n--) {
+            for (let m = Y-1; m > TY; m--) {
+                if (n - m === xyDiff) {
+                    // Create list of all values in bishop path
+                    pathResult.push(chessBoard[n][m]);
+                    console.log(m + ", " + n)
+                }
+            }
+        }
 
     }
 
     // Check for "none" in the bishops free path
-    console.log(valueArr);
+    console.log(pathResult);
     const predicate = (v) => v === "none"
-    return valueArr.every(predicate);
+    return pathResult.every(predicate);
 
 };
 
