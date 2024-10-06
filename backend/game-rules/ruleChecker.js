@@ -22,9 +22,11 @@ let chessBoard = [
 
 
 // Checks for specific piece's legal move rules 
-function legalMove(x, y, tX, tY, sValue, tValue, turn){
+function legalMove(x, y, tX, tY, sValue, tValue, turn, moveType){
     //const targetValue = sBtn.getAttribute("value");
     const selectValue = sValue;
+    console.log("\n")
+    console.log("MoveType detected as : " + moveType)
 
     // Filter which piece has been selected -> applies correct rule for specific piece-type: 
     if (selectValue.includes("P")) {

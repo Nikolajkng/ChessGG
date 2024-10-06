@@ -35,6 +35,8 @@ const onClick = (btn, x, y) => {
             console.log("move-attempt sent to server...")
         }
 
+        
+
         // Info for debug:
         console.log('Coordinates: ' + "(" + x + ", " + y + ")");
         console.log('Value: ' + btn.getAttribute("value"));

@@ -30,8 +30,16 @@ module.exports = (server) => {
 
         // Listening for move-attempt:
         socket.on('move-attempt', data => {
-            if (legalMove(data.sX, data.sY, data.x, data.y, data.sValue, data.tValue, data.turn)) {
+            let moveType = "";
 
+            // Identify move-attempt as move || capture
+            if(data.tValue.includes("none")){
+                moveType = "move";
+            } else {
+                moveType = "capture"
+            }
+
+            if (legalMove(data.sX, data.sY, data.x, data.y, data.sValue, data.tValue, data.turn, moveType)) {
                 io.emit('legal-move', {
                     turn: data.turn,
                     sValue: data.sValue,
