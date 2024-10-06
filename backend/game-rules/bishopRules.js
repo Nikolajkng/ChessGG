@@ -41,8 +41,9 @@ function checkBishopPath(dirVectorBR, dirVectorTL, dirVectorBL, dirVectorTR, X, 
 
     // Comments from Niko:
     /* 
-    The algorithm for traversal in "regular" diagonal direction (TopLeft -> BotRight) is to match the numerical diff between 'x' and 'y'.
-    The algorith for traversal in "anti-diagonal" direction (BotLeft <- TopRight) is recursive, since pattern is not the same as the "regular diagonal"!
+    1) The algorithm for traversal in "regular" diagonal direction (TopLeft -> BotRight) is to match the pattern of numerical diff between 'x' and 'y'.
+    2) The algorith for traversal in "anti-diagonal" direction (BotLeft <- TopRight) is recursive, since pattern is not the same as the "regular diagonal"!
+    2.1) Bonus: Just found out the pattern here is based on sum between x and y...
     */
     const XYDiff = Math.abs(X - Y);
 
