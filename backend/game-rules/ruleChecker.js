@@ -21,8 +21,8 @@ let chessBoard = [
 
 
 
-// The function
-const legalMove = (sX, sY, tX, tY, sValue, tValue, turn) => {
+// Checks for specific piece's legal move rules 
+function legalMove(sX, sY, tX, tY, sValue, tValue, turn){
     //const targetValue = sBtn.getAttribute("value");
     const selectValue = sValue;
 
@@ -30,15 +30,15 @@ const legalMove = (sX, sY, tX, tY, sValue, tValue, turn) => {
     if (selectValue.includes("P")) {
         return pawnRules(sX, sY, tX, tY, chessBoard, turn, sValue, tValue);
         } else if (selectValue.includes("N")) {
-            return knightRules(sX, sY, tX, tY, chessBoard, turn);
+            return knightRules(sX, sY, tX, tY, chessBoard, turn, sValue, tValue);
         } else if (selectValue.includes("B")) {
             return bishopRules(sX, sY, tX, tY, chessBoard, turn, sValue, tValue);
         } else if (selectValue.includes("R")) {
-            return rookRules(sX, sY, tX, tY, chessBoard, turn);
+            return rookRules(sX, sY, tX, tY, chessBoard, turn, sValue, tValue);
         } else if (selectValue.includes("K")) {
-            return kingRules(sX, sY, tX, tY, chessBoard, turn);
+            return kingRules(sX, sY, tX, tY, chessBoard, turn, sValue, tValue);
         } else if (selectValue.includes("Q")) {
-            return queenRules(sX, sY, tX, tY, chessBoard, turn);
+            return queenRules(sX, sY, tX, tY, chessBoard, turn, sValue, tValue);
     } else {
         console.error("Error in rulechecker");
         return false;

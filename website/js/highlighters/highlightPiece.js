@@ -9,8 +9,6 @@ let canSelect = true;
 const selectedCell = (sBtn, x, y) => {
     ////////////////////////////////////////// WHITE PLAYER SELECTION ////////////////////////////////////////// 
     const sValue = sBtn.getAttribute("value");
-    const legalMove = false; // Temp
-
     if (playerTurn === "White") {
         if (canSelect && sValue.includes("white")) {
             selectedBtn = sBtn;
@@ -23,14 +21,13 @@ const selectedCell = (sBtn, x, y) => {
             console.log("selected: " + sValue);
         }
         // Remove selection only by re-select same cell
-        else if (!canSelect && !legalMove) {
+        else if (!canSelect) {
             removeHighlight();
             selectedBtn = null;
         }
         ////////////////////////////////////////// BLACK PLAYER SELECTION ////////////////////////////////////////// 
     } else if (playerTurn === "Black") {
         const sValue = sBtn.getAttribute("value");
-        const legalMove = false; // Temp
         if (canSelect && sValue.includes("black")) {
             selectedBtn = sBtn;
             selectedX = x;
@@ -43,7 +40,7 @@ const selectedCell = (sBtn, x, y) => {
             console.log("selected: " + sValue);
         }
         // Remove selection only by re-select same cell
-        else if (!canSelect && !legalMove) {
+        else if (!canSelect) {
             removeHighlight();
             selectedBtn = null;
         }

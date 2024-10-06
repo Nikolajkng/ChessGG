@@ -31,7 +31,6 @@ module.exports = (server) => {
         // Listening for move-attempt:
         socket.on('move-attempt', data => {
             if (legalMove(data.sX, data.sY, data.x, data.y, data.sValue, data.tValue, data.turn)) {
-                // TO DO: Update chessboard Array:
 
                 io.emit('legal-move', {
                     turn: data.turn,
