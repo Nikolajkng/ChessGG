@@ -39,6 +39,12 @@ function bishopRules(x, y, tX, tY, chessBoard, turn, sValue, tValue) {
 
 function checkBishopPath(dirVectorBR, dirVectorTL, dirVectorBL, dirVectorTR, X, Y, TX, TY, chessBoard) {
 
+    // Comments from Niko:
+    /* 
+    The algorithm for traversal in "regular" diagonal direction (TopLeft -> BotRight) is to match the numerical diff between 'x' and 'y'.
+    The algorith for traversal in "anti-diagonal" direction (BotLeft <- TopRight) is recursive, since pattern is not the same as the "regular diagonal"!
+    */
+
     // Diagonal traversal in 2D array algorithm:
     const XYDiff = Math.abs(X - Y);
     let pathResult = [];
@@ -47,13 +53,11 @@ function checkBishopPath(dirVectorBR, dirVectorTL, dirVectorBL, dirVectorTR, X, 
         for (let n = X + 1; n < TX; n++) {
             for (let m = Y + 1; m < TY; m++) {
                 if (m - n === XYDiff) {
-                    // Create list of all values in bishop path
                     pathResult.push(chessBoard[n][m]);
                     console.log(m + ", " + n)
                 }
             }
         }
-
     } else if (dirVectorTL) {
         console.log("Moving towards TOP-LEFT")
         const xyDiff = Math.abs(X - Y);
@@ -66,36 +70,28 @@ function checkBishopPath(dirVectorBR, dirVectorTL, dirVectorBL, dirVectorTR, X, 
                 }
             }
         }
-
     } else if (dirVectorTR) {
         console.log("moving towards TOP-RIGHT")
         while (chessBoard[X][Y] !== chessBoard[TX][TY]) {
-            // Move one row up
-            X--;
-            // Move one col right
-            Y++;
+            X--; // Move one row up
+            Y++; // Move one col right
+            pathResult.push(chessBoard[X][Y]);
+            console.log(X + "," + Y);
+        }
+        pathResult.pop(pathResult.length - 1)
+    } else if (dirVectorBL) {
+        console.log("moving towards BOT-LEFT")
+        while (chessBoard[X][Y] !== chessBoard[TX][TY]) {
+            X++; // Move one row down
+            Y--; // Move one col left
             pathResult.push(chessBoard[X][Y]);
             console.log(X + "," + Y);
         }
         // Removes target piece-value, only want in-between for path
         pathResult.pop(pathResult.length - 1)
-
-    } else if (dirVectorBL) {
-        console.log("moving towards BOT-LEFT")
-        while (chessBoard[X][Y] !== chessBoard[TX][TY]) {
-            // Move one row down
-            X++;
-            // Move one col left
-            Y--;
-            pathResult.push(chessBoard[X][Y]);
-            console.log(X + "," + Y);
-        }
-         // Removes target piece-value, only want in-between for path
-         pathResult.pop(pathResult.length-1)
-
     }
 
-    // Check for "none" in the bishops free path
+    // Check for "none" in the bishops free path array
     console.log(pathResult);
     const predicate = (v) => v === "none"
     return pathResult.every(predicate);
