@@ -12,19 +12,12 @@ function knightRules(x, y, tX, tY, chessBoard, turn, sValue, tValue) {
 
 
     if (turn === "White") {
-        // Specific rules for white
-
-
         const satisfyAllRulesWhite = !whitePieces && (movePatternUp || movePatternDown || movePatternRight || movePatternLeft);
         if (satisfyAllRulesWhite) {
             swapValueArray(chessBoard, x, y, tX, tY)
             return true;
         }
-
-
     } else if (turn === "Black") {
-        // Specific rules for black
-
         const satisfyAllRulesBlack = !blackPieces && (movePatternUp || movePatternDown || movePatternRight || movePatternLeft);
         if (satisfyAllRulesBlack) {
             swapValueArray(chessBoard, x, y, tX, tY)
