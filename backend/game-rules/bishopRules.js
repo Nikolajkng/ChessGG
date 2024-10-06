@@ -14,12 +14,15 @@ function bishopRules(x, y, tX, tY, chessBoard, turn, sValue, tValue) {
     const dirVectorBR = a < 0 && b < 0
     const dirVectorTL = a > 0 && b > 0
     const diagonalMove = Math.abs(x - y) === Math.abs(tX - tY);
+    const anti_diagonalMove = x+y === tX+tY
+    const whitePieces = tValue.includes("white");
+    const blackPieces = tValue.includes("black");
     const freePath = checkBishopPath(dirVectorBR, dirVectorTL, dirVectorBL, dirVectorTR, x, y, tX, tY, chessBoard);
 
 
     if (turn === "White") {
         // Specific rules for white
-        const satisfyAllRulesWhite = diagonalMove && freePath
+        const satisfyAllRulesWhite = (diagonalMove || anti_diagonalMove) && freePath && !whitePieces
         if (satisfyAllRulesWhite) {
             swapValueArray(chessBoard, x, y, tX, tY)
             return satisfyAllRulesWhite
@@ -27,7 +30,7 @@ function bishopRules(x, y, tX, tY, chessBoard, turn, sValue, tValue) {
 
     } else if (turn === "Black") {
         // Specific rules for black
-        const satisfyAllRulesBlack = diagonalMove && freePath
+        const satisfyAllRulesBlack = (diagonalMove || anti_diagonalMove) && freePath && !blackPieces
         if (satisfyAllRulesBlack) {
             swapValueArray(chessBoard, x, y, tX, tY)
             return satisfyAllRulesBlack
