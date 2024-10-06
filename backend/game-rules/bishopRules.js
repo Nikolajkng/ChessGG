@@ -21,7 +21,7 @@ function bishopRules(x, y, tX, tY, chessBoard, turn, sValue, tValue) {
         // Specific rules for white
         const satisfyAllRulesWhite = diagonalMove && freePath
         if (satisfyAllRulesWhite) {
-            swapValueArray(x, y, tX, tY, chessBoard)
+            swapValueArray(chessBoard, x, y, tX, tY)
             return satisfyAllRulesWhite
         }
 
@@ -29,7 +29,7 @@ function bishopRules(x, y, tX, tY, chessBoard, turn, sValue, tValue) {
         // Specific rules for black
         const satisfyAllRulesBlack = diagonalMove && freePath
         if (satisfyAllRulesBlack) {
-            swapValueArray(x, y, tX, tY, chessBoard)
+            swapValueArray(chessBoard, x, y, tX, tY)
             return satisfyAllRulesBlack
         }
 

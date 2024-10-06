@@ -64,8 +64,6 @@ function swapValueArray(chessBoard, X, Y, TX , TY) {
     const temp = chessBoard[X][Y];
     chessBoard[X][Y] = chessBoard[TX][TY]
     chessBoard[TX][TY] = temp;
-
-    // Check array
     printBoard(chessBoard)
 };
 
