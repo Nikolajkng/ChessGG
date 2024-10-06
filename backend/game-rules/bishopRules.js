@@ -109,5 +109,6 @@ function checkBishopPath(dirVectorBR, dirVectorTL, dirVectorBL, dirVectorTR, X, 
 
 
 module.exports = {
-    bishopRules
+    bishopRules,
+    checkBishopPath
 }

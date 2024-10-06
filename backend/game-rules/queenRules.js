@@ -1,8 +1,12 @@
-module.exports = {
-    queenRules
+function queenRules(x, y, tX, tY, chessBoard, turn, sValue, tValue) {
+
+    // TO DO: combine the algorithm from bishop, Rook and king
+
+
+    return true;
 }
 
 
-function queenRules(sX, sY, tX, tY, chessBoard){
-    return true;
+module.exports = {
+    queenRules
 }
