@@ -22,23 +22,23 @@ let chessBoard = [
 
 
 // Checks for specific piece's legal move rules 
-function legalMove(sX, sY, tX, tY, sValue, tValue, turn){
+function legalMove(x, y, tX, tY, sValue, tValue, turn){
     //const targetValue = sBtn.getAttribute("value");
     const selectValue = sValue;
 
     // Filter which piece has been selected -> applies correct rule for specific piece-type: 
     if (selectValue.includes("P")) {
-        return pawnRules(sX, sY, tX, tY, chessBoard, turn, sValue, tValue);
+        return pawnRules(x, y, tX, tY, chessBoard, turn, sValue, tValue);
         } else if (selectValue.includes("N")) {
-            return knightRules(sX, sY, tX, tY, chessBoard, turn, sValue, tValue);
+            return knightRules(x, y, tX, tY, chessBoard, turn, sValue, tValue);
         } else if (selectValue.includes("B")) {
-            return bishopRules(sX, sY, tX, tY, chessBoard, turn, sValue, tValue);
+            return bishopRules(x, y, tX, tY, chessBoard, turn, sValue, tValue);
         } else if (selectValue.includes("R")) {
-            return rookRules(sX, sY, tX, tY, chessBoard, turn, sValue, tValue);
+            return rookRules(x, y, tX, tY, chessBoard, turn, sValue, tValue);
         } else if (selectValue.includes("K")) {
-            return kingRules(sX, sY, tX, tY, chessBoard, turn, sValue, tValue);
+            return kingRules(x, y, tX, tY, chessBoard, turn, sValue, tValue);
         } else if (selectValue.includes("Q")) {
-            return queenRules(sX, sY, tX, tY, chessBoard, turn, sValue, tValue);
+            return queenRules(x, y, tX, tY, chessBoard, turn, sValue, tValue);
     } else {
         console.error("Error in rulechecker");
         return false;

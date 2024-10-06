@@ -5,10 +5,12 @@ function bishopRules(x, y, tX, tY, chessBoard, turn, sValue, tValue) {
         swapValueArray
     } = require("./ruleChecker")
 
-    // Subtract startpos with endpos to get vector --> signs of vector gives direction  (x0,y0)-(x1-y1) = <a,b>
-    // Notes: BR = Bottom-right, TL = Top-left, BL = Bottom-left, TR = Top-right        (remember, not cartesian coordinate system!)
+    // Subtract startpos with endpos to get vector: (x0,y0) - (x1-y1) = <a,b>
     let a = x - tX;
     let b = y - tY;
+
+    // Vector to indicate direction (Bottom-right, TL = Top-left, BL = Bottom-left, TR = Top-right)
+    // Remember, not cartesian coordinate system, dont get confused on corner directions!
     const dirVectorTR = a > 0 && b < 0
     const dirVectorBL = a < 0 && b > 0
     const dirVectorBR = a < 0 && b < 0
@@ -20,6 +22,7 @@ function bishopRules(x, y, tX, tY, chessBoard, turn, sValue, tValue) {
     const freePath = checkBishopPath(dirVectorBR, dirVectorTL, dirVectorBL, dirVectorTR, x, y, tX, tY, chessBoard);
 
 
+    // Check if bishop rules are satisfied
     if (turn === "White") {
         // Specific rules for white
         const satisfyAllRulesWhite = (diagonalMove || anti_diagonalMove) && freePath && !whitePieces
