@@ -81,6 +81,7 @@ module.exports = (server) => {
             socket.broadcast.emit('user-disconnected', players[socket.id]);
             socket.broadcast.emit("new-user-list", Object.values(players));
             delete players[socket.id];
+            delete socketID.splice(socket.id, 1);
 
             //Reset gameboard:
             resetGameArray();
