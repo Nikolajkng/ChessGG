@@ -17,7 +17,6 @@ function updateBoard(sX, sY, tX, tY, turn) {
 }
 
 
-
 function placeNewPiece(sBtn, tBtn) {
     const newPieceFigure = document.createElement("span");
     newPieceFigure.style.cssText = " font-size:" + pieceSize + ";"

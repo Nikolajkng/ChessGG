@@ -1,5 +1,25 @@
+// Build the board of 8x8 buttons as cells:
+const boardSize = 8;
+for (let x = 0; x < boardSize; x++) {
+    for (let y = 0; y < boardSize; y++) {
+        let btn = document.createElement('button');
+        btn.setAttribute("id", 'button(' + x + "," + y + ")"); // id = 'button(x,y)'
+        btn.setAttribute("x", x);
+        btn.setAttribute("y", y);
+        designPattern(x, y, btn);
+        setInitialPieceValues(btn, x, y);
+        setInitialPieces(btn)
+        setCellSize(btn);
+        onClick(btn, x, y);
+        btn.style.pointerEvents = 'none'; // Lock everything 
+        document.querySelector('body').appendChild(btn);
+        document.getElementById("chessBoard").appendChild(btn);
+    }
+}
+
+
 // The board style design:
-const designPattern = (x, y, btn) => {
+function designPattern(x, y, btn){
     if (y % 2 == 0 && x % 2 == 0) {
         btn.setAttribute("cellColor", "white-color");
         btn.style.cssText = "" +
@@ -19,20 +39,19 @@ const designPattern = (x, y, btn) => {
     }
 };
 
-// Build the board of 8x8 buttons as cells:
-const boardSize = 8;
-for (let x = 0; x < boardSize; x++) {
-    for (let y = 0; y < boardSize; y++) {
-        let btn = document.createElement('button');
-        btn.setAttribute("id", 'button(' + x + "," + y + ")"); // id = 'button(x,y)'
-        btn.setAttribute("x", x);
-        btn.setAttribute("y", y);
-        designPattern(x, y, btn);
-        setInitialPieceValues(btn, x, y);
-        setInitialPieces(btn)
-        setCellSize(btn);
-        onClick(btn, x, y);
-        document.querySelector('body').appendChild(btn);
-        document.getElementById("chessBoard").appendChild(btn);
+
+function lockBoard(){
+    for(let x = 0; x < boardSize; x++){
+        for(let y = 0; y < boardSize; y++){
+            document.getElementById('button(' + x + "," + y + ")").style.pointerEvents = 'none'
+        }   
+    }
+}
+
+function unlockBoard(){
+    for(let x = 0; x < boardSize; x++){
+        for(let y = 0; y < boardSize; y++){
+            document.getElementById('button(' + x + "," + y + ")").style.pointerEvents = 'auto'
+        }   
     }
 }
