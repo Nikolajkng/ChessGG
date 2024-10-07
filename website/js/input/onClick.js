@@ -1,9 +1,10 @@
 // Global variables:
 let clickCount = 0;
-let playerTurn = "White"; //always starts
 
 const switchPlayerTurn = () => {
     playerTurn = (clickCount % 2 === 0) ? "White" : "Black"
+    lockBoard();   // Lock my board after my turn is over
+    socket.emit("player-turn", playerTurn)  // Signal other players turn
 }
 
 // Onclick function of buttons:

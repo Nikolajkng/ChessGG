@@ -1,22 +1,39 @@
 // Export the whole socket to server.js
 module.exports = (server) => {
-    
+
     // Import the legalMove() from ruleChecker.js
-    const {legalMove} = require('./game-rules/ruleChecker.js');
-    const {resetGameArray} = require('./game-rules/ruleChecker.js');
+    const {
+        legalMove
+    } = require('./game-rules/ruleChecker.js');
+    const {
+        resetGameArray
+    } = require('./game-rules/ruleChecker.js');
 
 
     //////////////////////// Socket.io setup /////////////////////////////////
     const io = require('socket.io')(server);
     const players = {};
+    let socketID = [];
+
 
     io.on('connection', (socket) => {
 
         // Listening for new players...
         socket.on('new-player', playerName => {
             players[socket.id] = playerName;
+            socketID.push(socket.id);
             socket.broadcast.emit('user-connected', playerName);
             socket.broadcast.emit("new-user-list", Object.values(players));
+        });
+
+        // TEST
+        socket.on('player-turn', turn => {
+            console.log(socketID[0] +" . " +socketID[1])
+            if (turn === "White") {
+                socket.broadcast.to(socketID[0]).emit('your-turn', 'White player turn');
+            } else {
+                socket.broadcast.to(socketID[1]).emit('your-turn', 'Black player turn');
+            }
         });
 
         // Listening for new chat messages...
@@ -33,7 +50,7 @@ module.exports = (server) => {
             let moveType = "";
 
             // Identify move-attempt as move || capture
-            if(data.tValue.includes("none")){
+            if (data.tValue.includes("none")) {
                 moveType = "move";
             } else {
                 moveType = "capture"

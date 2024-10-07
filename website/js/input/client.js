@@ -2,6 +2,9 @@ const socket = io(`${window.location.host}/`);
 const messageContainer = document.getElementById("message-container")
 const messageForm = document.getElementById("send-container");
 const messageInput = document.getElementById("message-input");
+let count = 0;
+let playerTurn = "White"; //always starts
+
 
 //////////////////////////////// Socket.emit (SEND TO SERVER - for broadcasting ///////////////////////////////////
 
@@ -20,10 +23,21 @@ messageForm.addEventListener('submit', e => {
     messageInput.value = '';
 })
 
+// Initialize game
+socket.emit("player-turn", playerTurn);  
+
+//////////////////////////////// Socket.emit (SEND TO SERVER) ///////////////////////////////////
+
 /* PROMPT */
 const playerName = prompt('Please enter your name 🖊️');
 appendMessage('you joined!');
 socket.emit('new-player', playerName);
+
+
+socket.emit('currentPlayerTurn', playerTurn);
+socket.on('your-turn', () => {
+    unlockBoard();
+})
 
 
 //////////////////////////////// Socket.on (LISTEN FOR SERVER) ///////////////////////////////////
