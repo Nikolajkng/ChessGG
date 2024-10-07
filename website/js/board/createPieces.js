@@ -67,7 +67,7 @@ const setInitialPieces = (btn) => {
     }
     switch (value) {
         case "whiteP":
-            pieceSymbol.textContent = "♙";
+            pieceSymbol.textContent = "🐒";
             break;
         case "whiteK":
             pieceSymbol.textContent = "♔";
@@ -76,7 +76,7 @@ const setInitialPieces = (btn) => {
             pieceSymbol.textContent = "♕";
             break;
         case "whiteR":
-            pieceSymbol.textContent = "♖";
+            pieceSymbol.textContent = "🦏";
             break;
         case "whiteB":
             pieceSymbol.textContent = "♗";
@@ -94,10 +94,10 @@ const setInitialPieces = (btn) => {
             pieceSymbol.textContent = "♛";
             break;
         case "blackR":
-            pieceSymbol.textContent = "♜";
+            pieceSymbol.textContent = "🦏";
             break;
         case "blackB":
-            pieceSymbol.textContent = "♝";
+            pieceSymbol.textContent = "🐒";
             break;
         case "blackN":
             pieceSymbol.textContent = "♞";
