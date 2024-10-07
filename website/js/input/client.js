@@ -23,7 +23,7 @@ messageForm.addEventListener('submit', e => {
     messageInput.value = '';
 })
 
-// Initialize game
+// PT-0: Initialize player turn
 socket.emit("player-turn", playerTurn);  
 
 //////////////////////////////// Socket.emit (SEND TO SERVER) ///////////////////////////////////
@@ -32,12 +32,6 @@ socket.emit("player-turn", playerTurn);
 const playerName = prompt('Please enter your name 🖊️');
 appendMessage('you joined!');
 socket.emit('new-player', playerName);
-
-
-socket.emit('currentPlayerTurn', playerTurn);
-socket.on('your-turn', () => {
-    unlockBoard();
-})
 
 
 //////////////////////////////// Socket.on (LISTEN FOR SERVER) ///////////////////////////////////
@@ -60,6 +54,11 @@ socket.on('chat-message', data => {
 /* Collect player joined */
 socket.on("new-user-list", console.log);
 
+
+// PT-4: Listens for player turn and unlocks board:
+socket.on('your-turn', () => {
+    unlockBoard();
+})
 
 
 // Await move-attempt response from servers Rule-checker:

@@ -26,7 +26,7 @@ module.exports = (server) => {
             socket.broadcast.emit("new-user-list", Object.values(players));
         });
 
-        // TEST
+        // PT-3: Signal to the right client whose turn it is (initially always white):
         socket.on('player-turn', turn => {
             console.log(socketID[0] +" . " +socketID[1])
             if (turn === "White") {
