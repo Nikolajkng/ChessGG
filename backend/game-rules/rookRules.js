@@ -36,13 +36,14 @@ function rookRules(x, y, tX, tY, chessBoard, turn, sValue, tValue) {
 }
 
 function checkRookPath(X, Y, TX, TY, chessBoard) {
+    console.log("rook path")
     // Vectors to indicate direction:
     let a = TX - X;
     let b = TY - Y;
-    const up = a < 0
-    const down = a > 0
-    const right = b > 0
-    const left = b < 0
+    const up = a < 0 && Math.abs(Y - TY) === 0
+    const down = a > 0 && Math.abs(Y - TY) === 0
+    const right = b > 0 && Math.abs(X - TX) === 0
+    const left = b < 0 && Math.abs(X - TX) === 0
     let pathResult = [];
 
     // Algorithm: Check direction vector -> go in that direction and collect all values until target coord -> Check collection for free path
@@ -72,10 +73,12 @@ function checkRookPath(X, Y, TX, TY, chessBoard) {
         pathResult.splice(pathResult[0], 1); // Remove itself from path
     }
     const predicate = (v) => v === 'none';
+    console.log(pathResult)
     return pathResult.every(predicate);
 }
 
 
 module.exports = {
-    rookRules
+    rookRules,
+    checkRookPath
 }

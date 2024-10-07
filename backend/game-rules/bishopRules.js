@@ -32,6 +32,8 @@ function bishopRules(x, y, tX, tY, chessBoard, turn, sValue, tValue) {
 
 
 function checkBishopPath(X, Y, TX, TY, chessBoard) {
+    console.log("Bishop path")
+
     // Subtract startpos with endpos to get vector: (x0,y0) - (x1-y1) = <a,b>
     let a = X - TX;
     let b = Y - TY;
