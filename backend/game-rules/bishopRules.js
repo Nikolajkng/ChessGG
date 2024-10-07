@@ -1,25 +1,15 @@
-const boardSize = 8;
-
 function bishopRules(x, y, tX, tY, chessBoard, turn, sValue, tValue) {
     const {
         swapValueArray
     } = require("./ruleChecker")
 
-    // Subtract startpos with endpos to get vector: (x0,y0) - (x1-y1) = <a,b>
-    let a = x - tX;
-    let b = y - tY;
 
-    // Vector to indicate direction (Bottom-right, TL = Top-left, BL = Bottom-left, TR = Top-right)
-    // Remember, not cartesian coordinate system, dont get confused on corner directions!
-    const dirVectorTR = a > 0 && b < 0
-    const dirVectorBL = a < 0 && b > 0
-    const dirVectorBR = a < 0 && b < 0
-    const dirVectorTL = a > 0 && b > 0
+    // Bishop movement rules:
     const diagonalMove = Math.abs(x - y) === Math.abs(tX - tY);
     const anti_diagonalMove = x+y === tX+tY
     const whitePieces = tValue.includes("white");
     const blackPieces = tValue.includes("black");
-    const freePath = checkBishopPath(dirVectorBR, dirVectorTL, dirVectorBL, dirVectorTR, x, y, tX, tY, chessBoard);
+    const freePath = checkBishopPath(x, y, tX, tY, chessBoard);
 
 
     // Check if bishop rules are satisfied
@@ -30,7 +20,6 @@ function bishopRules(x, y, tX, tY, chessBoard, turn, sValue, tValue) {
             swapValueArray(chessBoard, x, y, tX, tY)
             return satisfyAllRulesWhite
         }
-
     } else if (turn === "Black") {
         // Specific rules for black
         const satisfyAllRulesBlack = (diagonalMove || anti_diagonalMove) && freePath && !blackPieces
@@ -38,12 +27,21 @@ function bishopRules(x, y, tX, tY, chessBoard, turn, sValue, tValue) {
             swapValueArray(chessBoard, x, y, tX, tY)
             return satisfyAllRulesBlack
         }
-
     }
 }
 
 
-function checkBishopPath(dirVectorBR, dirVectorTL, dirVectorBL, dirVectorTR, X, Y, TX, TY, chessBoard) {
+function checkBishopPath(X, Y, TX, TY, chessBoard) {
+    // Subtract startpos with endpos to get vector: (x0,y0) - (x1-y1) = <a,b>
+    let a = X - TX;
+    let b = Y - TY;
+
+    // Vector to indicate direction (Bottom-right, TL = Top-left, BL = Bottom-left, TR = Top-right)
+    // Remember, not cartesian coordinate system, dont get confused on corner directions!
+    const dirVectorTR = a > 0 && b < 0
+    const dirVectorBL = a < 0 && b > 0
+    const dirVectorBR = a < 0 && b < 0
+    const dirVectorTL = a > 0 && b > 0
 
     // Comments from Niko:
     /* 

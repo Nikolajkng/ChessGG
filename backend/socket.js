@@ -28,7 +28,6 @@ module.exports = (server) => {
 
         // PT-3: Signal to the right client whose turn it is (initially always white):
         socket.on('player-turn', turn => {
-            console.log(socketID[0] +" . " +socketID[1])
             if (turn === "White") {
                 socket.broadcast.to(socketID[0]).emit('your-turn', 'White player turn');
             } else {
