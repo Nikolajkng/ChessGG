@@ -67,7 +67,7 @@ const setInitialPieces = (btn) => {
     }
     switch (value) {
         case "whiteP":
-            pieceSymbol.textContent = "🐒";
+            pieceSymbol.textContent = "♙";
             break;
         case "whiteK":
             pieceSymbol.textContent = "♔";
@@ -76,7 +76,7 @@ const setInitialPieces = (btn) => {
             pieceSymbol.textContent = "♕";
             break;
         case "whiteR":
-            pieceSymbol.textContent = "🦏";
+            pieceSymbol.textContent = "♖";
             break;
         case "whiteB":
             pieceSymbol.textContent = "♗";
@@ -94,10 +94,10 @@ const setInitialPieces = (btn) => {
             pieceSymbol.textContent = "♛";
             break;
         case "blackR":
-            pieceSymbol.textContent = "🦏";
+            pieceSymbol.textContent = "♜";
             break;
         case "blackB":
-            pieceSymbol.textContent = "🐒";
+            pieceSymbol.textContent = "♝";
             break;
         case "blackN":
             pieceSymbol.textContent = "♞";
@@ -105,3 +105,56 @@ const setInitialPieces = (btn) => {
     }
     btn.appendChild(pieceSymbol);
 }
+    
+
+/*
+// Place all initial pieces based on their values:
+const setInitialPieces = (btn) => {
+    var pieceSymbol = document.createElement("span");
+    var value = btn.getAttribute('value');
+    pieceSymbol.style.cssText = " font-size:" + pieceSize + ";"
+
+    if (value === "none") {
+        return;
+    }
+    switch (value) {
+        case "whiteP":
+            pieceSymbol.textContent = "🐵";
+            break;
+        case "whiteK":
+            pieceSymbol.textContent = "🦁";
+            break;
+        case "whiteQ":
+            pieceSymbol.textContent = "🐯";
+            break;
+        case "whiteR":
+            pieceSymbol.textContent = "🦏";
+            break;
+        case "whiteB":
+            pieceSymbol.textContent = "🐝";
+            break;
+        case "whiteN":
+            pieceSymbol.textContent = "🤺";
+            break;
+        case "blackP":
+            pieceSymbol.textContent = "🐵";
+            break;
+        case "blackK":
+            pieceSymbol.textContent = "🦁";
+            break;
+        case "blackQ":
+            pieceSymbol.textContent = "🐯";
+            break;
+        case "blackR":
+            pieceSymbol.textContent = "🦏";
+            break;
+        case "blackB":
+            pieceSymbol.textContent = "🐝";
+            break;
+        case "blackN":
+            pieceSymbol.textContent = "🤺";
+            break;
+    }
+    btn.appendChild(pieceSymbol);
+}
+    */

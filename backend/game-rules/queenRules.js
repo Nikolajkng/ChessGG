@@ -14,7 +14,7 @@ function queenRules(x, y, tX, tY, chessBoard, turn, sValue, tValue) {
     const whitePieces = tValue.includes("white");
     const blackPieces = tValue.includes("black");
     const straight = Math.abs(x - tX) === 0 || Math.abs(y - tY) === 0;
-    const diagonal = Math.abs(x - y) === Math.abs(tX - tY);
+    const diagonal = Math.abs(x - y) === Math.abs(tX - tY) || (x+y) === (tX + tY);
 
 
     // If straight -> use rook path algo, else use bishop (not straight = diagonal)
