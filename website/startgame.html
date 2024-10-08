@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="images/x-icon" href="/images/favicon-32x32.png">
+    <link rel="stylesheet" href="css/onBoardStyles.css" />
+    <link rel="stylesheet" href="css/chatboxStyles.css">
+    <link rel="stylesheet" href="css/sideMenus.css" />
+    <style>
+        .menubutton {
+            height: 60px;
+            width: 200px;
+            background-color: rgb(72, 115, 246);
+            border-radius: 10px;
+            border: 0;
+            align-content: top;
+            transition: transform 0.5s;
+
+        }
+
+        .menubutton:hover {
+            animation: bubble 0.4s ease-out;
+            height: 60px;
+            width: 200px;
+            background-color: rgb(54, 88, 190);
+            border-radius: 10px;
+            border: 0;
+            align-content: top;
+        }
+
+        @keyframes bubble {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.03);
+            }
+
+
+        }
+
+        .menubuttontxt {
+            font-weight: bold;
+            font-size: large;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="topbar">
+        <h1>
+            ChessGG♞
+        </h1>
+    </div>
+
+    <div
+        style="  overflow: hidden; position: absolute;  width: 100%; height: 70%; display: flex; justify-content: center; align-items: center;">
+        <div style="
+              width: 20rem; height: 25rem; background-color: lightskyblue; display: flex; flex-direction: column; 
+              gap: 20px; justify-content:center;align-items:center; border-radius:5px;">
+            <button class="menubutton">
+                <p class="menubuttontxt">
+                    Start new game
+                </p>
+            </button>
+            <button class="menubutton">
+                <p class="menubuttontxt">
+                    Choose game mode </p>
+            </button>
+            <button class="menubutton">
+                <p class="menubuttontxt">
+                    Settings </p>
+            </button>
+            <button class="menubutton">
+                <p class="menubuttontxt">
+                    Exit </p>
+            </button>
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>
