@@ -28,7 +28,7 @@ module.exports = (server) => {
 
         // PT-3: Signal to the right client whose turn it is (initially always white):
         socket.on('player-turn', turn => {
-            console.log("Server Socket: current turn is: "+turn)
+            console.log("Server Socket: current turn is: " + turn)
             console.log("Server Socket: socketIDs: " + socketID)
             if (turn === "White") {
                 socket.broadcast.to(socketID[0]).emit('your-turn', 'White player turn');
@@ -57,6 +57,7 @@ module.exports = (server) => {
                 moveType = "capture"
             }
 
+            // Transmit the move to ALL clients
             if (legalMove(data.sX, data.sY, data.x, data.y, data.sValue, data.tValue, data.turn, moveType)) {
                 io.emit('legal-move', {
                     turn: data.turn,
@@ -68,7 +69,8 @@ module.exports = (server) => {
                     tY: data.y
                 })
             } else {
-                io.emit('illegal-move', {
+                // Transmit the error sound ONLY to client
+                socket.emit('illegal-move', {
                     // Update nothing
                 });
             }

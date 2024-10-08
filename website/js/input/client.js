@@ -2,9 +2,7 @@ const socket = io(`${window.location.host}/`);
 const messageContainer = document.getElementById("message-container")
 const messageForm = document.getElementById("send-container");
 const messageInput = document.getElementById("message-input");
-let count = 0;
 let playerTurn = "White"; //always starts
-
 
 //////////////////////////////// Socket.emit (SEND TO SERVER - for broadcasting ///////////////////////////////////
 
@@ -24,7 +22,7 @@ messageForm.addEventListener('submit', e => {
 })
 
 // PT-0: Initialize player turn
-socket.emit("player-turn", playerTurn);  
+socket.emit("player-turn", playerTurn);
 
 //////////////////////////////// Socket.emit (SEND TO SERVER) ///////////////////////////////////
 
@@ -64,7 +62,7 @@ socket.on('your-turn', () => {
 // Await move-attempt response from servers Rule-checker:
 socket.on('legal-move', data => {
     console.log("attempt-move: Accepted!")
-
+    moveSound();
     updateBoard(data.sX, data.sY, data.tX, data.tY, data.turn);
     console.log("updated clickcount: " + clickCount);
     console.log("next turn is: " + playerTurn)
@@ -72,6 +70,7 @@ socket.on('legal-move', data => {
 });
 
 socket.on('illegal-move', () => {
+    illegalMoveSound();
     console.log("attempt-move: REJECTED!")
     console.log("Rejection cause possibles: not your turn || selected an invalid cell || illegal move")
     console.log("########################")
