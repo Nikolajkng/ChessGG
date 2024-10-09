@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/onBoardStyles.css" />
     <link rel="stylesheet" href="css/chatboxStyles.css">
     <link rel="stylesheet" href="css/sideMenus.css" />
+    <script defer type="text/javascript" , src="/input/menuOnClick.js"></script>
     <style>
         .menubutton {
             height: 60px;
@@ -60,20 +61,23 @@
         <div style="
               width: 20rem; height: 25rem; background-color: lightskyblue; display: flex; flex-direction: column; 
               gap: 20px; justify-content:center;align-items:center; border-radius:5px;">
-            <button class="menubutton">
-                <p class="menubuttontxt">
-                    Start new game
-                </p>
-            </button>
-            <button class="menubutton">
+            <a href="index.html">
+                <button id="startgameBtn" class="menubutton">
+                    <p class="menubuttontxt">
+                        Start new game
+                    </p>
+                </button>
+            </a>
+
+            <button id="gamemodeBtn" class="menubutton">
                 <p class="menubuttontxt">
                     Choose game mode </p>
             </button>
-            <button class="menubutton">
+            <button id="settingsBtn" class="menubutton">
                 <p class="menubuttontxt">
                     Settings </p>
             </button>
-            <button class="menubutton">
+            <button id="exitBtn" class="menubutton">
                 <p class="menubuttontxt">
                     Exit </p>
             </button>
