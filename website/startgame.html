@@ -1,55 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    
+    <script type="module" src="js/visualFX.js"></script>
     <meta charset="UTF-8">
-    <link rel="icon" type="images/x-icon" href="/images/favicon-32x32.png">
-    <link rel="stylesheet" href="css/onBoardStyles.css" />
-    <link rel="stylesheet" href="css/chatboxStyles.css">
-    <link rel="stylesheet" href="css/sideMenus.css" />
-    <script defer type="text/javascript" , src="/input/menuOnClick.js"></script>
-    <style>
-        .menubutton {
-            height: 60px;
-            width: 200px;
-            background-color: rgb(72, 115, 246);
-            border-radius: 10px;
-            border: 0;
-            align-content: top;
-            transition: transform 0.5s;
+    <link rel="icon" type="image/x-icon" href="/images/favicon-32x32.png">
+    <link rel="stylesheet" href="css/startpage.css" />
 
+    <!-- Load your visualFX script as a module -->
+     <style>
+        body {
+            background-image: url("/images/space.jpg");
+            background-size: 120%;
+            background-position-x: 42%;
+            background-repeat: no-repeat;
+            background-color: lightskyblue;
+            overflow:hidden;
         }
-
-        .menubutton:hover {
-            animation: bubble 0.4s ease-out;
-            height: 60px;
-            width: 200px;
-            background-color: rgb(54, 88, 190);
-            border-radius: 10px;
-            border: 0;
-            align-content: top;
-        }
-
-        @keyframes bubble {
-            0% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.03);
-            }
-
-
-        }
-
-        .menubuttontxt {
-            font-weight: bold;
-            font-size: large;
-        }
-    </style>
+     </style>
 </head>
 
-<body>
+<body class="backgroundImage">
     <div class="topbar">
         <h1>
             ChessGG♞
@@ -57,35 +29,26 @@
     </div>
 
     <div
-        style="  overflow: hidden; position: absolute;  width: 100%; height: 70%; display: flex; justify-content: center; align-items: center;">
-        <div style="
-              width: 20rem; height: 25rem; background-color: lightskyblue; display: flex; flex-direction: column; 
-              gap: 20px; justify-content:center;align-items:center; border-radius:5px;">
+        style="overflow: hidden; position: absolute; width: 100%; height: 55%; display: flex; justify-content: center; align-items: center;">
+        <div
+            style="width: 20rem; height: 25rem; display: flex; flex-direction: column; gap: 20px; justify-content:center; align-items:center; border-radius:600px;">
             <a href="index.html">
                 <button id="startgameBtn" class="menubutton">
-                    <p class="menubuttontxt">
-                        Start new game
-                    </p>
+                    <p class="menubuttontxt">Start new game</p>
                 </button>
             </a>
-
             <button id="gamemodeBtn" class="menubutton">
-                <p class="menubuttontxt">
-                    Choose game mode </p>
+                <p class="menubuttontxt">Choose game mode</p>
             </button>
             <button id="settingsBtn" class="menubutton">
-                <p class="menubuttontxt">
-                    Settings </p>
+                <p class="menubuttontxt">Settings</p>
             </button>
             <button id="exitBtn" class="menubutton">
-                <p class="menubuttontxt">
-                    Exit </p>
+                <p class="menubuttontxt">Exit</p>
             </button>
         </div>
     </div>
-
-
-
+    
 </body>
 
 </html>
