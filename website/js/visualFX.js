@@ -99,8 +99,6 @@ function loadFigure(loader) {
     loader.load(
         'visualModels/moon_walk.glb',
         function (gltf) {
-            console.log('GLTF Model loaded:', gltf);
-
             // Store the loaded model and configure it
             model = gltf.scene;
             model.scale.set(0.5, 0.5, 0.5);

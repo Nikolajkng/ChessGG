@@ -24,16 +24,17 @@ module.exports = (server) => {
             socketID.push(socket.id);
             socket.broadcast.emit('user-connected', playerName);
             socket.broadcast.emit("new-user-list", Object.values(players));
+            console.log("Current players' socket.id in-game: [" + socketID + "]");
+
+            socket.emit("number-of-players", socketID.length);
         });
 
         // PT-3: Signal to the right client whose turn it is (initially always white):
         socket.on('player-turn', turn => {
-            console.log("Server Socket: current turn is: " + turn)
-            console.log("Server Socket: socketIDs: " + socketID)
             if (turn === "White") {
-                socket.broadcast.to(socketID[0]).emit('your-turn', 'White player turn');
+                socket.broadcast.to(socketID[0]).emit('your-turn');
             } else {
-                socket.broadcast.to(socketID[1]).emit('your-turn', 'Black player turn');
+                socket.broadcast.to(socketID[1]).emit('your-turn');
             }
         });
 

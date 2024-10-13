@@ -2,7 +2,7 @@ const socket = io(`${window.location.host}/`);
 const messageContainer = document.getElementById("message-container")
 const messageForm = document.getElementById("send-container");
 const messageInput = document.getElementById("message-input");
-let playerTurn = "White"; //always starts
+let playerTurn = "White"; 
 
 //////////////////////////////// Socket.emit (SEND TO SERVER - for broadcasting ///////////////////////////////////
 
@@ -21,12 +21,8 @@ messageForm.addEventListener('submit', e => {
     messageInput.value = '';
 })
 
-// PT-0: Initialize player turn
-socket.emit("player-turn", playerTurn);
 
-//////////////////////////////// Socket.emit (SEND TO SERVER) ///////////////////////////////////
-
-/* PROMPT */
+// Register a new player to the server (First thing should be emitted)
 const playerName = prompt('Please enter your name 🖊️');
 appendMessage('you joined!');
 socket.emit('new-player', playerName);
@@ -51,6 +47,22 @@ socket.on('chat-message', data => {
 
 /* Collect player joined */
 socket.on("new-user-list", console.log);
+
+
+socket.on("number-of-players", n => {
+    if (n == 2) {
+        console.log("Two player has joined... Starting game...")
+        unlockBoard();
+
+        // PT-0: Initialize player turn logic
+        socket.emit("player-turn", playerTurn);  //Set to "White" first-time by default
+
+
+    } else {
+        // Show loading screen:
+        console.log("waiting for more players...")
+    }
+})
 
 
 // PT-4: Listens for player turn and unlocks board:

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">    
+    <script type="module" src="js/visualFX.js"></script>
+    <script defer type="text/javascript" , src="js/startmenu/menuButtons.js"></script>
+    <link rel="icon" type="image/x-icon" href="/images/favicon-32x32.png">
+    <link rel="stylesheet" href="css/startpage.css" />
+
+    <!-- Load your visualFX script as a module -->
+     <style>
+        body {
+            background-image: url("/images/space.jpg");
+            background-size: 120%;
+            background-position-x: 42%;
+            background-repeat: no-repeat;
+            background-color: lightskyblue;
+            overflow:hidden;
+        }
+     </style>
+</head>
+
+<body class="backgroundImage">
+    <div class="topbar">
+        <h1>
+            ChessGG♞
+        </h1>
+    </div>
+
+    <div
+        style="overflow: hidden; position: absolute; width: 100%; height: 55%; display: flex; justify-content: center; align-items: center;">
+        <div
+            style="width: 20rem; height: 25rem; display: flex; flex-direction: column; gap: 20px; justify-content:center; align-items:center; border-radius:600px;">
+            <a href="gameboard.html">
+                <button id="startgameBtn" class="menubutton">
+                    <p class="menubuttontxt">Start new game</p>
+                </button>
+            </a>
+            <button id="gamemodeBtn" class="menubutton">
+                <p class="menubuttontxt">Choose game mode</p>
+            </button>
+            <button id="settingsBtn" class="menubutton">
+                <p class="menubuttontxt">Settings</p>
+            </button>
+            <button id="exitBtn" class="menubutton">
+                <p class="menubuttontxt">Exit</p>
+            </button>
+        </div>
+    </div>
+    
+</body>
+
+</html>
