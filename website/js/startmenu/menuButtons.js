@@ -6,5 +6,7 @@ let exitBtn = document.getElementById("exitBtn");
 
 // Listens for clicks
 startBtn.addEventListener('click', () => {
-console.log("clicked on startGameButton...")
+
+    // To prove that the user has interacted with the page (such permission to use media later is allowed)
+    sessionStorage.setItem("userInteraction", "true");
 });

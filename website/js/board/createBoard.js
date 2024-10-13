@@ -11,11 +11,11 @@ for (let x = 0; x < boardSize; x++) {
         setInitialPieces(btn)
         setCellSize(btn);
         onClick(btn, x, y);
-        btn.style.pointerEvents = 'none'; // Lock everything 
         document.querySelector('body').appendChild(btn);
         document.getElementById("chessBoard").appendChild(btn);
     }
 }
+lockBoard();
 
 
 // The board style design:

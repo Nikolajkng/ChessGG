@@ -7,14 +7,16 @@
     <link rel="stylesheet" href="css/onBoardStyles.css" />
     <link rel="stylesheet" href="css/chatboxStyles.css">
     <link rel="stylesheet" href="css/sideMenus.css" />
+    <link rel="stylesheet" href="css/waitingScreen.css" />
     <script defer type="text/javascript" , src="/socket.io/socket.io.js"></script>
-    <script defer type="text/javascript" , src="js/input/onClick.js"></script>
+    <script defer type="text/javascript" , src="js/input/inGame_onClick.js"></script>
     <script defer type="text/javascript" , src="js/soundFX.js"></script>
-    <script defer type="text/javascript" , src="js/input/client.js"></script>
+    <script defer type="text/javascript" , src="js/waitingScreen.js"></script>
+    <script defer type="text/javascript" , src="js/client.js"></script>
     <script defer type="text/javascript" , src="js/board/updateBoard.js"></script>
     <script defer type="text/javascript" , src="js/board/createPieces.js"></script>
     <script defer type="text/javascript" , src="js/board/createBoard.js"></script>
-    <script defer type="text/javascript" , src="js/highlighters/highlightPiece.js"></script>
+    <script defer type="text/javascript" , src="js/highlighters/selectPiece.js"></script>
     <script defer type="text/javascript" , src="js/highlighters/highlightPlayerMenu.js"></script>
 </head>
 
@@ -25,6 +27,7 @@
             ChessGG♞
         </h1>
     </div>
+
     <!-- CENTER - NON-TOPBAR-->
     <div style="display: flex; justify-content: space-between">
 
@@ -53,16 +56,30 @@
         </div>
 
         <!-------------- CENTER - Chess Board -------------->
-        <div id="board" class="boardContainer">
-            <div id="chessBoard" class="boardGrid">
-
+        <div style="display: flex; flex-direction: column;">
+            <div id="board" class="boardContainer">
+                <div id="chessBoard" class="boardGrid">
+                    <!-------------- CENTER - Waiting screen overlay -------------->
+                    <div id="waitingScreen" class="waitingScreen">
+                        <div id="waitingText" class="waitingText">
+                            Waiting for player
+                        </div>
+                        <div id="loader" class="loader">
+                            
+                        </div>
+                    </div>
+                </div>
             </div>
+
         </div>
+
         <!----------- RIGHT - Menu ----------->
         <div style="display: flex; flex-direction: column">
             <div id="blackMenu" class="blackMenuDisable">
                 <p>Black Player</p>
             </div>
+
+            <!----------- RIGHT - Chess history ----------->
             <div class="chessHistory">
                 Chess history
             </div>

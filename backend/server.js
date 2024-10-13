@@ -9,13 +9,8 @@ const server = http.createServer(app);
 
 //////////////////////// EXPRESS setup /////////////////////////////////
 
-// Links the server to HTML file:
-// app.get('/', function (req, res) {
-//     res.sendFile(path.join(__dirname, '../website', 'index.html'))
-// });
-
 app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname, '../website', 'startgame.html'))
+    res.sendFile(path.join(__dirname, '../website', 'startmenu.html'))
 });
 
 // Handles all static files in website folder (such as .css):

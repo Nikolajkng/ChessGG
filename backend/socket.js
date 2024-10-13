@@ -25,9 +25,13 @@ module.exports = (server) => {
             socket.broadcast.emit('user-connected', playerName);
             socket.broadcast.emit("new-user-list", Object.values(players));
             console.log("Current players' socket.id in-game: [" + socketID + "]");
-
-            socket.emit("number-of-players", socketID.length);
+            
+            // Start game for both clients when enough players
+            if(socketID.length === 2){
+                io.emit('start-game', "starting game...");
+            }
         });
+
 
         // PT-3: Signal to the right client whose turn it is (initially always white):
         socket.on('player-turn', turn => {

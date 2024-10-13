@@ -2,7 +2,7 @@ const socket = io(`${window.location.host}/`);
 const messageContainer = document.getElementById("message-container")
 const messageForm = document.getElementById("send-container");
 const messageInput = document.getElementById("message-input");
-let playerTurn = "White"; 
+let playerTurn = "White";
 
 //////////////////////////////// Socket.emit (SEND TO SERVER - for broadcasting ///////////////////////////////////
 
@@ -30,6 +30,7 @@ socket.emit('new-player', playerName);
 
 //////////////////////////////// Socket.on (LISTEN FOR SERVER) ///////////////////////////////////
 
+
 /* CONNECTION || DISCONNECTION*/
 socket.on('user-connected', playerName => {
     appendMessage(playerName + " has joined!");
@@ -40,6 +41,17 @@ socket.on('user-disconnected', playerName => {
     //alert(playerName + "has rage quit")
 })
 
+
+// Listens for number of players from the server
+socket.on("start-game", text => {
+    console.log(text);
+    hideWaitingScreen();
+    gameStartSound();
+    socket.emit("player-turn", "White")
+
+})
+
+
 /* CHAT */
 socket.on('chat-message', data => {
     appendMessage(data.playerName + ": " + data.message);
@@ -48,21 +60,6 @@ socket.on('chat-message', data => {
 /* Collect player joined */
 socket.on("new-user-list", console.log);
 
-
-socket.on("number-of-players", n => {
-    if (n == 2) {
-        console.log("Two player has joined... Starting game...")
-        unlockBoard();
-
-        // PT-0: Initialize player turn logic
-        socket.emit("player-turn", playerTurn);  //Set to "White" first-time by default
-
-
-    } else {
-        // Show loading screen:
-        console.log("waiting for more players...")
-    }
-})
 
 
 // PT-4: Listens for player turn and unlocks board:
