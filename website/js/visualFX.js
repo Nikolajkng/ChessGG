@@ -69,9 +69,7 @@ function animate() {
         
         // Calculate screen boundaries
         const screenRightEdge = camera.position.x + (window.innerWidth / 2) / 100;
-        const screenLeftEdge = camera.position.x - (window.innerWidth / 2) / 100;
-        console.log(model2.position.x)
-    
+        const screenLeftEdge = camera.position.x - (window.innerWidth / 2) / 100;    
         // Check if the object has moved beyond the right edge
         if (model2.position.x > screenRightEdge) {
             model2.position.x = screenLeftEdge; // Move to the left side
