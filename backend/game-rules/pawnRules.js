@@ -54,7 +54,6 @@ function pawnRules(x, y, tX, tY, chessBoard, turn, sValue, tValue, moveType) {
 
 
     } else if (turn === "Black") {
-        console.log("hej 1")
         // Specific rules for black
         let blackFreePath = ""
         let blackGoBackwards = tX < x;
@@ -63,27 +62,20 @@ function pawnRules(x, y, tX, tY, chessBoard, turn, sValue, tValue, moveType) {
         if (firstMove) {
             blackFreePath = chessBoard[x + 1][y] && chessBoard[x + 2][y] === "none";
             firstMove = false;
-            console.log("hej 2")
-
         } else {
             blackFreePath = chessBoard[x + 1][y] === "none"
-            console.log("hej 3")
-
         }
 
         // Logic for capture:
         if (moveType === "capture") {
-            console.log("hej 4")
-
             let capturePatternBlack = Math.abs(x - tX) === 1 && Math.abs(y - tY) === 1;
             let satisfyCaptureRulesBlack = (capturePatternBlack && tValue.includes("white"));
             if (satisfyCaptureRulesBlack) {
                 swapValueCapture(chessBoard, x, y, tX, tY)
             }
+            return satisfyCaptureRulesBlack;
             // Logic for move:
         } else if (moveType === "move") {
-            console.log("hej 5")
-
             let satisfyAllRulesBlack = (blackFreePath && straightMove && maxStep && !blackGoBackwards);
             console.log(satisfyAllRulesBlack)
             if (satisfyAllRulesBlack) {
