@@ -8,8 +8,7 @@ function bishopRules(x, y, tX, tY, chessBoard, turn, sValue, tValue, moveType) {
     // Bishop movement rules:
     const targetIsWhitePieces = tValue.includes("white");
     const targetIsBlackPieces = tValue.includes("black");
-    const diagonalMove = Math.abs(x - y) === Math.abs(tX - tY);
-    const anti_diagonalMove = x + y === tX + tY
+    const diagonal = Math.abs(x - y) === Math.abs(tX - tY) || (x+y) === (tX + tY);
     const freePath = checkBishopPath(x, y, tX, tY, chessBoard);
 
 
@@ -28,10 +27,10 @@ function bishopRules(x, y, tX, tY, chessBoard, turn, sValue, tValue, moveType) {
         }
     // Movement for bishops independent of player turn:
     } else if (moveType === "move") {
-        const satisfyAllRules = (diagonalMove || anti_diagonalMove) && freePath
+        const satisfyAllRules = diagonal && freePath
         if (satisfyAllRules) {
             swapValueArray(chessBoard, x, y, tX, tY)
-            return satisfyAllRules
+            return true;
         }
     }
 }
