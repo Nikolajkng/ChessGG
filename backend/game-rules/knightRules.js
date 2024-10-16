@@ -1,30 +1,38 @@
-function knightRules(x, y, tX, tY, chessBoard, turn, sValue, tValue) {
+function knightRules(x, y, tX, tY, chessBoard, turn, sValue, tValue, moveType) {
     const {
-        swapValueArray
+        swapValueArray,
+        swapValueCapture
     } = require("./ruleChecker")
 
     // Knight movement rules
-    const whitePieces = tValue.includes("white");
-    const blackPieces = tValue.includes("black");
+    const targetIsWhitePieces = tValue.includes("white");
+    const targetIsBlackPieces = tValue.includes("black");
     const movePatternUp = tX === x - 2 && (tY === y + 1 || tY === y - 1)
     const movePatternDown = tX === x + 2 && (tY === y + 1 || tY === y - 1)
-    const movePatternRight = tY === y + 2 && (tX === x + 1 || tX === y - 1)
+    const movePatternRight = tY === y + 2 && (tX === x + 1 || tX === x - 1)
     const movePatternLeft = tY === y - 2 && (tX === x + 1 || tX === x - 1)
 
-    // Check if knight movement rules are satisfied
-    if (turn === "White") {
-        const satisfyAllRulesWhite = !whitePieces && (movePatternUp || movePatternDown || movePatternRight || movePatternLeft);
-        if (satisfyAllRulesWhite) {
-            swapValueArray(chessBoard, x, y, tX, tY)
-            return true;
+    // Capture logic:
+    if (moveType === "capture") {
+        if (turn === "White") {
+            if (targetIsBlackPieces && !targetIsWhitePieces) {
+                swapValueCapture(chessBoard, x, y, tX, tY);
+                return true;
+            }
+        } else if (turn === "Black") {
+            if (!targetIsBlackPieces && targetIsWhitePieces) {
+                swapValueCapture(chessBoard, x, y, tX, tY);
+                return true;
+            }
         }
-    } else if (turn === "Black") {
-        const satisfyAllRulesBlack = !blackPieces && (movePatternUp || movePatternDown || movePatternRight || movePatternLeft);
+
+    } else if (moveType === "move") {
+        // Knight move is independent of player color
+        const satisfyAllRulesBlack = (movePatternUp || movePatternDown || movePatternRight || movePatternLeft);
         if (satisfyAllRulesBlack) {
             swapValueArray(chessBoard, x, y, tX, tY)
             return true;
         }
-
     }
 
 
