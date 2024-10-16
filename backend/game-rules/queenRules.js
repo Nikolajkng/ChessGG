@@ -8,7 +8,7 @@ const {
 function queenRules(x, y, tX, tY, chessBoard, turn, sValue, tValue) {
     const {
         swapValueArray
-    } = require("./ruleChecker")
+    } = require("./legalMove")
 
     // Movement rules for Queen:
     const whitePieces = tValue.includes("white");

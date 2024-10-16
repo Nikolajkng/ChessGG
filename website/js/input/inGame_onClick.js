@@ -17,7 +17,7 @@ const onClick = (btn, x, y) => {
         let sX = selectedX;
         let sY = selectedY;
 
-        // (1) Send move-attempt to server / rulechecker:
+        // (1) Send move-attempt to server / legalMove:
         const sValue = selectedValue;
         const tValue = btn.getAttribute("value");
         const turn = playerTurn;

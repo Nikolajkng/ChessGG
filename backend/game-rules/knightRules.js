@@ -2,7 +2,7 @@ function knightRules(x, y, tX, tY, chessBoard, turn, sValue, tValue, moveType) {
     const {
         swapValueArray,
         swapValueCapture
-    } = require("./ruleChecker")
+    } = require("./legalMove")
 
     // Knight movement rules
     const targetIsWhitePieces = tValue.includes("white");
@@ -28,8 +28,8 @@ function knightRules(x, y, tX, tY, chessBoard, turn, sValue, tValue, moveType) {
 
     } else if (moveType === "move") {
         // Knight move is independent of player color
-        const satisfyAllRulesBlack = (movePatternUp || movePatternDown || movePatternRight || movePatternLeft);
-        if (satisfyAllRulesBlack) {
+        const satisfyAllRules = (movePatternUp || movePatternDown || movePatternRight || movePatternLeft);
+        if (satisfyAllRules) {
             swapValueArray(chessBoard, x, y, tX, tY)
             return true;
         }

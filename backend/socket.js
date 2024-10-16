@@ -1,13 +1,13 @@
 // Export the whole socket to server.js
 module.exports = (server) => {
 
-    // Import the legalMove() from ruleChecker.js
+    // Import the legalMove()
     const {
         legalMove
-    } = require('./game-rules/ruleChecker.js');
+    } = require('./game-rules/legalMove.js');
     const {
         resetGameArray
-    } = require('./game-rules/ruleChecker.js');
+    } = require('./game-rules/legalMove.js');
 
 
     //////////////////////// Socket.io setup /////////////////////////////////

@@ -2,7 +2,7 @@ function pawnRules(x, y, tX, tY, chessBoard, turn, sValue, tValue, moveType) {
     const {
         swapValueArray,
         swapValueCapture
-    } = require("./ruleChecker")
+    } = require("./legalMove")
 
 
     // Shared rules

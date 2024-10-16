@@ -34,7 +34,7 @@ function legalMove(x, y, tX, tY, sValue, tValue, turn, moveType){
         } else if (selectValue.includes("N")) {
             return knightRules(x, y, tX, tY, chessBoard, turn, sValue, tValue, moveType);
         } else if (selectValue.includes("B")) {
-            return bishopRules(x, y, tX, tY, chessBoard, turn, sValue, tValue);
+            return bishopRules(x, y, tX, tY, chessBoard, turn, sValue, tValue, moveType);
         } else if (selectValue.includes("R")) {
             return rookRules(x, y, tX, tY, chessBoard, turn, sValue, tValue);
         } else if (selectValue.includes("K")) {
@@ -42,7 +42,7 @@ function legalMove(x, y, tX, tY, sValue, tValue, turn, moveType){
         } else if (selectValue.includes("Q")) {
             return queenRules(x, y, tX, tY, chessBoard, turn, sValue, tValue);
     } else {
-        console.error("Error in rulechecker");
+        console.error("Error in legalMove");
         return false;
     }
 }

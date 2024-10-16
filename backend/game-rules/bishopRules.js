@@ -1,34 +1,41 @@
-function bishopRules(x, y, tX, tY, chessBoard, turn, sValue, tValue) {
+function bishopRules(x, y, tX, tY, chessBoard, turn, sValue, tValue, moveType) {
     const {
-        swapValueArray
-    } = require("./ruleChecker")
+        swapValueArray,
+        swapValueCapture
+    } = require("./legalMove")
 
 
     // Bishop movement rules:
+    const targetIsWhitePieces = tValue.includes("white");
+    const targetIsBlackPieces = tValue.includes("black");
     const diagonalMove = Math.abs(x - y) === Math.abs(tX - tY);
-    const anti_diagonalMove = x+y === tX+tY
-    const whitePieces = tValue.includes("white");
-    const blackPieces = tValue.includes("black");
+    const anti_diagonalMove = x + y === tX + tY
     const freePath = checkBishopPath(x, y, tX, tY, chessBoard);
 
 
-    // Check if bishop rules are satisfied
-    if (turn === "White") {
-        // Specific rules for white
-        const satisfyAllRulesWhite = (diagonalMove || anti_diagonalMove) && freePath && !whitePieces
-        if (satisfyAllRulesWhite) {
-            swapValueArray(chessBoard, x, y, tX, tY)
-            return satisfyAllRulesWhite
+    // Capture logic:
+    if (moveType === "capture") {
+        if (turn === "White") {
+            if (targetIsBlackPieces && !targetIsWhitePieces) {
+                swapValueCapture(chessBoard, x, y, tX, tY);
+                return true;
+            }
+        } else if (turn === "Black") {
+            if (!targetIsBlackPieces && targetIsWhitePieces) {
+                swapValueCapture(chessBoard, x, y, tX, tY);
+                return true;
+            }
         }
-    } else if (turn === "Black") {
-        // Specific rules for black
-        const satisfyAllRulesBlack = (diagonalMove || anti_diagonalMove) && freePath && !blackPieces
-        if (satisfyAllRulesBlack) {
+    // Movement for bishops independent of player turn:
+    } else if (moveType === "move") {
+        const satisfyAllRules = (diagonalMove || anti_diagonalMove) && freePath
+        if (satisfyAllRules) {
             swapValueArray(chessBoard, x, y, tX, tY)
-            return satisfyAllRulesBlack
+            return satisfyAllRules
         }
     }
 }
+
 
 
 function checkBishopPath(X, Y, TX, TY, chessBoard) {

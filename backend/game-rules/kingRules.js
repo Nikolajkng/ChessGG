@@ -1,7 +1,7 @@
 function kingRules(x, y, tX, tY, chessBoard, turn, sValue, tValue) {
     const {
         swapValueArray
-    } = require("./ruleChecker")
+    } = require("./legalMove")
 
     // King movement Rules
     const whitePieces = tValue.includes("white");
