@@ -15,12 +15,12 @@ function knightRules(x, y, tX, tY, chessBoard, turn, sValue, tValue, moveType) {
     // Capture logic:
     if (moveType === "capture") {
         if (turn === "White") {
-            if (targetIsBlackPieces && !targetIsWhitePieces) {
+            if (targetIsBlackPieces && !targetIsWhitePieces && (movePatternUp || movePatternDown || movePatternRight || movePatternLeft)) {
                 swapValueCapture(chessBoard, x, y, tX, tY);
                 return true;
             }
         } else if (turn === "Black") {
-            if (!targetIsBlackPieces && targetIsWhitePieces) {
+            if (!targetIsBlackPieces && targetIsWhitePieces && (movePatternUp || movePatternDown || movePatternRight || movePatternLeft)) {
                 swapValueCapture(chessBoard, x, y, tX, tY);
                 return true;
             }

@@ -13,12 +13,12 @@ function rookRules(x, y, tX, tY, chessBoard, turn, sValue, tValue, moveType) {
     // Capture logic:
     if (moveType === "capture") {
         if (turn === "White") {
-            if (targetIsBlackPieces && !targetIsWhitePieces && freePath) {
+            if (targetIsBlackPieces && !targetIsWhitePieces && freePath && straightLines) {
                 swapValueCapture(chessBoard, x, y, tX, tY);
                 return true;
             }
         } else if (turn === "Black") {
-            if (!targetIsBlackPieces && targetIsWhitePieces && freePath) {
+            if (!targetIsBlackPieces && targetIsWhitePieces && freePath && straightLines) {
                 swapValueCapture(chessBoard, x, y, tX, tY);
                 return true;
             }
