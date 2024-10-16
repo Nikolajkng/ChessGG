@@ -32,7 +32,7 @@ function legalMove(x, y, tX, tY, sValue, tValue, turn, moveType){
     if (selectValue.includes("P")) {
         return pawnRules(x, y, tX, tY, chessBoard, turn, sValue, tValue, moveType);
         } else if (selectValue.includes("N")) {
-            return knightRules(x, y, tX, tY, chessBoard, turn, sValue, tValue);
+            return knightRules(x, y, tX, tY, chessBoard, turn, sValue, tValue, moveType);
         } else if (selectValue.includes("B")) {
             return bishopRules(x, y, tX, tY, chessBoard, turn, sValue, tValue);
         } else if (selectValue.includes("R")) {
