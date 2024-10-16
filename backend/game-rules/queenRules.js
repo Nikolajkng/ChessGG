@@ -5,9 +5,10 @@ const {
     checkRookPath
 } = require("./rookRules");
 
-function queenRules(x, y, tX, tY, chessBoard, turn, sValue, tValue) {
+function queenRules(x, y, tX, tY, chessBoard, turn, sValue, tValue, moveType) {
     const {
-        swapValueArray
+        swapValueArray,
+        swapValueCapture
     } = require("./legalMove")
 
     // Movement rules for Queen:

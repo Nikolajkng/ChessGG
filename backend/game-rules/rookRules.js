@@ -1,38 +1,36 @@
-function rookRules(x, y, tX, tY, chessBoard, turn, sValue, tValue) {
+function rookRules(x, y, tX, tY, chessBoard, turn, sValue, tValue, moveType) {
     const {
-        swapValueArray
+        swapValueArray,
+        swapValueCapture
     } = require("./legalMove")
 
     // Movement rules for Rook:
-    const whitePieces = tValue.includes("white");
-    const blackPieces = tValue.includes("black");
+    const targetIsWhitePieces = tValue.includes("white");
+    const targetIsBlackPieces = tValue.includes("black");
     const straightLines = Math.abs(x - tX) === 0 || Math.abs(y - tY) === 0;
-    const freePathRook = checkRookPath(x, y, tX, tY, chessBoard);
+    const freePath = checkRookPath(x, y, tX, tY, chessBoard);
 
-    // Check if rook rules are satisfied
-    if (turn === "White") {
-        // Specific rules for white
-
-
-        // Final check
-        const satisfyAllRulesWhite = !whitePieces && straightLines && freePathRook
-        if (satisfyAllRulesWhite) {
-            swapValueArray(chessBoard, x, y, tX, tY)
-            return satisfyAllRulesWhite
+    // Capture logic:
+    if (moveType === "capture") {
+        if (turn === "White") {
+            if (targetIsBlackPieces && !targetIsWhitePieces && freePath) {
+                swapValueCapture(chessBoard, x, y, tX, tY);
+                return true;
+            }
+        } else if (turn === "Black") {
+            if (!targetIsBlackPieces && targetIsWhitePieces && freePath) {
+                swapValueCapture(chessBoard, x, y, tX, tY);
+                return true;
+            }
         }
-    } else if (turn === "Black") {
-        // Specific rules for black
-
-
-        // Final check
-        const satisfyAllRulesBlack = !blackPieces && straightLines && freePathRook
-        if (satisfyAllRulesBlack) {
+    } else if (moveType === "move") {
+        // Rook move is independent of player turn
+        const satisfyAllRules = (straightLines && freePath);
+        if (satisfyAllRules) {
             swapValueArray(chessBoard, x, y, tX, tY)
-            return satisfyAllRulesBlack
+            return true;
         }
-
     }
-
 }
 
 function checkRookPath(X, Y, TX, TY, chessBoard) {

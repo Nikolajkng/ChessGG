@@ -1,6 +1,7 @@
-function kingRules(x, y, tX, tY, chessBoard, turn, sValue, tValue) {
+function kingRules(x, y, tX, tY, chessBoard, turn, sValue, tValue, moveType) {
     const {
-        swapValueArray
+        swapValueArray,
+        swapValueCapture
     } = require("./legalMove")
 
     // King movement Rules

@@ -34,8 +34,6 @@ function knightRules(x, y, tX, tY, chessBoard, turn, sValue, tValue, moveType) {
             return true;
         }
     }
-
-
 }
 
 module.exports = {
