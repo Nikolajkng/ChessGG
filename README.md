@@ -23,3 +23,9 @@ Extensions
   - Win/lose/scoreboard system connected to database
 - Extern features & API calls
   - AI to optimize moves?
+
+# Status
+Project is still in progressed and may have bugs
+
+# Link to website
+https://nikospo.f-skipper.com/

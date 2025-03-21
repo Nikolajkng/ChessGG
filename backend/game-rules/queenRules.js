@@ -37,6 +37,7 @@ function queenRules(x, y, tX, tY, chessBoard, turn, sValue, tValue, moveType) {
     // Movement for bishops independent of player turn:
     } else if (moveType === "move") {
         const satisfyAllRules = (diagonal || straight) && freePath
+        console.log(diagonal+":"+straight+":"+freePath)
         if (satisfyAllRules) {
             swapValueArray(chessBoard, x, y, tX, tY)
             return true;
